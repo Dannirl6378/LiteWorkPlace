@@ -32,7 +32,11 @@ export default function Sing() {
             padding: "0em 2em 2em 2em",
           }}
         >
-          {action === "Sing Up" ? <h1>Sing Up</h1> : <h1>Sing In</h1>}
+          {action === "Sing Up" ? (
+            <h1>Sing Up</h1> /*tady bude info pro heslo */
+          ) : (
+            <h1>Sing In</h1>
+          )}
 
           <Box
             sx={{
@@ -47,6 +51,7 @@ export default function Sing() {
             <TextField
               id="inputName"
               label="Name"
+              type="text"
               variant="standard"
               onChange={(e) => setUser(e.target.value)}
             />
@@ -66,10 +71,14 @@ export default function Sing() {
             <TextField
               id="inputEmail"
               label="Email"
+              type="email"
               variant="standard"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <CheckIcon color="success" sx={{ display: email ? "" : "none" }} />
+            <CheckIcon
+              color="success"
+              sx={{ display: email ? "" : "none" }} //tady v podmince bude kontrola podminek pro email
+            />
           </Box>
 
           <Box
@@ -89,7 +98,10 @@ export default function Sing() {
               variant="standard"
               onChange={(e) => setPwd(e.target.value)}
             />
-            <CheckIcon color="success" sx={{ display: pwd ? "" : "none" }} />
+            <CheckIcon
+              color="success"
+              sx={{ display: pwd ? "" : "none" }} //tady v podmince bude kontrola podminek pro heslo
+            />
           </Box>
           {action === "Sing Up" ? (
             <>
@@ -124,8 +136,23 @@ export default function Sing() {
           ) : (
             ""
           )}
-          {matchPwd&&pwd&&email&&user?<Button variant="contained">Confirm</Button>:<></>}
-          <Stack spacing={2} direction="row">
+          {matchPwd === pwd && email && user ? (
+            <Button
+              sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
+              variant="contained"
+              onClick={() => {}} //tady po kliknuti uloženi do databaze a vyhodi to popUp s dokončenou registraci
+            >
+              Confirm
+            </Button>
+          ) : (
+            <></>
+          )}
+          <Stack
+            spacing={2}
+            direction="row"
+            justifyContent={"space-evenly"}
+            sx={{ padding: "1em 0em 0em 0em" }}
+          >
             <Button
               variant="contained"
               disabled={action === "Sing Up" ? true : false}
@@ -142,13 +169,14 @@ export default function Sing() {
               onClick={() => {
                 setAction("Sing In");
                 setMatchPwd("");
+                setPwd("");
               }}
             >
               Sing In
             </Button>
-            <Link to="workingPage">
+            {/*<Link to="workingPage">
               <Button variant="contained">Main Page</Button>
-            </Link>
+            </Link>*/}
           </Stack>
         </Box>
       </div>
