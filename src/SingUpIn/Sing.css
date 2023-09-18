@@ -4,9 +4,7 @@ h1 {
   text-decoration: underline blue;
   z-index: 1;
 }
-.form{
-  margin:auto;
-}
+
 .background{
   width: 100%;
   height: 100%;
@@ -16,6 +14,7 @@ h1 {
 }
 .background::before{
   content: "";
+  background: url("../backgroundImg/sing.jpg") center center/cover no-repeat;
   position: absolute;
   width: 100%;
   height: 100%;
