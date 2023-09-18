@@ -11,10 +11,8 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { Link } from "react-router-dom";
 import "./Sing.css";
 
-
-
 export default function Sing() {
-  const [action, setAction] = useState("Sing Up");
+  const [action, setAction] = useState("Sing In");
   const [pwd, setPwd] = useState("");
   const [matchPwd, setMatchPwd] = useState("");
   const [user, setUser] = useState("");
@@ -126,18 +124,21 @@ export default function Sing() {
           ) : (
             ""
           )}
-
+          {matchPwd&&pwd&&email&&user?<Button variant="contained">Confirm</Button>:<></>}
           <Stack spacing={2} direction="row">
             <Button
               variant="contained"
+              disabled={action === "Sing Up" ? true : false}
               onClick={() => {
                 setAction("Sing Up");
               }}
             >
-              Sing Up
+              Registration
             </Button>
             <Button
               variant="contained"
+              color={action === "Sing Up" ? "primary" : "primary"}
+              disabled={action === "Sing Up" ? false : true}
               onClick={() => {
                 setAction("Sing In");
                 setMatchPwd("");
