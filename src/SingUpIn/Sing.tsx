@@ -72,6 +72,7 @@ export default function Sing() {
               id="inputEmail"
               label="Email"
               type="email"
+              helperText="exapmle@example.com"
               variant="standard"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -94,6 +95,7 @@ export default function Sing() {
               id="inputPassword"
               type="password"
               label="Password"
+              helperText={action==="Sing Up"?"8 znaku velká,malá písmena a číslice":<></>}
               value={pwd}
               variant="standard"
               onChange={(e) => setPwd(e.target.value)}
