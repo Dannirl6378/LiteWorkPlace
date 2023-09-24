@@ -4,7 +4,7 @@ interface ValidationProps {
   value: {
     email: string;
   };
-  setValidationChangeEmail:boolean;
+  setValidationChangeEmail:(isValid: boolean) => void;
 }
 
 function ValidationEmail({ value, setValidationChangeEmail }: ValidationProps) {
@@ -15,7 +15,7 @@ function ValidationEmail({ value, setValidationChangeEmail }: ValidationProps) {
     const validationResultEmail = isValid ? true : false;
 
     setValidationChangeEmail(validationResultEmail);
-  }, [value, setValidationChangeEmail]);
+  }, [value]);
 
   return null;
 }
