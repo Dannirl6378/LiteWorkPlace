@@ -10,7 +10,6 @@ interface ValidationProps {
 function ValidationEmail({ value, setValidationChangeEmail }: ValidationProps) {
   useEffect(() => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     const isValid = emailPattern.test(value.email);
     const validationResultEmail = isValid ? true : false;
 

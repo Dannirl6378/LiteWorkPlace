@@ -15,8 +15,7 @@ import ValidationEmail from "./ValidationEmail";
 
 interface ValidationResult {
   email: string;
-  pwd:string;
-
+  pwd: string;
 }
 
 export default function Sing() {
@@ -25,23 +24,24 @@ export default function Sing() {
   const [matchPwd, setMatchPwd] = useState("");
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
-  const [validationResultPassword, setValidationResultPassword] = useState(false);
+  const [validationResultPassword, setValidationResultPassword] =
+    useState(false);
   const [validationResultEmail, setValidationResultEmail] = useState(false);
 
-  // Funkce pro aktualizaci stavu validationResultPasswod
- /* const handleValidationChangePassword = (
-    validationResultPassword:ValidationResult
-  ) => {
-    setValidationResultPassword(validationResultPassword);
-  };*/
-  const handleChangeEmail=(e: { target: { value: any; }; })=>{
+   const handleChangePassword = (e: { target: { value: any } }) => {
+    const newPwd = e.target.value;
+    setPwd(newPwd)
+    console.log("newPwd",newPwd,pwd)
+    setValidationResultPassword(false);
+  };
+  const handleChangeEmail = (e: { target: { value: any } }) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
     setValidationResultEmail(false);
-   // <ValidationEmail value={{email}} setValidationChangeEmail={setValidationResultEmail}/>
-  }
+  };
 
-      console.log(handleChangeEmail)
+  console.log("email",validationResultEmail);
+  console.log("Password",validationResultPassword);
 
   return (
     <div className="background">
@@ -59,7 +59,7 @@ export default function Sing() {
             padding: "0em 2em 2em 2em",
             backdropFilter: " blur(1px)",
           }}
-        >          
+        >
           {action === "Sing Up" ? (
             <h1>Sing Up</h1> /*tady bude info pro heslo */
           ) : (
@@ -107,14 +107,20 @@ export default function Sing() {
               />
             </Tooltip>
             <ValidationEmail
-              value={{email}}
+              value={{ email }}
               setValidationChangeEmail={setValidationResultEmail}
             />
             {action === "Sing Up" ? (
-              <CheckIcon
-                color="success"
-                sx={{ display: validationResultEmail ? "" : "none" }} //tady v podmince bude kontrola podminek pro email
-              />
+              <>
+                <ClearIcon
+                  color="error"
+                  sx={{ display: validationResultEmail ? "none" : "" }}
+                />
+                <CheckIcon
+                  color="success"
+                  sx={{ display: validationResultEmail ? "" : "none" }} //tady v podmince bude kontrola podminek pro email
+                />
+              </>
             ) : (
               <></>
             )}
@@ -140,19 +146,21 @@ export default function Sing() {
                 //helperText={action==="Sing Up"?"8 znaku velká,malá písmena a číslice":<></>}
                 value={pwd}
                 variant="standard"
-                onChange={(e) => setPwd(e.target.value)}
-              />
+                onChange={handleChangePassword}
+                />
             </Tooltip>
             <ValidationPassword
               value={{ pwd }}
-              setValidationChangePassword={() => {
-                setValidationResultPassword(validationResultPassword);
-              }}    
+                setValidationChangePassword={setValidationResultPassword}
             />
-            <CheckIcon
-              color="success"
-              sx={{ display: validationResultPassword ? "" : "none" }} //tady v podmince bude kontrola podminek pro heslo
-            />
+            <ClearIcon
+                  color="error"
+                  sx={{ display: validationResultPassword ? "none" : "" }}
+                />
+                <CheckIcon
+                  color="success"
+                  sx={{ display: validationResultPassword ? "" : "none" }} //tady v podmince bude kontrola podminek pro email
+                />
           </Box>
           {action === "Sing Up" ? (
             <>
@@ -187,7 +195,7 @@ export default function Sing() {
           ) : (
             ""
           )}
-          {matchPwd === pwd && email && user && action === "Sing Up" ? (
+          {matchPwd === pwd && validationResultEmail && validationResultPassword &&  user && action=== "Sing Up" ? (
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
@@ -198,7 +206,7 @@ export default function Sing() {
           ) : (
             <></>
           )}
-          {pwd !== "" && email && user && action === "Sing In" ? (
+          {pwd !== "" && validationResultEmail && validationResultPassword && user && action === "Sing In" ? (
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
