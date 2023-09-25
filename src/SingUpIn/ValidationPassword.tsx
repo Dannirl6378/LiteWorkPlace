@@ -4,20 +4,20 @@ interface ValidationProps {
   value: {
     pwd: string;
   };
-  onValidationChangePassword: (validationResultPassword: string) => void;
+  setValidationChangePassword:(isValid: boolean) => void;
 }
 
 function ValidationPassword({
   value,
-  onValidationChangePassword,
+  setValidationChangePassword,
 }: ValidationProps) {
   useEffect(() => {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
     const isValid = passwordPattern.test(value.pwd);
-    const validationResultPassword = isValid ? 'true' : 'false';
+    const validationResultPassword = isValid ? true : false;
 
-    onValidationChangePassword(validationResultPassword);
-  }, [value, onValidationChangePassword]);
+    setValidationChangePassword(validationResultPassword);
+  }, [value]);
 
   return null; // Vracíme null, protože tento komponent nepotřebuje žádný vizuální výstup.
 }

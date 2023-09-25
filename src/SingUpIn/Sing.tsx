@@ -145,7 +145,7 @@ export default function Sing() {
             </Tooltip>
             <ValidationPassword
               value={{ pwd }}
-              onValidationChangePassword={() => {
+              setValidationChangePassword={() => {
                 setValidationResultPassword(validationResultPassword);
               }}    
             />
