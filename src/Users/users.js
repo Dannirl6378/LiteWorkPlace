@@ -1,65 +1,77 @@
 [
-  { User: "John Doe", Email: "johndoe@example.com", Password: "Abcd1234" },
-  { User: "Jane Smith", Email: "janesmith@example.com", Password: "Efgh5678" },
   {
-    User: "Michael Johnson",
-    Email: "michaeljohnson@example.com",
-    Password: "Ijkl9012",
-  },
-  { User: "Sara Brown", Email: "sarabrown@example.com", Password: "Mnop3456" },
-  {
-    User: "David Wilson",
-    Email: "davidwilson@example.com",
-    Password: "Qrst7890",
+    "user": "John Doe",
+    "email": "johndoe@example.com",
+    "password": "Abcd1234"
   },
   {
-    User: "Jennifer Lee",
-    Email: "jenniferlee@example.com",
-    Password: "Uvwx2345",
+    "user": "Jane Smith",
+    "email": "janesmith@example.com",
+    "password": "Efgh5678"
   },
   {
-    User: "Robert Davis",
-    Email: "robertdavis@example.com",
-    Password: "Yzab6789",
+    "user": "Michael Johnson",
+    "email": "michaeljohnson@example.com",
+    "password": "Ijkl9012"
   },
   {
-    User: "Linda Martinez",
-    Email: "lindamartinez@example.com",
-    Password: "Cdef0123",
+    "user": "Sara Brown",
+    "email": "sarabrown@example.com",
+    "password": "Mnop3456"
   },
   {
-    User: "William Anderson",
-    Email: "williamanderson@example.com",
-    Password: "Ghi4567",
+    "user": "David Wilson",
+    "email": "davidwilson@example.com",
+    "password": "Qrst7890"
   },
   {
-    User: "Jessica Taylor",
-    Email: "jessicataylor@example.com",
-    Password: "Jklm8901",
+    "user": "Jennifer Lee",
+    "email": "jenniferlee@example.com",
+    "password": "Uvwx2345"
   },
   {
-    User: "Christopher Thomas",
-    Email: "christopherthomas@example.com",
-    Password: "Nopq2345",
+    "user": "Robert Davis",
+    "email": "robertdavis@example.com",
+    "password": "Yzab6789"
   },
   {
-    User: "Patricia Rodriguez",
-    Email: "patriciarodriguez@example.com",
-    Password: "Rstu6789",
+    "user": "Linda Martinez",
+    "email": "lindamartinez@example.com",
+    "password": "Cdef0123"
   },
   {
-    User: "Daniel Garcia",
-    Email: "danielgarcia@example.com",
-    Password: "Vwxy0123",
+    "user": "William Anderson",
+    "email": "williamanderson@example.com",
+    "password": "Ghi4567"
   },
   {
-    User: "Elizabeth Hernandez",
-    Email: "elizabethhernandez@example.com",
-    Password: "Zabc4567",
+    "user": "Jessica Taylor",
+    "email": "jessicataylor@example.com",
+    "password": "Jklm8901"
   },
   {
-    User: "Joseph Martinez",
-    Email: "josephmartinez@example.com",
-    Password: "Defg8901",
+    "user": "Christopher Thomas",
+    "email": "christopherthomas@example.com",
+    "password": "Nopq2345"
   },
-];
+  {
+    "user": "Patricia Rodriguez",
+    "email": "patriciarodriguez@example.com",
+    "password": "Rstu6789"
+  },
+  {
+    "user": "Daniel Garcia",
+    "email": "danielgarcia@example.com",
+    "password": "Vwxy0123"
+  },
+  {
+    "user": "Elizabeth Hernandez",
+    "email": "elizabethhernandez@example.com",
+    "password": "Zabc4567"
+  },
+  {
+    "user": "Joseph Martinez",
+    "email": "josephmartinez@example.com",
+    "password": "Defg8901"
+  }
+]
