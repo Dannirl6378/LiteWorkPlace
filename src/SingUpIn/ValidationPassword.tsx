@@ -11,6 +11,9 @@ function ValidationPassword({
   value,
   setValidationChangePassword,
 }: ValidationProps) {
+
+
+
   useEffect(() => {
     
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;

@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
@@ -12,11 +13,7 @@ import "./Sing.css";
 import { Tooltip } from "@mui/material";
 import ValidationPassword from "./ValidationPassword";
 import ValidationEmail from "./ValidationEmail";
-
-interface ValidationResult {
-  email: string;
-  pwd: string;
-}
+import {fetchData} from "../dbData/Axios"
 
 export default function Sing() {
   const [action, setAction] = useState("Sing In");
@@ -27,6 +24,9 @@ export default function Sing() {
   const [validationResultPassword, setValidationResultPassword] =
     useState(false);
   const [validationResultEmail, setValidationResultEmail] = useState(false);
+
+ 
+  
 
    const handleChangePassword = (e: { target: { value: any } }) => {
     const newPwd = e.target.value;
@@ -124,9 +124,6 @@ export default function Sing() {
             ) : (
               <></>
             )}
-            {/* <ValidationEmail value={{ email }} onValidationChange={function (validationResults: { email: boolean; }): void {
-              throw new Error("Function not implemented.");
-            } }/>*/}
           </Box>
 
           <Box
@@ -143,7 +140,6 @@ export default function Sing() {
                 id="inputPassword"
                 type="password"
                 label="Password"
-                //helperText={action==="Sing Up"?"8 znaku velká,malá písmena a číslice":<></>}
                 value={pwd}
                 variant="standard"
                 onChange={handleChangePassword}
@@ -210,7 +206,7 @@ export default function Sing() {
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
-              onClick={() => {}} //tady po kliknuti uloženi do databaze a vyhodi to popUp s dokončenou registraci
+              onClick={() => {}} //tady po kliknuti uloženi do databaze a přihlasi se
             >
               Confirm
             </Button>
