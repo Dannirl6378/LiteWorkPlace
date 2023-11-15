@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
@@ -11,9 +11,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import "./Sing.css";
 import { Tooltip } from "@mui/material";
-import ValidationPassword from "./ValidationPassword";
-import ValidationEmail from "./ValidationEmail";
-import {fetchData} from "../dbData/Axios"
+import ValidationPassword from "./CheckPassword/ValidationPassword";
+import ValidationEmail from "./CheckEmail/ValidationEmail";
+import PopUp from "../PopUp/PopUp";
+import CheckDatabase from "./CheckEmail/CheckDatabase";
+import FindUser from "../findUser/FindUser";
+/*import RegistrationComponent from "./CheckPassword/RegistrationComponent"*/
 
 export default function Sing() {
   const [action, setAction] = useState("Sing In");
@@ -24,14 +27,12 @@ export default function Sing() {
   const [validationResultPassword, setValidationResultPassword] =
     useState(false);
   const [validationResultEmail, setValidationResultEmail] = useState(false);
+  const [checkIsEmail, setCheckIsEmail] = useState(false);
 
- 
-  
-
-   const handleChangePassword = (e: { target: { value: any } }) => {
+  const handleChangePassword = (e: { target: { value: any } }) => {
     const newPwd = e.target.value;
-    setPwd(newPwd)
-    console.log("newPwd",newPwd,pwd)
+    setPwd(newPwd);
+    console.log("newPwd", newPwd, pwd);
     setValidationResultPassword(false);
   };
   const handleChangeEmail = (e: { target: { value: any } }) => {
@@ -40,8 +41,13 @@ export default function Sing() {
     setValidationResultEmail(false);
   };
 
-  console.log("email",validationResultEmail);
-  console.log("Password",validationResultPassword);
+  console.log("email", validationResultEmail);
+  console.log("Password", validationResultPassword);
+
+  const find = FindUser;
+  console.log(find);
+
+ /* RegistrationComponent;*/
 
   return (
     <div className="background">
@@ -101,7 +107,6 @@ export default function Sing() {
                 id="inputEmail"
                 label="Email"
                 type="email"
-                //helperText="exapmle@example.com"
                 variant="standard"
                 onChange={handleChangeEmail}
               />
@@ -110,22 +115,63 @@ export default function Sing() {
               value={{ email }}
               setValidationChangeEmail={setValidationResultEmail}
             />
+            <CheckDatabase
+              value={{ email }}
+              setCheckIsEmail={setCheckIsEmail}
+            />
             {action === "Sing Up" ? (
               <>
                 <ClearIcon
                   color="error"
-                  sx={{ display: validationResultEmail ? "none" : "" }}
+                  sx={{
+                    display:
+                      validationResultEmail && !checkIsEmail ? "none" : "",
+                  }}
                 />
                 <CheckIcon
                   color="success"
-                  sx={{ display: validationResultEmail ? "" : "none" }} //tady v podmince bude kontrola podminek pro email
+                  sx={{
+                    display:
+                      validationResultEmail && !checkIsEmail ? "" : "none",
+                  }}
                 />
+                {checkIsEmail ? <PopUp checkIsEmail={checkIsEmail} /> : ""}
               </>
             ) : (
               <></>
             )}
           </Box>
+          {/*import React, { useEffect } from 'react';                  ///toto je pro hash hesla a naslednou práci s nim jestě uvudum musím to cele opravit
+import PasswordUtility from './path-to-your-utility';
 
+function RegistrationComponent() {
+  useEffect(() => {
+    const plaintextPassword = 'secretPassword';
+
+    // Hašování hesla
+    PasswordUtility.hashPassword(plaintextPassword)
+      .then((hashedPassword) => {
+        console.log('Hašované heslo:', hashedPassword);
+
+        // Porovnání hesel
+        PasswordUtility.comparePassword('wrongPassword', hashedPassword)
+          .then((result) => {
+            console.log('Výsledek porovnání hesel:', result);
+          })
+          .catch((error) => {
+            console.error('Chyba při porovnání hesel:', error);
+          });
+      })
+      .catch((error) => {
+        console.error('Chyba při hašování hesla:', error);
+      });
+  }, []);
+
+  return <div>Registrace</div>;
+}
+
+export default RegistrationComponent;
+*/}
           <Box
             sx={{
               display: "flex",
@@ -143,20 +189,20 @@ export default function Sing() {
                 value={pwd}
                 variant="standard"
                 onChange={handleChangePassword}
-                />
+              />
             </Tooltip>
             <ValidationPassword
               value={{ pwd }}
-                setValidationChangePassword={setValidationResultPassword}
+              setValidationChangePassword={setValidationResultPassword}
             />
             <ClearIcon
-                  color="error"
-                  sx={{ display: validationResultPassword ? "none" : "" }}
-                />
-                <CheckIcon
-                  color="success"
-                  sx={{ display: validationResultPassword ? "" : "none" }} //tady v podmince bude kontrola podminek pro email
-                />
+              color="error"
+              sx={{ display: validationResultPassword ? "none" : "" }}
+            />
+            <CheckIcon
+              color="success"
+              sx={{ display: validationResultPassword ? "" : "none" }} //tady v podmince bude kontrola podminek pro email
+            />
           </Box>
           {action === "Sing Up" ? (
             <>
@@ -191,7 +237,11 @@ export default function Sing() {
           ) : (
             ""
           )}
-          {matchPwd === pwd && validationResultEmail && validationResultPassword &&  user && action=== "Sing Up" ? (
+          {matchPwd === pwd &&
+          validationResultEmail &&
+          validationResultPassword &&
+          user &&
+          action === "Sing Up" ? (
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
@@ -202,7 +252,11 @@ export default function Sing() {
           ) : (
             <></>
           )}
-          {pwd !== "" && validationResultEmail && validationResultPassword && user && action === "Sing In" ? (
+          {pwd !== "" &&
+          validationResultEmail &&
+          validationResultPassword &&
+          user &&
+          action === "Sing In" ? (
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
