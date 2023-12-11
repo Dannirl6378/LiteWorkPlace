@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { fetchData } from './dbData/Axios'; // Importujte správnou funkci
+import React, { useEffect, useState } from "react";
+import { fetchData } from "./dbData/AxiosGetUsers"; // Importujte správnou funkci
 
 function TestComponent() {
-  const [data, setData] = useState('');
-  const [error, setError] = useState('');
+  const [data, setData] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     // Zavolejte funkci pro získání dat pomocí API klíče

@@ -14,9 +14,9 @@ import { Tooltip } from "@mui/material";
 import ValidationPassword from "./CheckPassword/ValidationPassword";
 import ValidationEmail from "./CheckEmail/ValidationEmail";
 import PopUp from "../PopUp/PopUp";
-import CheckDatabase from "./CheckEmail/CheckDatabase";
+import CheckDatabaseEmail from "./CheckEmail/CheckDatabase";
 import FindUser from "../findUser/FindUser";
-/*import RegistrationComponent from "./CheckPassword/RegistrationComponent"*/
+
 
 export default function Sing() {
   const [action, setAction] = useState("Sing In");
@@ -115,7 +115,7 @@ export default function Sing() {
               value={{ email }}
               setValidationChangeEmail={setValidationResultEmail}
             />
-            <CheckDatabase
+            <CheckDatabaseEmail
               value={{ email }}
               setCheckIsEmail={setCheckIsEmail}
             />

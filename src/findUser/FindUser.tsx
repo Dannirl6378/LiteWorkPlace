@@ -1,7 +1,7 @@
-import { fetchData } from "../dbData/Axios";
+import { fetchData } from "../dbData/AxiosGetUsers";
 import React from "react";
 
-const dataUser = "janesmith@example.com";// promená přihledaní 
+const dataUser = "janesmith@example.com"; // promená přihledaní
 interface UserData {
   _id: string;
   user: string;
