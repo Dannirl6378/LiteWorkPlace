@@ -1,5 +1,4 @@
-import { fetchData } from "../dbData/AxiosGetUsers";
-import React from "react";
+import { fetchData } from "../dbData/AxiosUtils";
 
 const dataUser = "janesmith@example.com"; // promená přihledaní
 interface UserData {

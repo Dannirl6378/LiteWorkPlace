@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
@@ -16,6 +16,7 @@ import ValidationEmail from "./CheckEmail/ValidationEmail";
 import PopUp from "../PopUp/PopUp";
 import CheckDatabaseEmail from "./CheckEmail/CheckDatabase";
 import FindUser from "../findUser/FindUser";
+import {handleRegistration} from "./Register"
 
 
 export default function Sing() {
@@ -47,7 +48,7 @@ export default function Sing() {
   const find = FindUser;
   console.log(find);
 
- /* RegistrationComponent;*/
+
 
   return (
     <div className="background">
@@ -260,7 +261,7 @@ export default RegistrationComponent;
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
-              onClick={() => {}} //tady po kliknuti uloženi do databaze a přihlasi se
+              onClick={() => {handleRegistration(user,email,pwd)}} //tady po kliknuti uloženi do databaze a přihlasi se
             >
               Confirm
             </Button>
