@@ -1,5 +1,7 @@
+//testacess.tsx
+/*
 import React, { useEffect, useState } from "react";
-import { fetchData } from "./dbData/AxiosGetUsers"; // Importujte správnou funkci
+import { getUser } from "./dbData/AxiosGetUsers"; // Importujte správnou funkci
 
 function TestComponent() {
   const [data, setData] = useState("");
@@ -7,7 +9,7 @@ function TestComponent() {
 
   useEffect(() => {
     // Zavolejte funkci pro získání dat pomocí API klíče
-    fetchData() // Použijte novou funkci pro získání dat
+    getUser() // Použijte novou funkci pro získání dat
       .then((response) => {
         // Zobrazte data na stránce
         setData(JSON.stringify(response));
@@ -27,3 +29,4 @@ function TestComponent() {
 }
 
 export default TestComponent;
+*/

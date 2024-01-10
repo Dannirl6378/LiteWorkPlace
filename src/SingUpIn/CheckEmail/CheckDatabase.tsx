@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getUsers } from "../../dbData/AxiosGetUsers";
+import { getUser } from "../../dbData/AxiosGetUser";
 
 interface ValidationProps {
   value: {
@@ -15,7 +15,7 @@ export default function CheckDatabaseEmail({
   useEffect(() => {
     async function checkEmailExistence() {
       try {
-        const data = await getUsers(); // Získání dat z databáze
+        const data = await getUser(); // Získání dat z databáze
         const emailArray = data.map((user: { email: any }) => user.email);
         const isSame = (emailArray as Array<any>).includes(value.email);
         const checkSameEmail = isSame ? true : false;

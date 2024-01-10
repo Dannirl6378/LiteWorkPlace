@@ -1,5 +1,6 @@
 // testHashing.js
-/*const PasswordUtility = require('../PasswordUtility');
+export {};
+const PasswordUtility = require('../PasswordUtility');
 
 async function testHashing() {
   try {
@@ -22,4 +23,4 @@ async function testHashing() {
 }
 
 // Spuštění testů
-testHashing();*/
+testHashing();

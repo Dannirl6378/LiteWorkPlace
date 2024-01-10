@@ -16,8 +16,7 @@ import ValidationEmail from "./CheckEmail/ValidationEmail";
 import PopUp from "../PopUp/PopUp";
 import CheckDatabaseEmail from "./CheckEmail/CheckDatabase";
 import FindUser from "../findUser/FindUser";
-import {handleRegistration} from "./Register"
-
+import { handleRegistration } from "./Register";
 
 export default function Sing() {
   const [action, setAction] = useState("Sing In");
@@ -47,8 +46,6 @@ export default function Sing() {
 
   const find = FindUser;
   console.log(find);
-
-
 
   return (
     <div className="background">
@@ -142,37 +139,6 @@ export default function Sing() {
               <></>
             )}
           </Box>
-          {/*import React, { useEffect } from 'react';                  ///toto je pro hash hesla a naslednou práci s nim jestě uvudum musím to cele opravit
-import PasswordUtility from './path-to-your-utility';
-
-function RegistrationComponent() {
-  useEffect(() => {
-    const plaintextPassword = 'secretPassword';
-
-    // Hašování hesla
-    PasswordUtility.hashPassword(plaintextPassword)
-      .then((hashedPassword) => {
-        console.log('Hašované heslo:', hashedPassword);
-
-        // Porovnání hesel
-        PasswordUtility.comparePassword('wrongPassword', hashedPassword)
-          .then((result) => {
-            console.log('Výsledek porovnání hesel:', result);
-          })
-          .catch((error) => {
-            console.error('Chyba při porovnání hesel:', error);
-          });
-      })
-      .catch((error) => {
-        console.error('Chyba při hašování hesla:', error);
-      });
-  }, []);
-
-  return <div>Registrace</div>;
-}
-
-export default RegistrationComponent;
-*/}
           <Box
             sx={{
               display: "flex",
@@ -246,7 +212,9 @@ export default RegistrationComponent;
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
-              onClick={() => {}} //tady po kliknuti uloženi do databaze a vyhodi to popUp s dokončenou registraci
+              onClick={() => {
+                handleRegistration(user, email, pwd);
+              }} //tady po kliknuti uloženi do databaze a vyhodi to popUp s dokončenou registraci
             >
               Confirm
             </Button>
@@ -261,7 +229,9 @@ export default RegistrationComponent;
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
-              onClick={() => {handleRegistration(user,email,pwd)}} //tady po kliknuti uloženi do databaze a přihlasi se
+              onClick={() => {
+                handleRegistration(user, email, pwd);
+              }} //tady po kliknuti uloženi do databaze a přihlasi se pozor je pro sing
             >
               Confirm
             </Button>
