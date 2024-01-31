@@ -1,20 +1,30 @@
-import { fetchData } from "./AxiosUtils";
+// AxiosRegisterUser.js
+import axios from "axios";
 
-export async function getUsers() {
-    // Nyní použijte API klíč v hlavičce Axiosu
-    const data = JSON.stringify({
-      collection: "Test-users",
-      database: "Users",
-      dataSource: "Cluster0",
-      projection: {
-        _id: 1,
-        user: "",
-      },
-    });
-    const config = {
-      method: "get",
-      url: "http://localhost:3001/loginUser",
-      data: data,
-    };
-    return response = await fetchData(config);
+export async function LoginUser(userData) {
+  try {
+    const response = await axios.get(
+      "http://localhost:3001/api/userpassword",
+
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return { error: "Error nothing found." };
+  }
 }
+/*import axios from "axios";      na to se pozdeji podivat????
+
+export async function LoginUser(userData) {
+  try {
+    const response = await axios.get(
+      "http://localhost:3001/api/userpassword",
+      { params: userData }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return { error: "Error nothing found." };
+  }
+}
+*/

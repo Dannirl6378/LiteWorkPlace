@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Clock from "./clock";
+import Clock from "./1stBanner/ReminderClock/clock";
 import "./App.css";
-import PopUp from "./PopUp/PopUp";
+//import PopUp from "./PopUp/PopUp";
 import "./WorkingPage.css"
 
 function WorkingPage() {

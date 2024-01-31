@@ -17,6 +17,9 @@ import PopUp from "../PopUp/PopUp";
 import CheckDatabaseEmail from "./CheckEmail/CheckDatabase";
 import FindUser from "../findUser/FindUser";
 import { handleRegistration } from "./Register";
+import { handleSignIn } from "./SingIn";
+import { Link, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Sing() {
   const [action, setAction] = useState("Sing In");
@@ -28,6 +31,7 @@ export default function Sing() {
     useState(false);
   const [validationResultEmail, setValidationResultEmail] = useState(false);
   const [checkIsEmail, setCheckIsEmail] = useState(false);
+  const navigate = useNavigate();
 
   const handleChangePassword = (e: { target: { value: any } }) => {
     const newPwd = e.target.value;
@@ -214,7 +218,7 @@ export default function Sing() {
               variant="contained"
               onClick={() => {
                 handleRegistration(user, email, pwd);
-              }} //tady po kliknuti uloženi do databaze a vyhodi to popUp s dokončenou registraci
+              }} //toto je registrace
             >
               Confirm
             </Button>
@@ -229,8 +233,15 @@ export default function Sing() {
             <Button
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
-              onClick={() => {
-                handleRegistration(user, email, pwd);
+              onClick={async () => {
+                const isValid = await handleSignIn(user, email, pwd,navigate);
+                if (isValid) {
+                  // window.location.href = "/workingPage";
+                  //redirect("/workingPage");
+                  console.log("probiha prihlašeni")
+                } else {
+                  console.error("Incorrect login details");
+                }
               }} //tady po kliknuti uloženi do databaze a přihlasi se pozor je pro sing
             >
               Confirm
@@ -265,9 +276,9 @@ export default function Sing() {
             >
               Sing In
             </Button>
-            {/*<Link to="workingPage">
+            <Link to="workingPage">
               <Button variant="contained">Main Page</Button>
-            </Link>*/}
+            </Link>
           </Stack>
         </Box>
       </div>
