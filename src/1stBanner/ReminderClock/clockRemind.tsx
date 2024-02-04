@@ -1,72 +1,81 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 
 interface TimeObject {
+  [x: string]: string | number | Date;
   hours: number;
   minutes: number;
 }
 
-export default function AlarmClock() {
+const AlarmClock: React.FC = () => {
+  const [selectedTime, setSelectedTime] = useState<TimeObject | null>(null);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
   const [alarmTime, setAlarmTime] = useState<Date | null>(null);
-  const [selectedTime, setSelectedTime] = useState<TimeObject | null>();
+  const [alarmHour, setAlarmHour] = useState<number | null>(null);
+  const [alarmMinute, setAlarmMinute] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-    return () => clearInterval(timer); // clearInterval je globalnifci javascriptu proto není a nemusi být žádný import
+    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
-    if (alarmTime && currentTime >= alarmTime) {
-      // bude možné že se podminka bude muset změnit na currentTime === alarmTime
-      alert("Čas vypršel!");
-    }
-  }, [alarmTime, currentTime]);
-
-  const SelectAlarm = () => {
-    const handleSetAlarm = (newTime: TimeObject | null, userInput?: string) => {
-      setSelectedTime(newTime);
-
-      if (newTime) {
-        const alarmDate = new Date();
-        alarmDate.setHours(newTime.hours);
-        alarmDate.setMinutes(newTime.minutes);
-        setAlarmTime(alarmDate);
-      } else if (userInput) {
-        const [hours, minutes] = userInput.split(":");
-        const alarmDate = new Date();
-        alarmDate.setHours(parseInt(hours, 10));
-        alarmDate.setMinutes(parseInt(minutes, 10));
-        setAlarmTime(alarmDate);
+    if (alarmTime && alarmHour !== null && alarmMinute !== null) {
+      const currentHour = currentTime.getHours();
+      const currentMinute = currentTime.getMinutes();
+      console.log(alarmHour, alarmMinute);
+      console.log("curent",currentHour);
+      console.log("alarm",alarmHour);
+      if (
+        currentHour === alarmHour && currentMinute === alarmMinute
+      ) {
+        alert("Čas vypršel!");
+        setAlarmHour(null);
+        setAlarmMinute(null);
+        setSelectedTime(null);
       }
-    };
+    }
+  }, [alarmTime, currentTime, alarmHour, alarmMinute]);
 
-    return (
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer
-          components={[
-            "MobileTimePicker",
-            "MobileTimePicker",
-            "MobileTimePicker",
-          ]}
-        >
-          <DemoItem label={'"hours", "minutes"'}>
-            <TimePicker
-              views={["hours", "minutes"]}
-              ampm={false}
-              value={selectedTime}
-              onChange={(newTime) => handleSetAlarm(newTime)}
-            />
-          </DemoItem>
-        </DemoContainer>
-      </LocalizationProvider>
-    );
+  const handleSetAlarm = (newTime: TimeObject | null, userInput?: string) => {
+    setSelectedTime(newTime);
+    if (newTime) {
+      const alarmDate = new Date(newTime.$d);
+      console.log(alarmDate);
+      const newAlarmHour = alarmDate.getHours();
+      const newAlarmMinute = alarmDate.getMinutes();
+      setAlarmTime(alarmDate);
+      setAlarmHour(newAlarmHour);
+      setAlarmMinute(newAlarmMinute);
+    } else if (userInput) {
+      const [hours, minutes] = userInput.split(":");
+      const alarmDate = new Date();
+      const newAlarmHour = parseInt(hours, 10);
+      const newAlarmMinute = parseInt(minutes, 10);
+      alarmDate.setHours(newAlarmHour);
+      alarmDate.setMinutes(newAlarmMinute);
+      setAlarmTime(alarmDate);
+      setAlarmHour(newAlarmHour);
+      setAlarmMinute(newAlarmMinute);
+    }
   };
-  return <SelectAlarm />;
-}
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      {/* Tady je váš TimePicker */}
+      <TimePicker
+        label="hh:mm"
+        ampm={false}
+        value={selectedTime}
+        onChange={(newTime) => handleSetAlarm(newTime)}
+      />
+    </LocalizationProvider>
+  );
+};
+
+export default AlarmClock;

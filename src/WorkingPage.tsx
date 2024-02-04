@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Clock from "./1stBanner/ReminderClock/clock";
 import "./App.css";
 //import PopUp from "./PopUp/PopUp";
 import "./WorkingPage.css"
+import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
 
 function WorkingPage() {
   return (
@@ -13,6 +14,9 @@ function WorkingPage() {
             <div className="componentsHead">
               <div className="banner0">
                 <Clock />
+                <div id="Alarm">
+                <AlarmClock/>
+                </div>
               </div>
               <div className="newsbanner">test1</div>
             </div>

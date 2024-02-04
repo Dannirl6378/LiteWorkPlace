@@ -1,4 +1,5 @@
 // AxiosUtils.js
+/*
 import axios from "axios";
 
 export async function fetchData(url) {
@@ -10,3 +11,4 @@ export async function fetchData(url) {
     return [];
   }
 }
+*/

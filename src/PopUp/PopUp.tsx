@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./PopUp.css"
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 

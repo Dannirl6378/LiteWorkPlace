@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
@@ -15,10 +15,9 @@ import ValidationPassword from "./CheckPassword/ValidationPassword";
 import ValidationEmail from "./CheckEmail/ValidationEmail";
 import PopUp from "../PopUp/PopUp";
 import CheckDatabaseEmail from "./CheckEmail/CheckDatabase";
-import FindUser from "../findUser/FindUser";
 import { handleRegistration } from "./Register";
 import { handleSignIn } from "./SingIn";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function Sing() {
@@ -47,9 +46,6 @@ export default function Sing() {
 
   console.log("email", validationResultEmail);
   console.log("Password", validationResultPassword);
-
-  const find = FindUser;
-  console.log(find);
 
   return (
     <div className="background">
