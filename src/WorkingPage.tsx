@@ -1,21 +1,29 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Clock from "./1stBanner/ReminderClock/clock";
 import "./App.css";
 //import PopUp from "./PopUp/PopUp";
-import "./WorkingPage.css"
+import "./WorkingPage.css";
 import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function WorkingPage() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const singParam = searchParams.get("sing");
+  const singFromQuery = singParam === "true";
+
   return (
     <>
-      
+      {singFromQuery ? (
         <div className="app">
           <div className="skelet">
             <div className="componentsHead">
               <div className="banner0">
                 <Clock />
                 <div id="Alarm">
-                <AlarmClock/>
+                  <AlarmClock />
                 </div>
               </div>
               <div className="newsbanner">test1</div>
@@ -34,10 +42,13 @@ function WorkingPage() {
             </div>
           </div>
         </div>
-            
+      ) : (
+        <Link to="/">
+          <Button variant="contained">LogIn</Button>
+        </Link>
+      )}
     </>
   );
 }
 
 export default WorkingPage;
-

@@ -1,7 +1,7 @@
 import axios from "axios";
+import { GetUser } from "./CheckUser/GetUser";
 
 export async function handleSignIn(
-  user: string,
   email: string,
   pwd: string,
   navigate: (path: string) => void // Předáváme funkci pro navigaci
