@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
@@ -19,7 +19,7 @@ import { handleRegistration } from "./Register";
 import { handleSignIn } from "./SingIn";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import  WorkingPage  from "../WorkingPage";
+import Cookies from "js-cookie";
 
 export default function Sing() {
   const [action, setAction] = useState("Sing In");
@@ -31,24 +31,37 @@ export default function Sing() {
     useState(false);
   const [validationResultEmail, setValidationResultEmail] = useState(false);
   const [checkIsEmail, setCheckIsEmail] = useState(false);
-  const [sing, setSing] = useState(false);
   const navigate = useNavigate();
 
   const handleSignInClick = async () => {
     const isValid = await handleSignIn(email, pwd, navigate);
+    const currentUser = user; // Zde získáme aktuální hodnotu user
+    console.log("isValid", isValid);
     if (isValid) {
-      setSing(true); // Nastavíme sing na true, pokud je přihlášení úspěšné
+      const userData = {
+        name: currentUser, // Použijeme aktuální hodnotu user
+        loggedIn: isValid,
+      };
+      const userDataString = JSON.stringify(userData);
+      Cookies.set("userData", userDataString);
+      navigate(`/workingPage`);
       console.log("Přihlášení proběhlo úspěšně");
     } else {
-      setSing(false); // Nastavíme sing na false, pokud přihlášení selže
+      navigate(`/workingPage`);
       console.error("Nesprávné přihlašovací údaje");
     }
   };
+  /* useEffect(() => {
+    const updateURL = () => {
+      navigate(`/workingPage?sing=${sing}`);
+    };
+
+    updateURL(); // Aktualizujte URL po každé změně hodnoty sing
+  }, [sing]);*/
 
   const handleChangePassword = (e: { target: { value: any } }) => {
     const newPwd = e.target.value;
     setPwd(newPwd);
-    console.log("newPwd", newPwd, pwd);
     setValidationResultPassword(false);
   };
   const handleChangeEmail = (e: { target: { value: any } }) => {
@@ -239,7 +252,7 @@ export default function Sing() {
           validationResultPassword &&
           user &&
           action === "Sing In" ? (
-            <Button
+            <Button //toto je !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! přihlašení
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
               variant="contained"
               onClick={handleSignInClick} //tady po kliknuti uloženi do databaze a přihlasi se pozor je pro sing
@@ -276,7 +289,7 @@ export default function Sing() {
             >
               Sing In
             </Button>
-            <Link to={`workingPage?sing=${sing}`}>
+            <Link to={{ pathname: "/workingPage", search: `?sing=$true` }}>
               <Button variant="contained">Main Page</Button>
             </Link>
           </Stack>
