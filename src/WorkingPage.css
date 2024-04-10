@@ -133,7 +133,7 @@
 }
 .Alarm {
   position: relative;
-  margin: -2rem 1rem auto;
+  margin-right: 50%;
   color: #000000;
   text-shadow: 15px 8px 2px #00000038;
   z-index: 1;
