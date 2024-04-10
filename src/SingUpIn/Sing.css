@@ -1,0 +1,24 @@
+h1 {
+  color: blue;
+  margin-top: 2%;
+  text-decoration: underline blue;
+  z-index: 1;
+}
+
+.background{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+.background::before{
+  content: "";
+  background: url("../backgroundImg/sing.jpg") center center/cover no-repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
