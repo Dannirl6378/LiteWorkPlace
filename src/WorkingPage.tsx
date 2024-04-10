@@ -7,6 +7,7 @@ import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import Cookies from "js-cookie";
+import UserId from "./banner0/UserId";
 
 export default function WorkingPage() {
   const location = useLocation();
@@ -47,6 +48,7 @@ export default function WorkingPage() {
                 <div id="Alarm">
                   <AlarmClock />
                 </div>
+                <UserId/>
               </div>
               <div className="newsbanner">test1</div>
             </div>
