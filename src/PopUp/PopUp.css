@@ -1,0 +1,9 @@
+#popUp {
+  border: 1px solid red;
+  width: 25%;
+  height: 25%;
+  text-align: center;
+  color: #000000;
+  margin:50% 50% 50% 50%;
+  background-color: rgba(0, 0, 255, 0.436);
+}
