@@ -131,7 +131,7 @@
   font-family: fantasy;
   font-size: 2rem;
 }
-.Alarm {
+#Alarm {
   position: relative;
   margin-right: 50%;
   color: #000000;
@@ -160,4 +160,8 @@
 .errorSing {
   margin-left: 50%;
   margin-top: 25%;
+}
+#UserId{
+  z-index: 1;
+  position: relative;
 }

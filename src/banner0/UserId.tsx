@@ -8,11 +8,14 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 export default function UserId() {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -28,6 +31,15 @@ export default function UserId() {
 
     setOpen(false);
   };
+
+const handleLogOut=()=>{
+  Cookies.remove("userData");
+  navigate(`/`);
+}
+const handleClickProfil=()=>{
+  navigate(`/MyProfile`)
+}
+
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -72,10 +84,11 @@ export default function UserId() {
                   id="composition-menu"
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
+                  
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleClickProfil}>My account</MenuItem>
+                  <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
