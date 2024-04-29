@@ -32,13 +32,13 @@ export default function UserId() {
     setOpen(false);
   };
 
-const handleLogOut=()=>{
-  Cookies.remove("userData");
-  navigate(`/`);
-}
-const handleClickProfil=()=>{
-  navigate(`/MyProfile`)
-}
+  const handleLogOut = () => {
+    Cookies.remove("userData");
+    navigate(`/`);
+  };
+  const handleClickProfil = () => {
+    navigate(`/MyProfile`);
+  };
 
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Tab") {
@@ -52,8 +52,14 @@ const handleClickProfil=()=>{
   return (
     <div>
       <Button
-        sx={{ color: "black", '& .MuiSvgIcon-root': { fontSize: 50 } }}
-        startIcon={<AccountCircleIcon/>}
+        sx={{
+          color: "black",
+          "& .MuiSvgIcon-root": {
+            width: "max(20px, min(55px, 5vw))",
+            height: "max(20px, min(55px, 5vw))",
+          },
+        }}
+        startIcon={<AccountCircleIcon />}
         ref={anchorRef}
         id="composition-button"
         aria-controls={open ? "composition-menu" : undefined}
@@ -84,10 +90,9 @@ const handleClickProfil=()=>{
                   id="composition-menu"
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
-                  
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClickProfil}>My account</MenuItem>
+                  <MenuItem onClick={handleClickProfil}>My CV</MenuItem>
                   <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                 </MenuList>
               </ClickAwayListener>

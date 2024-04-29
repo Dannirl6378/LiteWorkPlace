@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import Cookies from "js-cookie";
 import UserId from "./banner0/UserId";
+import NewsTabs from "./banner1/newsTabs";
 
 export default function WorkingPage() {
   /*const location = useLocation();
@@ -52,7 +53,7 @@ export default function WorkingPage() {
                   <UserId />
                 </div>
               </div>
-              <div className="newsbanner">test1</div>
+              <div className="newsbanner"><NewsTabs/></div>
             </div>
             <div className="componentsBody">
               <div className="leftSide">
