@@ -40,17 +40,17 @@ const News2 = () => {
 
     useEffect(() => {
         if (news) {
-            setDisplayedArticles(Math.min(4, news.length));
+            setDisplayedArticles(Math.min(3, news.length));
         }
     }, [news, displayedArticles]); // Tento useEffect zajišťuje aktualizaci displayedArticles po načtení nových dat nebo změně displayedArticles
 
     return (
-        <div>
+        <div className="news-container">
             {news && news.length > 0 && news.slice(0, displayedArticles).map((article: Article, index) => (
                 <div key={index} className="newstabs">
                     <div>
                     <h4><a target="_blank" rel="noopener noreferrer" href={article.url}>{article.title}</a></h4>
-                    <p>{article.description}</p>
+                    {/*<p>{article.description}</p>*/}
                     </div>
                 </div>
             ))}

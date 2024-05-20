@@ -1,8 +1,28 @@
-h3{color:black;}
-.newstabs{
-    position: relative;
+.news-container {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    max-width: 10vw;
+    flex-wrap: wrap;
+    gap: 16px; /* Mezera mezi články */
+  }
+  
+  .newstabs {
+    flex: 1 1 calc(33.333% - 16px); /* 3 články na řádek s mezerou */
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(233, 95, 95, 0.6);
 }
+  
+  .newstabs h4 {
+    margin: 0;
+  }
+  
+  .newstabs a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .newstabs a:hover {
+    text-decoration: underline;
+  }
+  

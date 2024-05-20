@@ -21,9 +21,9 @@ export default function NewsTabs() {
         indicatorColor="secondary"
         aria-label="secondary tabs example"
       >
-        <Tab value="one" label="News1" />
-        <Tab value="two" label="News2" />
-        <Tab value="three" label="News3" />
+        <Tab sx={{ fontSize: 15, fontWeight: 'bold'}}  value="one" label="News1" />
+        <Tab sx={{ fontSize: 15, fontWeight: 'bold'}} value="two" label="NewsApi" />
+        <Tab sx={{ fontSize: 15, fontWeight: 'bold'}}  value="three" label="News3" />
       </Tabs>
       <Box sx={{ mt: 1 }}>
         {value === 'one' && <News1 />} 
