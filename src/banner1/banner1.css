@@ -1,17 +1,21 @@
 .news-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px; /* Mezera mezi články */
+    gap: 10px; /* Mezera mezi články */
   }
   
   .newstabs {
-    flex: 1 1 calc(33.333% - 16px); /* 3 články na řádek s mezerou */
+    flex: 1 1 calc(33.333% - 13px); /* 3 články na řádek s mezerou */
     box-sizing: border-box;
     border: 1px solid #ddd;
     padding: 10px;
+    margin:auto;
+    max-height: 10vh;
+    max-width: 35vw;
     border-radius: 8px;
     background-color: rgba(233, 95, 95, 0.6);
-}
+    overflow: auto;
+}   
   
   .newstabs h4 {
     margin: 0;
