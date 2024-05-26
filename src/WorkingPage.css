@@ -163,5 +163,6 @@
 }
 #UserId{
   z-index: 1;
-  position: relative;
+  position:absolute;
+  margin-left: 80%;
 }

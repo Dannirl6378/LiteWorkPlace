@@ -1,13 +1,13 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Clock from "./1stBanner/ReminderClock/clock";
+import Clock from "./1stBanner/clock";
 import "./App.css";
 import "./WorkingPage.css";
 import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import Cookies from "js-cookie";
-import UserId from "./banner0/UserId";
+import UserId from "./1stBanner/UserId";
 import NewsTabs from "./banner1/newsTabs";
 
 export default function WorkingPage() {

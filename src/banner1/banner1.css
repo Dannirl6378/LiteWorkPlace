@@ -11,6 +11,7 @@
     padding: 10px;
     margin:auto;
     max-height: 10vh;
+    min-height: 5vh;
     max-width: 35vw;
     border-radius: 8px;
     background-color: rgba(233, 95, 95, 0.6);
@@ -29,4 +30,63 @@
   .newstabs a:hover {
     text-decoration: underline;
   }
+  .container {
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: normal;
+    border: 0px solid;
+    overflow: auto;
+  }
   
+  .tabs {
+    overflow: auto;
+    max-height: 50vh;
+    border-right: 0px solid #ccc;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    box-sizing: border-box;
+    width: fit-content;
+    height: fit-content;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding-left: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      flex-direction: column;
+      overflow:auto;
+    }
+  
+    .tabs-container {
+      box-sizing: border-box;
+      border: 0px solid #ddd;
+      max-height: 12Vh; /* Adjust this value as needed */
+      display: flex;
+      border-bottom: 0px solid #ccc;
+    }
+  
+    .tab {
+      white-space: nowrap;
+    }
+
+    .content {
+      position: absolute;
+      max-width: 70%;
+      margin-left: 20%;
+      margin-bottom: 10%;
+      padding-bottom:3%;
+  }
+  .newstabs{
+    max-height: 8vh;
+  }
+  .newstabs h4{
+    font-size: small;
+  }
+  }
