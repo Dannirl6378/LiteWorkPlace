@@ -124,7 +124,7 @@
 }
 .clock {
   position: relative;
-  margin: -2rem 1rem auto;
+  margin: -3rem 1rem auto;
   color: #000000;
   text-shadow: 15px 8px 2px #00000038;
   z-index: 1;
@@ -133,7 +133,7 @@
 }
 #Alarm {
   position: relative;
-  margin-right: 50%;
+  margin-right: 60%;
   color: #000000;
   text-shadow: 15px 8px 2px #00000038;
   z-index: 1;
@@ -164,5 +164,5 @@
 #UserId{
   z-index: 1;
   position:absolute;
-  margin-left: 80%;
+  margin-left: 85%;
 }
