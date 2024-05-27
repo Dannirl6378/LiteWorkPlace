@@ -69,7 +69,7 @@ const AlarmClock: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* Tady je váš TimePicker */}
       <TimePicker sx={{
-        width:"12vw",
+        minWidth:"20vw",
       }}
         label="hh:mm"
         ampm={false}
