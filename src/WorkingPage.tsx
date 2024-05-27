@@ -1,18 +1,19 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Clock from "./1stBanner/ReminderClock/clock";
+import Clock from "./1stBanner/clock";
 import "./App.css";
 import "./WorkingPage.css";
 import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import Cookies from "js-cookie";
-import UserId from "./banner0/UserId";
+import UserId from "./1stBanner/UserId";
+import NewsTabs from "./banner1/newsTabs";
 
 export default function WorkingPage() {
-  const location = useLocation();
+  /*const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const singParam = searchParams.get("sing");
+  const singParam = searchParams.get("sing");*/
   //const singFromQuery = singParam === "true";
 
   const userDataString = Cookies.get("userData");
@@ -34,7 +35,7 @@ export default function WorkingPage() {
 
   const userData = JSON.parse(userDataString);
   const isLoggedIn = userData.loggedIn;
-  Cookies.remove("userData");
+
   console.log("isLoggedIn", isLoggedIn);
   console.log("userDataName", userData);
   return (
@@ -48,9 +49,11 @@ export default function WorkingPage() {
                 <div id="Alarm">
                   <AlarmClock />
                 </div>
-                <UserId/>
+                <div id="UserId">
+                  <UserId />
+                </div>
               </div>
-              <div className="newsbanner">test1</div>
+              <div className="newsbanner"><NewsTabs/></div>
             </div>
             <div className="componentsBody">
               <div className="leftSide">
