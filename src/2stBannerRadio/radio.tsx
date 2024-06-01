@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import './radio.css'; // Import CSS souboru
 
 interface Station {
     id: string;
@@ -10,6 +13,9 @@ interface Station {
 const Radio = () => {
     const [stations, setStations] = useState<Station[]>([]);
     const [currentStation, setCurrentStation] = useState<string>('');
+    const [volume, setVolume] = useState<number>(1); // Hlasitost mezi 0 a 1
+    const [isPlaying, setIsPlaying] = useState<boolean>(false); // Stav přehrávání
+    const audioRef = useRef<HTMLAudioElement>(null);
 
     const fetchData = async () => {
         try {
@@ -23,12 +29,11 @@ const Radio = () => {
             };
             const response = await axios.request(options);
             const allStations = response.data;
-            // Filtrovat pouze stanice s ID 82794 a 9428
             const filteredStations = allStations.filter((station: Station) => 
                 station.id === '82794' || station.id === '9428'
             );
             setStations(filteredStations);
-            console.log(filteredStations);
+            console.log('Filtered stations:', filteredStations);
         } catch (error) {
             console.error(error);
         }
@@ -39,37 +44,76 @@ const Radio = () => {
             await fetchData();
         };
 
-        loadDataAndSetTimeout(); // Spustíme načtení dat hned po zavolání useEffect
+        loadDataAndSetTimeout();
 
-        const intervalId = setInterval(loadDataAndSetTimeout, 100 * 60 * 1000); // 100 minut v milisekundách
+        const intervalId = setInterval(loadDataAndSetTimeout, 100 * 60 * 1000);
 
-        return () => clearInterval(intervalId); // Zrušíme interval při odmontování komponenty
-    }, []); // Zde je prázdné pole znamená, že useEffect se spustí pouze při inicializaci komponenty
+        return () => clearInterval(intervalId);
+    }, []);
 
-    const handleStationChange = (stream: string) => {
-        setCurrentStation(stream);
+    const handleStationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedStream = event.target.value;
+        setCurrentStation(selectedStream);
+        setIsPlaying(true); // Při změně stanice začne přehrávat automaticky
     };
+
+    const handlePlayPauseToggle = () => {
+        setIsPlaying(!isPlaying); // Přepínáme mezi Play a Pause
+        if (audioRef.current) {
+            if (!isPlaying) {
+                audioRef.current.play();
+            } else {
+                audioRef.current.pause();
+            }
+        }
+    };
+
+    const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newVolume = parseFloat(event.target.value);
+        setVolume(newVolume);
+        if (audioRef.current) {
+            audioRef.current.volume = newVolume;
+        }
+    };
+
+    useEffect(() => {
+        if (isPlaying && audioRef.current) {
+            audioRef.current.play();
+        }
+    }, [isPlaying]);
 
     return (
         <div>
             {stations.length > 0 ? (
-                <ul>
+                <select className='stations' onChange={handleStationChange} value={currentStation}>
+                    <option value="" disabled>Choose a station</option>
                     {stations.map((station, index) => (
-                        <li key={index}>
-                            <button onClick={() => handleStationChange(station.stream)}>
-                                {station.emisora}
-                            </button>
-                        </li>
+                        <option key={index} value={station.stream}>
+                            {station.emisora}
+                        </option>
                     ))}
-                </ul>
+                </select>
             ) : (
                 <p>Loading stations...</p>
             )}
             {currentStation && (
-                <audio controls autoPlay>
-                    <source src={currentStation} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                </audio>
+                <div>
+                    <audio ref={audioRef}>
+                        <source src={currentStation} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div className="custom-controls">
+                        <button className='PpButton' onClick={handlePlayPauseToggle}>{isPlaying ? <PauseIcon/> : <PlayArrowIcon/>}</button>
+                        <input className='volume'
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={volume}
+                            onChange={handleVolumeChange}
+                        />
+                    </div>
+                </div>
             )}
         </div>
     );
