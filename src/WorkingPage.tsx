@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import Cookies from "js-cookie";
 import UserId from "./1stBanner/UserId";
-import NewsTabs from "./banner1/newsTabs";
-import Radio from "./2stBannerRadio/radio"
+import NewsTabs from "./bannerNews/newsTabs";
+import Radio from "./bannerRadio/radio"
 
 export default function WorkingPage() {
   /*const location = useLocation();

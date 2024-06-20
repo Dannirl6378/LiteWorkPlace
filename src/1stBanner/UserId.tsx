@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef,useEffect } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -49,6 +49,17 @@ export default function UserId() {
       setOpen(false);
     }
   }
+
+  useEffect(()=>{
+    const handlBeforeUnload = ()=>{
+      Cookies.remove("userData");
+      localStorage.removeItem("userData");
+    };
+    window.addEventListener("beforeunload",handlBeforeUnload);
+    return()=>{
+      window.removeEventListener("beforeunload",handlBeforeUnload);
+    };
+  },[]);
 
   return (
     <div>
