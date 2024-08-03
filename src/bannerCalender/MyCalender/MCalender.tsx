@@ -1,20 +1,22 @@
 import * as React from "react";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { Box } from "@mui/material";
-import { useState, useEffect } from "react";
+import { StaticDatePicker } from "@mui/x-date-pickers";
+import { Box, TextField } from "@mui/material";
+import { useState } from "react";
+import CustomDay from "./CustomDay";
 import EventMsg from "./MyCalenderDial";
+import DeleteEvent from "./DeleteEvent";
 
 export default function MyCalendar() {
-  const [selectDate, setSelectDate] = useState<dayjs.Dayjs | null>(null);
-  const [msg, setMsg] = useState<string>("");
+  const [value, setValue] = useState<Dayjs | null>(null);
+  const [selectedDate, setSelectDate] = useState<Dayjs | null>(null);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [events, setEvents] = useState<{ [key: string]: string[] }>({});
   const [eventText, setEventText] = useState("");
 
-  const handleDateClick = (date: dayjs.Dayjs) => {
+  const handleDateClick = (date: Dayjs | null) => {
     setSelectDate(date);
     setOpenPopUp(true);
   };
@@ -22,7 +24,23 @@ export default function MyCalendar() {
   const handleDiaClose = () => {
     setOpenPopUp(false);
   };
- console.log("openPopUp",openPopUp);
+
+  const handleSaveEvent = async () => {
+    if (selectedDate) {
+      const dateString = selectedDate.format('YYYY-MM-DD');
+      const newEvents = {
+        ...events,
+        [dateString]: [...(events[dateString] || []), eventText],
+      };
+      setEvents(newEvents);
+
+      // await saveEvent(dateString, eventText);
+
+      setEventText('');
+      handleDiaClose();
+    }
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box
@@ -31,8 +49,8 @@ export default function MyCalendar() {
           height: 200,
           overflow: "hidden",
           "& .MuiPickersCalendarHeader-root": { height: 30 },
-          "& .MuiDayCalendar-weekContainer": { height: "auto" }, 
-          "& .MuiPickersDay-root": { width: 20, height: 20 }, 
+          "& .MuiDayCalendar-weekContainer": { height: "auto" },
+          "& .MuiPickersDay-root": { width: 20, height: 20 },
           "& .MuiDayCalendar-weekDayLabel": {
             fontSize: 10,
             lineHeight: "20px",
@@ -41,9 +59,12 @@ export default function MyCalendar() {
           },
         }}
       >
-        <DateCalendar
-          value={dayjs()}
-          onChange={handleDateClick}
+        <StaticDatePicker
+          orientation="portrait"
+          openTo="day"
+          value={value}
+          onChange={(newValue) => setValue(newValue)}
+          slots={{ day: (props) => <CustomDay {...props} events={events} /> }}
           sx={{
             width: "100%",
             height: "100%",
@@ -63,8 +84,10 @@ export default function MyCalendar() {
         open={openPopUp}
         onClose={handleDiaClose}
         eventText={eventText}
-        setMsg={setMsg}
+        setMsg={setEventText}
+        onSave={handleSaveEvent}
       />
     </LocalizationProvider>
   );
 }
+  
