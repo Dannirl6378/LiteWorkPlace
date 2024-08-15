@@ -1,7 +1,6 @@
-import React from 'react';
-import { IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-//import { deleteEvent } from './api';
+import React from "react";
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface DeleteEventProps {
   date: string;
@@ -10,20 +9,23 @@ interface DeleteEventProps {
   setEvents: React.Dispatch<React.SetStateAction<{ [key: string]: string[] }>>;
 }
 
-const DeleteEvent: React.FC<DeleteEventProps> = ({ date, eventText, events, setEvents }) => {
-  const handleDeleteEvent = async () => {
-    // Check if the event actually exists
+const DeleteEvent: React.FC<DeleteEventProps> = ({
+  date,
+  eventText,
+  events,
+  setEvents,
+}) => {
+  const handleDeleteEvent = () => {
     if (events[date]) {
-      const newEvents = {
-        ...events,
-        [date]: events[date].filter(event => event !== eventText),
-      };
-
-      // Update state with the new events
-      setEvents(newEvents);
-
-      // Uncomment and implement this if you have an API call
-      // await deleteEvent(date, eventText);
+      const updateEvent = events[date].filter((event) => event !== eventText);
+      if (updateEvent.length > 0) {
+        setEvents((prevEvents) => ({ ...prevEvents, [date]: updateEvent }));
+      } else {
+        setEvents((prevEvents) => {
+          const { [date]: __, ...remanigEvents } = prevEvents;
+          return remanigEvents;
+        });
+      }
     }
   };
 
