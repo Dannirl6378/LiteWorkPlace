@@ -8,8 +8,10 @@ import {
   List,
   ListItem,
   ListItemText,
+  Badge,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+
 
 export default function ToDoList() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,10 +36,12 @@ export default function ToDoList() {
 
   return (
     <div>
+        <Badge badgeContent={items.length} color="secondary" overlap="circular"></Badge>
       <Button
         aria-controls="ToDoList"
         aria-haspopup="tree"
         onClick={handleClick}
+        sx={{ background: "black", color: "white", fontWeight: "bold" }}
       >
         Open ToDo List
       </Button>
@@ -88,5 +92,4 @@ export default function ToDoList() {
       </Menu>
     </div>
   );
-};
-
+}

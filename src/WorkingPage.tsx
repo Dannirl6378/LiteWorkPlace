@@ -11,6 +11,7 @@ import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
 import Radio from "./bannerRadio/radio";
 import MyCalender from "./bannerCalender/MyCalender/MCalender";
+import ToDoList from "./bannerTODoLIST/ToDoListMain";
 
 export default function WorkingPage() {
   /*const location = useLocation();
@@ -79,7 +80,7 @@ export default function WorkingPage() {
             </div>
             <div className="componentsBody">
               <div className="leftSide">
-                <div className="banner1Td">ToDoList </div>
+                <div className="banner1Td"><ToDoList/> </div>
                 <div className="banner2Calender">
                   <MyCalender />
                 </div>
