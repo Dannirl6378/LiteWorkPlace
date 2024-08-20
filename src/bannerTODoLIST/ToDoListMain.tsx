@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-
 export default function ToDoList() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [items, setItems] = useState<string[]>([]);
@@ -36,7 +35,11 @@ export default function ToDoList() {
 
   return (
     <div>
-        <Badge badgeContent={items.length} color="secondary" overlap="circular"></Badge>
+      <Badge
+        badgeContent={items.length}
+        color="secondary"
+        overlap="circular"
+      ></Badge>
       <Button
         aria-controls="ToDoList"
         aria-haspopup="tree"
