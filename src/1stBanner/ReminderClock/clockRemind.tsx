@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 interface TimeObject {
   [x: string]: string | number | Date;
@@ -11,66 +12,44 @@ interface TimeObject {
 }
 
 const AlarmClock: React.FC = () => {
-  const [selectedTime, setSelectedTime] = useState<TimeObject | null>(null);
-  const [currentTime, setCurrentTime] = useState<Date>(new Date());
-  const [alarmTime, setAlarmTime] = useState<Date | null>(null);
-  const [alarmHour, setAlarmHour] = useState<number | null>(null);
-  const [alarmMinute, setAlarmMinute] = useState<number | null>(null);
+  const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
+  const [currentTime, setCurrentTime] = useState<Dayjs>(dayjs());
+  const [alarmTime, setAlarmTime] = useState<Dayjs | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTime(new Date());
+      setCurrentTime(dayjs());
     }, 1000);
     return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
-    if (alarmTime && alarmHour !== null && alarmMinute !== null) {
-      const currentHour = currentTime.getHours();
-      const currentMinute = currentTime.getMinutes();
-      console.log(alarmHour, alarmMinute);
-      console.log("curent",currentHour);
-      console.log("alarm",alarmHour);
-      if (
-        currentHour === alarmHour && currentMinute === alarmMinute
-      ) {
+    if (alarmTime) {
+      const currentHour = currentTime.hour();
+      const currentMinute = currentTime.minute();
+      const alarmHour = alarmTime.hour();
+      const alarmMinute = alarmTime.minute();
+      if (currentHour === alarmHour && currentMinute === alarmMinute) {
         alert("Čas vypršel!");
-        setAlarmHour(null);
-        setAlarmMinute(null);
+        setAlarmTime(null);
         setSelectedTime(null);
       }
     }
-  }, [alarmTime, currentTime, alarmHour, alarmMinute]);
+  }, [alarmTime, currentTime]);
 
-  const handleSetAlarm = (newTime: TimeObject | null, userInput?: string) => {
+  const handleSetAlarm = (newTime: Dayjs | null) => {
     setSelectedTime(newTime);
     if (newTime) {
-      const alarmDate = new Date(newTime.$d);
-      console.log(alarmDate);
-      const newAlarmHour = alarmDate.getHours();
-      const newAlarmMinute = alarmDate.getMinutes();
-      setAlarmTime(alarmDate);
-      setAlarmHour(newAlarmHour);
-      setAlarmMinute(newAlarmMinute);
-    } else if (userInput) {
-      const [hours, minutes] = userInput.split(":");
-      const alarmDate = new Date();
-      const newAlarmHour = parseInt(hours, 10);
-      const newAlarmMinute = parseInt(minutes, 10);
-      alarmDate.setHours(newAlarmHour);
-      alarmDate.setMinutes(newAlarmMinute);
-      setAlarmTime(alarmDate);
-      setAlarmHour(newAlarmHour);
-      setAlarmMinute(newAlarmMinute);
+      setAlarmTime(newTime);
     }
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {/* Tady je váš TimePicker */}
-      <TimePicker sx={{
-        minWidth:"20vw",
-      }}
+      <TimePicker
+        sx={{
+          minWidth: "20vw",
+        }}
         label="hh:mm"
         ampm={false}
         value={selectedTime}

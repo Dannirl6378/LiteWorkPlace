@@ -1,30 +1,114 @@
-import * as React from 'react';
-import dayjs, { Dayjs } from 'dayjs';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { useState } from 'react';
-import 'dayjs/locale/cs';
+import * as React from "react";
+import dayjs from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateCalendar, PickersDay } from "@mui/x-date-pickers";
+import { autocompleteClasses, Box, Tooltip } from "@mui/material";
+import EventMsg from "./EventMsg";
+import DeleteEvent from "./DeleteEvent";
+import CBox from "./StyledCalenderBoxCss";
 
+export default function MyCalendar() {
+  const [selectedDate, setSelectDate] = React.useState<dayjs.Dayjs | null>(
+    null,
+  );
+  const [openPopUp, setOpenPopUp] = React.useState(false);
+  const [events, setEvents] = React.useState<{ [key: string]: string[] }>({});
+  const [eventText, setEventText] = React.useState("");
+  const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
 
-dayjs.extend(localizedFormat);
-dayjs.locale('cs'); 
+  const handleDateClick = (date: dayjs.Dayjs) => {
+    setSelectDate(date);
+    setOpenPopUp(true);
+    setSelectedEvent(null);
+  };
 
-export default function MyCalender() {
-    const [value, setValue] = useState<Dayjs | null>(dayjs('2024-07-24'));//toLocatedateString
-  return (    <LocalizationProvider dateAdapter={AdapterDayjs}>
-    <DemoContainer components={['DateCalendar', 'DateCalendar']}>
-      <DemoItem label="Uncontrolled calendar">
-        <DateCalendar defaultValue={dayjs('2022-04-17')} />
-      </DemoItem>
-      <DemoItem label="Controlled calendar">
-        <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
-      </DemoItem>
-    </DemoContainer>
-  </LocalizationProvider>
-);
-);
+  const handleDiaClose = () => {
+    setOpenPopUp(false);
+  };
+
+  const handleSaveEvent = () => {
+    if (selectedDate) {
+      const dateString = selectedDate.format("YYYY-MM-DD");
+      setEvents((prevEvents) => ({
+        ...prevEvents,
+        [dateString]: [...(prevEvents[dateString] || []), eventText],
+      }));
+      setEventText("");
+      handleDiaClose();
+    }
+  };
+ console.log("dayevents",events);
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <CBox>
+        <DateCalendar
+          value={selectedDate || dayjs()}
+          onChange={handleDateClick}
+          slots={{
+            day: (props) => {
+              const dateString = props.day.format("YYYY-MM-DD");
+              const dayEvents = events[dateString];
+
+              return (
+                <Tooltip
+                  key={dateString}
+                  title={
+                    dayEvents ? (
+                      <Box>
+                        {dayEvents.map((event, index) => (
+                          <Box
+                            key={index}
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="space-between"
+                          >
+                            <span>{event}</span>
+                            <DeleteEvent
+                              date={dateString}
+                              eventText={event}
+                              events={events}
+                              setEvents={setEvents}
+                            />
+                          </Box>
+                        ))}
+                      </Box>
+                    ) : (
+                      ""
+                    )
+                  }
+                  arrow
+                  placement="top"
+                >
+                  <PickersDay
+                    {...props}
+                    sx={{
+                      backgroundColor: dayEvents ? "red" : "transparent",
+                      borderRadius: "50%",
+                      height: "80%",
+                      "&:hover": {
+                        backgroundColor: dayEvents ? "darkblue" : undefined,
+                      },
+                    }}
+                  />
+                </Tooltip>
+              );
+            },
+          }}
+        />
+      </CBox>
+      <EventMsg
+        open={openPopUp}
+        onClose={handleDiaClose}
+        onSave={handleSaveEvent}
+        eventText={eventText}
+        setMsg={setEventText}
+        events={events}
+        selectedEvent={selectedEvent}
+        setSelectedEvent={setSelectedEvent}
+        selectedDate={selectedDate}
+        setEvents={setEvents}
+      />
+    </LocalizationProvider>
+  );
 }
-
