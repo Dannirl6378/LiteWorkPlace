@@ -8,17 +8,26 @@ const CBox = styled(Box)`
   width: 100%;
   height: auto;
   overflow: hidden;
+  
 
   & .MuiPickersCalendarHeader-root {
     width: 100%;
-    max-width: 100%;
+    max-width: 90%;
     display: flex;
     justify-content: center;
     height: auto;
+    margin: auto;
+    margin-top:25%;
+  }
+    &.css-1t0788u-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition {
+    display:block;
+    position:relative;
+    overflow-x:hidden;
+    min-height:210px;
   }
 
   & .MuiDayCalendar-weekContainer {
-    width: 100%;
+    width: 96%;
     display: flex;
     justify-content: space-between; /* Ensure days are evenly distributed */
   }

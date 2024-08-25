@@ -12,6 +12,8 @@ import NewsTabs from "./bannerNews/newsTabs";
 import Radio from "./bannerRadio/radio";
 import MyCalender from "./bannerCalender/MyCalender/MCalender";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
+import TextEdit from "./bannerTextEdit/TextEditMain";
+
 
 export default function WorkingPage() {
   /*const location = useLocation();
@@ -85,7 +87,7 @@ export default function WorkingPage() {
                   <MyCalender />
                 </div>
               </div>
-              <div className="banner3Notes">Notes</div>
+              <div className="banner3Notes"><TextEdit/></div>
               <div className="rightSide">
                 <div className="banner4OneNote">OneNote</div>
                 <div className="banner5Radio">

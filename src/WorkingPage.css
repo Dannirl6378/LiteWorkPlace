@@ -3,7 +3,7 @@
   height: 100%;
   position: relative;
   background-color: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  color: hsla(0, 67%, 1%, 0.822);
 }
 
 .app::before {
@@ -85,6 +85,7 @@
   background-color: rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: center;
+  max-height: 40vh;
 }
 .banner3Notes {
   position: relative;
