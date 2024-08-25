@@ -8,6 +8,7 @@ const CBox = styled(Box)`
   width: 100%;
   height: auto;
   overflow: hidden;
+  
 
   & .MuiPickersCalendarHeader-root {
     width: 100%;
@@ -16,6 +17,7 @@ const CBox = styled(Box)`
     justify-content: center;
     height: auto;
     margin: auto;
+    margin-top:25%;
   }
     &.css-1t0788u-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition {
     display:block;
