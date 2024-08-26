@@ -36,15 +36,21 @@ export default function Sing() {
   const handleSignInClick = async () => {
     const isValid = await handleSignIn(email, pwd, navigate);
     const currentUser = user; // Zde získáme aktuální hodnotu user
-    console.log("isValid", isValid);
     if (isValid) {
       const userData = {
         name: currentUser, // Použijeme aktuální hodnotu user
         loggedIn: isValid,
       };
       const userDataString = JSON.stringify(userData);
-      Cookies.set("userData", userDataString);
-      navigate(`/workingPage`);
+      Cookies.set(
+        "userDatas",
+        JSON.stringify({ name: "user", loggedIn: true }),
+        {
+          sameSite:"none",
+          secure:true,
+          expires: 7,
+        },
+      );
       console.log("Přihlášení proběhlo úspěšně");
     } else {
       navigate(`/workingPage`);

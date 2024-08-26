@@ -3,7 +3,7 @@
   height: 100%;
   position: relative;
   background-color: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  color: hsla(0, 67%, 1%, 0.822);
 }
 
 .app::before {
@@ -77,11 +77,15 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 .banner2Calender {
+  border: solid 0px;
   width: 80%;
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  max-height: 40vh;
 }
 .banner3Notes {
   position: relative;
