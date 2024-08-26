@@ -9,7 +9,7 @@ import { Button } from "@mui/material";
 import Cookies from "js-cookie";
 import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
-import Radio from "./bannerRadio/radio"
+import Radio from "./bannerRadio/radio";
 
 export default function WorkingPage() {
   /*const location = useLocation();
@@ -54,7 +54,9 @@ export default function WorkingPage() {
                   <UserId />
                 </div>
               </div>
-              <div className="newsbanner"><NewsTabs/></div>
+              <div className="newsbanner">
+                <NewsTabs />
+              </div>
             </div>
             <div className="componentsBody">
               <div className="leftSide">
@@ -63,8 +65,10 @@ export default function WorkingPage() {
               </div>
               <div className="banner3Notes">Notes</div>
               <div className="rightSide">
-                <div className="banner4OneNote">OneNote</div>
-                <div className="banner5Radio"><Radio/></div>
+                <div className="bannerWeather">OneNote</div>
+                <div className="banner5Radio">
+                  <Radio />
+                </div>
                 <div className="banner6MiniGame">MiniGame</div>
               </div>
             </div>
