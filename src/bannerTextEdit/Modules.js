@@ -1,5 +1,5 @@
 // modules.js
-import { colors } from './Color';
+import { colors } from "./Color";
 
 export const modules = {
   toolbar: [
