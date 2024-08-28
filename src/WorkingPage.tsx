@@ -13,6 +13,7 @@ import Radio from "./bannerRadio/radio";
 import TextEdit from "./bannerTextEdit/TextEditMain";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MCalender from "./bannerCalender/MyCalender/MCalender";
+import Weather from './bannerWeather/Weather';
 
 export default function WorkingPage() {
   /*const location = useLocation();
@@ -91,7 +92,7 @@ export default function WorkingPage() {
                 <TextEdit />
               </div>
               <div className="rightSide">
-                <div className="banner4OneNote">OneNote</div>
+                <div className="bannerWeather"><Weather/></div>
                 <div className="banner5Radio">
                   <Radio />
                 </div>
