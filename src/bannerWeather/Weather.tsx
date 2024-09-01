@@ -104,6 +104,7 @@ export default function Weather() {
           <p className="location">{data?.name}</p>
           <div className="temp">
             <p>{data?.main.temp}°C</p>
+            <div className="wshow">
             <p className="Icons">
               {data?.weather[0].icon && (
                 <img
@@ -113,6 +114,7 @@ export default function Weather() {
               )}
             </p>
             <p className="descript">{data?.weather[0].description}</p>
+            </div>
           </div>
         </div>
       )}

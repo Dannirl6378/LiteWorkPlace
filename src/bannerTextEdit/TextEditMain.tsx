@@ -14,7 +14,7 @@ const TextEdit = () => {
   };
 
   return (
-    <div>
+    <div className="positionTextEdit">
       <h1 className="text-editor-heading"></h1>
       <div className="text-editor-container">
         <ReactQuill

@@ -48,7 +48,7 @@
   justify-content: space-between;
   text-align: left;
   width: 90%;
-  height: 10vw;
+  height: 6vw;
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 12px;
@@ -107,11 +107,12 @@
 }
 .bannerWeather{
   width: 80%;
-  margin: 1rem auto;
+  margin-top: -10px;
+  margin-left: 3%;
   padding: 1rem;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.5);
-  height: 50%;
+  height: 14vh;
 }
 .banner5Radio {
   width: 80%;
