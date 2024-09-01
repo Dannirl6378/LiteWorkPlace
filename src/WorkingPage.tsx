@@ -10,10 +10,10 @@ import Cookies from "js-cookie";
 import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
 import Radio from "./bannerRadio/radio";
-import MyCalender from "./bannerCalender/MyCalender/MCalender";
-import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import TextEdit from "./bannerTextEdit/TextEditMain";
-
+import ToDoList from "./bannerTODoLIST/ToDoListMain";
+import MCalender from "./bannerCalender/MyCalender/MCalender";
+import Weather from './bannerWeather/Weather';
 
 export default function WorkingPage() {
   /*const location = useLocation();
@@ -25,8 +25,7 @@ export default function WorkingPage() {
     return Cookies.get("userDatas");
   };
 
-  const userDataString=getuserDataString();
-
+  const userDataString = getuserDataString();
 
   console.log("userDataString", userDataString);
 
@@ -82,14 +81,18 @@ export default function WorkingPage() {
             </div>
             <div className="componentsBody">
               <div className="leftSide">
-                <div className="banner1Td"><ToDoList/> </div>
+                <div className="banner1Td">
+                  <ToDoList />{" "}
+                </div>
                 <div className="banner2Calender">
-                  <MyCalender />
+                  <MCalender />
                 </div>
               </div>
-              <div className="banner3Notes"><TextEdit/></div>
+              <div className="banner3Notes">
+                <TextEdit />
+              </div>
               <div className="rightSide">
-                <div className="banner4OneNote">OneNote</div>
+                <div className="bannerWeather"><Weather/></div>
                 <div className="banner5Radio">
                   <Radio />
                 </div>

@@ -7,3 +7,7 @@
 .text-editor {
   background-color: white;
 }
+.positionTextEdit {
+  position: center;
+  width: 100%;
+}
