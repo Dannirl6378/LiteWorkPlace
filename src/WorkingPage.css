@@ -105,12 +105,14 @@
   align-items: stretch;
   width: 25%;
 }
-.banner4OneNote {
-  width: 80%;
-  margin: 1rem auto;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.2);
+  .bannerWeather{
+    width: 80%;
+    margin-top: -10px;
+    margin-left: 3%;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 14vh;
 }
 .banner5Radio {
   width: 80%;
@@ -125,6 +127,7 @@
   padding: 1rem;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.2);
+  height: 20vh;
 }
 .clock {
   position: relative;
