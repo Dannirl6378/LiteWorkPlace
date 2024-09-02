@@ -1,32 +1,29 @@
 import React from "react";
 
-export function TicTacToeFirst(nGrid: [number, number][], size: number) {
+type Coordinate = [number, number];
+
+export function TicTacToeFirst(nGrid: Coordinate[], size: number) {
   const minLength = size > 4 ? 4 : size;
 
-  type Coordinate = [number, number];
-
-  const Player: Coordinate[] = nGrid;
   const sortCoordinates = (coordinates: Coordinate[]): Coordinate[] => {
     return coordinates.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
   };
 
-  const hasSequence = (
-    coordinates: Coordinate[],
-    minLength: number
-  ): boolean => {
+  const hasSequence = (coordinates: Coordinate[], minLength: number): boolean => {
     const sortedCoordinates = sortCoordinates(coordinates);
-    const xSequence = sortedCoordinates.map((coord) => coord[0]);
-    const ySequence = sortedCoordinates.map((coord) => coord[1]);
+    const xSequence = sortedCoordinates.map(coord => coord[0]);
+    const ySequence = sortedCoordinates.map(coord => coord[1]);
+
+    // Check if both x and y sequences meet the minimum length condition
     return (
-      hasMinSequenceLength(xSequence, minLength) ||
-      hasMinSequenceLength(ySequence, minLength)
+      (hasMinSequenceLength(xSequence, minLength) || hasConstantValueLength(xSequence, minLength)) &&
+      (hasMinSequenceLength(ySequence, minLength) || hasConstantValueLength(ySequence, minLength))
     );
   };
 
-  const hasMinSequenceLength = (
-    sequence: number[],
-    minLength: number
-  ): boolean => {
+  const hasMinSequenceLength = (sequence: number[], minLength: number): boolean => {
+    if (sequence.length < minLength) return false;
+
     let count = 1;
     for (let i = 1; i < sequence.length; i++) {
       if (sequence[i] === sequence[i - 1] + 1) {
@@ -41,7 +38,24 @@ export function TicTacToeFirst(nGrid: [number, number][], size: number) {
     return false;
   };
 
-  const hasXSequence: boolean = hasSequence(Player, minLength);
+  const hasConstantValueLength = (sequence: number[], minLength: number): boolean => {
+    if (sequence.length < minLength) return false;
+
+    let count = 1;
+    for (let i = 1; i < sequence.length; i++) {
+      if (sequence[i] === sequence[i - 1]) {
+        count++;
+        if (count >= minLength) {
+          return true;
+        }
+      } else {
+        count = 1;
+      }
+    }
+    return false;
+  };
+
+  const hasXSequence = hasSequence(nGrid, minLength);
 
   return { hasXSequence };
 }

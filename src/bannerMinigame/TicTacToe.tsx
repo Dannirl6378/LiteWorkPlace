@@ -20,7 +20,6 @@ export default function TicTacToe() {
 
   const handleClick = (rowIndex: number, cellIndex: number) => {
     const coord: [number, number] = [rowIndex, cellIndex];
-
     if (
       circleGrid.some(([row, col]) => row === rowIndex && col === cellIndex) ||
       xGrid.some(([row, col]) => row === rowIndex && col === cellIndex) ||
@@ -35,8 +34,9 @@ export default function TicTacToe() {
     } else {
       setXGrid([...xGrid, coord]);
     }
-    setIsNextCircle(!isNextCircle);
+    setIsNextCircle(false);
   };
+  console.log("xGrid",xGrid);
 
   const generateNewValues = () => {
     let newCoord: [number, number] | null = null;
@@ -52,9 +52,10 @@ export default function TicTacToe() {
         )
       ) {
         newCoord = potentialCoord;
+        console.log("potentialcoord",potentialCoord);
       }
     }
-  
+    
     setNewValues(newCoord);
   };
 
@@ -75,7 +76,7 @@ export default function TicTacToe() {
     const result = TicTacToeFirst(grid, size);
     return result.hasXSequence;
   };
-
+console.log("circleGrid",circleGrid);
   useEffect(() => {
     if (checkWinCondition(circleGrid)) {
       setIsWinnerO(true);
