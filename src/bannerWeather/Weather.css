@@ -19,11 +19,21 @@
   width: 15vw;
 }
 img {
-  margin-top: -50%;
-  margin-left: -60%;
-  width: 90%;
+  margin-top: -40%;
+  margin-left: -50%;
 }
 .wshow {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30%;
+}
+.descript{
+  margin:0 20% 10% 0;
+}
+.location{
+  margin-left: 15%;
+}
+.weatherData{
   display: flex;
   flex-direction: row;
 }

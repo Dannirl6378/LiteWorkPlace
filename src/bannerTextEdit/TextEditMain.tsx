@@ -15,7 +15,6 @@ const TextEdit = () => {
 
   return (
     <div>
-      <h1 className="text-editor-heading"></h1>
       <div className="text-editor-container">
         <ReactQuill
           theme="snow"

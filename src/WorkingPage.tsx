@@ -76,9 +76,14 @@ export default function WorkingPage() {
                   <UserId />
                 </div>
               </div>
+              <div className="containerNewsRadio">
               <div className="newsbanner">
                 <NewsTabs />
               </div>
+              <div className="banner5Radio">
+                  <Radio />
+                </div>
+                </div>
             </div>
             <div className="componentsBody">
               <div className="leftSide">
@@ -95,9 +100,6 @@ export default function WorkingPage() {
               <div className="rightSide">
                 <div className="bannerWeather">
                   <Weather />
-                </div>
-                <div className="banner5Radio">
-                  <Radio />
                 </div>
                 <div className="banner6MiniGame">
                   <TicTacToe />

@@ -23,14 +23,14 @@ export default function NewsTabs() {
           textColor="secondary"
           indicatorColor="secondary"
         >
-          <Tab className="tab" value="one" label="News1" />
+          {/*<Tab className="tab" value="one" label="News1" />*/}
           <Tab className="tab" value="two" label="NewsApi" />
-          <Tab className="tab" value="three" label="News3" />
+         {/* <Tab className="tab" value="three" label="News3" />*/}
         </Tabs>
       </Box>
       <Box className="content">
-        {value === 'one' && <News1 />}
         {value === 'two' && <News2 />}
+        {/*value === 'two' && <News2 />*/}
         {/* Add the component for 'three' if it exists */}
       </Box>
     </Box>

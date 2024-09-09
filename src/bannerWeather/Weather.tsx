@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Weather.css";
 
-
 interface WeatherData {
   name: string;
   temp: number;
@@ -91,7 +90,7 @@ export default function Weather() {
     <div className="appWeather">
       <div className="searchWeather">
         <input
-        className="inputweather"
+          className="inputweather"
           value={location}
           onChange={(event) => setLocation(event.target.value)}
           onKeyDown={handleSearch}
@@ -101,19 +100,19 @@ export default function Weather() {
       </div>
       {data?.name !== undefined && (
         <div className="containerWeather">
-          <p className="location">{data?.name}</p>
-          <div className="temp">
-            <p>{data?.main.temp}°C</p>
-            <div className="wshow">
-            <p className="Icons">
-              {data?.weather[0].icon && (
-                <img
-                  src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
-                  alt="Weather Icon"
-                />
-              )}
-            </p>
-            <p className="descript">{data?.weather[0].description}</p>
+          <h3 className="location">{data?.name}</h3>
+          <div className="wshow">
+          <h4 className="descript">{data?.weather[0].description}</h4>
+            <div className="weatherData">
+              <p className="Icons">
+                {data?.weather[0].icon && (
+                  <img
+                    src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+                    alt="Weather Icon"
+                  />
+                )}
+              </p>
+              <h4>{data?.main.temp}°C</h4>
             </div>
           </div>
         </div>
