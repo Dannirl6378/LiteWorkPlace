@@ -112,7 +112,7 @@ export default function Weather() {
                   />
                 )}
               </p>
-              <h4>{data?.main.temp}°C</h4>
+              <h4>{parseFloat(data?.main.temp.toFixed(1))}°C</h4>
             </div>
           </div>
         </div>

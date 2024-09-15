@@ -49,7 +49,7 @@
   text-align: left;
   width: 45%;
   height: 9vh;
-  margin-left: 1rem;
+  margin-left: 1.5rem;
   padding: 1rem;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.6);
@@ -94,7 +94,7 @@
   text-align: left;
   width: 50%;
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.2);
 }
@@ -108,7 +108,7 @@
   .bannerWeather{
     width: 80%;
     margin-top: 10px;
-    margin-left: 3%;
+    margin: 1rem auto;
     padding: 1rem;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.5);
@@ -117,8 +117,7 @@
 .banner5Radio {
   width: 30%;
   height: fit-content;
-  margin: 1rem auto;
-  padding: 1rem;
+  margin-right: 2rem;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.2);
 }
