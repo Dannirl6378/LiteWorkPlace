@@ -3,6 +3,8 @@
 }
 .text-editor-container {
   background-color: white;
+  margin-left: 3%;
+  width: 45vw;
 }
 .text-editor {
   background-color: white;

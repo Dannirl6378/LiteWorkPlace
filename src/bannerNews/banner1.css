@@ -5,13 +5,14 @@
   }
   
   .newstabs {
-    flex: 1 1 calc(33.333% - 13px); /* 3 články na řádek s mezerou */
+    display: flex; /* 3 články na řádek s mezerou */
+    flex-direction: column;
     box-sizing: border-box;
     border: 1px solid #ddd;
     padding: 10px;
-    margin:auto;
+    margin-left: 10%;
     max-height: 10vh;
-    min-height: 5vh;
+    min-height: 6vh;
     max-width: 35vw;
     border-radius: 8px;
     background-color: rgba(233, 95, 95, 0.6);

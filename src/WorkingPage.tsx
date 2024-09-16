@@ -11,9 +11,12 @@ import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
 import Radio from "./bannerRadio/radio";
 import TextEdit from "./bannerTextEdit/TextEditMain";
+import TicTacToe from "./bannerMinigame/TicTacToe";
+import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MCalender from "./bannerCalender/MyCalender/MCalender";
-import Weather from './bannerWeather/Weather';
+
+
 
 export default function WorkingPage() {
   /*const location = useLocation();
@@ -75,9 +78,14 @@ export default function WorkingPage() {
                   <UserId />
                 </div>
               </div>
+              <div className="containerNewsRadio">
               <div className="newsbanner">
                 <NewsTabs />
               </div>
+              <div className="banner5Radio">
+                  <Radio />
+                </div>
+                </div>
             </div>
             <div className="componentsBody">
               <div className="leftSide">
@@ -92,11 +100,12 @@ export default function WorkingPage() {
                 <TextEdit />
               </div>
               <div className="rightSide">
-                <div className="bannerWeather"><Weather/></div>
-                <div className="banner5Radio">
-                  <Radio />
+                <div className="bannerWeather">
+                  <Weather />
                 </div>
-                <div className="banner6MiniGame">MiniGame</div>
+                <div className="banner6MiniGame">
+                  <TicTacToe />
+                </div>
               </div>
             </div>
           </div>

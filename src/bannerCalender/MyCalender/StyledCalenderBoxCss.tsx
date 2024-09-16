@@ -6,7 +6,7 @@ const CBox = styled(Box)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: auto;
+  height: 40vh;
   overflow: hidden;
   
 
