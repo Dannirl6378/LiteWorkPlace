@@ -90,7 +90,7 @@ export default function Weather() {
     <div className="appWeather">
       <div className="searchWeather">
         <input
-          className="inputweather"
+        className="inputweather"
           value={location}
           onChange={(event) => setLocation(event.target.value)}
           onKeyDown={handleSearch}
@@ -112,7 +112,7 @@ export default function Weather() {
                   />
                 )}
               </p>
-              <h4>{parseFloat(data?.main.temp.toFixed(1))}°C</h4>
+            <p className="descript">{data?.weather[0].description}</p>
             </div>
           </div>
         </div>

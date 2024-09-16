@@ -10,11 +10,13 @@ import Cookies from "js-cookie";
 import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
 import Radio from "./bannerRadio/radio";
-import MyCalender from "./bannerCalender/MyCalender/MCalender";
-import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import TextEdit from "./bannerTextEdit/TextEditMain";
 import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
+import ToDoList from "./bannerTODoLIST/ToDoListMain";
+import MCalender from "./bannerCalender/MyCalender/MCalender";
+
+
 
 export default function WorkingPage() {
   /*const location = useLocation();
@@ -91,7 +93,7 @@ export default function WorkingPage() {
                   <ToDoList />{" "}
                 </div>
                 <div className="banner2Calender">
-                  <MyCalender />
+                  <MCalender />
                 </div>
               </div>
               <div className="banner3Notes">
