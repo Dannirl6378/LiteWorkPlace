@@ -27,6 +27,7 @@ const TextEdit = () => {
           className="text-editor"
         />
       </div>
+    </div>
   );
 };
 
