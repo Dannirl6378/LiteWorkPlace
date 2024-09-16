@@ -50,6 +50,8 @@
   width: 45%;
   height: 9vh;
   margin-left: 1.5rem;
+
+
   padding: 1rem;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.6);
@@ -168,9 +170,9 @@
   margin-left: 50%;
   margin-top: 25%;
 }
-#UserId{
+#UserId {
   z-index: 1;
-  position:absolute;
+  position: absolute;
   margin-left: 85%;
 }
 .containerNewsRadio{
@@ -178,3 +180,4 @@
   justify-content: space-between;
   flex-direction: row;
 }
+

@@ -14,7 +14,8 @@ const TextEdit = () => {
   };
 
   return (
-    <div>
+    <div className="positionTextEdit">
+      <h1 className="text-editor-heading"></h1>
       <div className="text-editor-container">
         <ReactQuill
           theme="snow"
@@ -26,7 +27,6 @@ const TextEdit = () => {
           className="text-editor"
         />
       </div>
-    </div>
   );
 };
 
