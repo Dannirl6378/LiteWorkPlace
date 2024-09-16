@@ -28,7 +28,16 @@ export default function WorkingPage() {
 
   const userDataString = getuserDataString();
 
-  console.log("userDataString", userDataString);
+  
+  if (userDataString) {
+    const userData = JSON.parse(userDataString); // Převod z řetězce JSON na objekt
+  
+    console.log("userDataString", userDataString); // Původní řetězec
+    console.log("user", userData.name); // Přístup k objektu uživatele
+  } else {
+    console.error("Uživatelská data nejsou k dispozici.");
+  }
+  
 
   if (!userDataString) {
     //const isLoggedIn = false;
