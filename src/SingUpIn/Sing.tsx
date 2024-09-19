@@ -44,7 +44,7 @@ export default function Sing() {
       const userDataString = JSON.stringify(userData);
       Cookies.set(
         "userDatas",
-        JSON.stringify({ name: "user", loggedIn: true }),
+        JSON.stringify({ name: `${user}`, loggedIn: true }),
         {
           sameSite:"none",
           secure:true,
