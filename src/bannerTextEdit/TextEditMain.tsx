@@ -5,12 +5,18 @@ import { modules } from "./Modules"; // Import modules
 import { formats } from "./Format"; // Import formats
 import "./TextEditor.css"; // Import the CSS file
 
-const TextEdit = () => {
+
+
+interface TextEditProps {
+  onContentChange: (content: string) => void;
+}
+const TextEdit: React.FC<TextEditProps> = ({ onContentChange }) => {
   const [content, setContent] = useState("");
 
   const handleProcedureContentChange = (content: string) => {
     setContent(content);
-    console.log("content---->", content);
+    onContentChange(content);
+    console.log("oncontent",content);
   };
 
   return (

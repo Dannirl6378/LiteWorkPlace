@@ -1,20 +1,20 @@
 import axios from "axios";
-import { GetUser } from "./CheckUser/GetUser";
+//import { GetUser } from "../dbData/AxiosGetUserbyEmail";
 
 export async function handleSignIn(
   email: string,
   pwd: string,
-  navigate: (path: string) => void // Předáváme funkci pro navigaci
+  navigate: (path: string) => void, // Předáváme funkci pro navigaci
 ) {
   let isValidPassword;
 
   try {
     const response = await axios.post(
-      "http://localhost:3001/api/passwordUtility/comparePassword",
+      "http://localhost:3001/passwordUtility/comparePassword",
       {
         password: pwd,
         email: email,
-      }
+      },
     );
     isValidPassword = response.data.message === "Přihlášení úspěšné.";
     console.log("isValidPassword", isValidPassword);

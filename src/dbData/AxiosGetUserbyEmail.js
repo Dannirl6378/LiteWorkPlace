@@ -3,9 +3,11 @@ import axios from "axios";
 // Funkce pro získání uživatele na základě e-mailu
 export async function getUser(email) {
   try {
-    const response = await axios.get(`http://localhost:3001/api/user/${email}`);
-    return response.data;
+    const response = await axios.get(`http://localhost:3001/getUsers/${email}`);
+    console.log("AxiosGetUserbyEmail", response.data);
+    return response.data; // Return the user data
   } catch (error) {
-    throw new Error("Chyba při získávání uživatelských dat.");
+    console.error("Error fetching user data:", error);
+    throw error;
   }
 }

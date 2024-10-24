@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useRef,useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -10,13 +10,58 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { autocompleteClasses } from "@mui/material";
+import { updateUserData, fetchUserData } from "../dbData/PushGetData";
+import ToDoList from "../bannerTODoLIST/ToDoListMain";
 
-interface Props {}
-export default function UserId() {
+// Definice typu pro uživatelská data
+interface UserData {
+  name: string;
+  email: string;
+  loggedIn: boolean;
+}
+
+interface UserIdProps {
+  quillContent: string;
+  ToDoList: string[]; // Změňte na skutečný typ obsahu
+}
+
+export default function UserId({ quillContent, ToDoList }: UserIdProps) {
   const [open, setOpen] = useState(false);
+  const [quillText, setQuillText] = useState(quillContent);
+  const [toDoListData,setToDoListData]=useState<string[]>(ToDoList)
+  const [userData, setUserData] = useState<UserData | undefined>(undefined);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
+
+  // Předpokládaná událost a úkoly
+  const akceCalander = ["Událost 1", "Událost 2"];
+  const todoList = ["Úkol 1", "Úkol 2"];
+  const quill = [...quillText];
+
+  useEffect(() => {
+    const getUserDataString = (): string | undefined => {
+      return Cookies.get("userDatas"); // Zajistěte, že název cookie je správný
+    };
+
+    const userDataString = getUserDataString();
+    console.log("userDataString", userDataString);
+
+    if (userDataString) {
+      try {
+        // Parsování stringu na objekt
+        const parsedUserData = JSON.parse(userDataString) as UserData;
+        setUserData(parsedUserData);
+        console.log("Parsed user data:", parsedUserData);
+
+        // Načtení dat
+        fetchUserData(parsedUserData.email);
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+      }
+    } else {
+      console.log("No user data found in cookies.");
+    }
+  }, []);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -33,10 +78,20 @@ export default function UserId() {
     setOpen(false);
   };
 
-  const handleLogOut = () => {
-    Cookies.remove("userData");
-    navigate(`/`);
+  const handleLogOut = async () => {
+    try {
+      if (userData) {
+        // Uložení obsahu před odhlášením
+        await updateUserData(userData.email, akceCalander, quill, toDoListData);
+      }
+
+      Cookies.remove("userDatas"); // Ujistěte se, že název cookie je správný
+      navigate(`/`);
+    } catch (error) {
+      console.error("Error during logout and data saving:", error);
+    }
   };
+
   const handleClickProfil = () => {
     navigate(`/MyProfile`);
   };
@@ -50,18 +105,16 @@ export default function UserId() {
     }
   }
 
-  useEffect(()=>{
-    const handlBeforeUnload = ()=>{
-      Cookies.remove("userData");
-      localStorage.removeItem("userData");
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      Cookies.remove("userDatas"); // Ujistěte se, že název cookie je správný
+      localStorage.removeItem("userDatas"); // Ujistěte se, že název localStorage položky je správný
     };
-    window.addEventListener("beforeunload",handlBeforeUnload);
-    return()=>{
-      window.removeEventListener("beforeunload",handlBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  },[]);
-
-  
+  }, []);
 
   return (
     <div>

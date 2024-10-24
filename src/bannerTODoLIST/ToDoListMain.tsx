@@ -12,7 +12,11 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function ToDoList() {
+interface ToDoListProps{
+  onListChange:(items: string[]) => void;
+}
+
+const ToDoList: React.FC<ToDoListProps> = ({ onListChange }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [items, setItems] = useState<string[]>([]);
   const [newItem, setNewItem] = useState<string>("");
@@ -25,21 +29,21 @@ export default function ToDoList() {
   };
   const handleAddItem = () => {
     if (newItem.trim() !== "") {
-      setItems((prevItems) => [...prevItems, newItem]);
+      const updatedItems = [...items, newItem];
+      setItems(updatedItems);
       setNewItem("");
+      onListChange(updatedItems); // Předáváme změněný seznam zpět
     }
   };
   const handleDeleteItems = (index: number) => {
-    setItems((prevItems) => prevItems.filter((_, i) => i !== index));
+    const updatedItems = items.filter((_, i) => i !== index);
+    setItems(updatedItems);
+    onListChange(updatedItems); // Předáváme změněný seznam zpět
   };
 
   return (
     <div>
-      <Badge
-        badgeContent={items.length}
-        color="secondary"
-        overlap="circular"
-      ></Badge>
+      <Badge badgeContent={items.length} color="secondary" overlap="circular" />
       <Button
         aria-controls="ToDoList"
         aria-haspopup="tree"
@@ -49,7 +53,7 @@ export default function ToDoList() {
         Open ToDo List
       </Button>
       <Menu
-        id="ToDo List"
+        id="ToDoList"
         open={Boolean(anchorEl)}
         keepMounted
         onClose={handleClose}
@@ -95,4 +99,6 @@ export default function ToDoList() {
       </Menu>
     </div>
   );
-}
+};
+
+export default ToDoList;

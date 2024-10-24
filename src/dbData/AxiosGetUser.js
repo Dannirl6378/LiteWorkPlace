@@ -7,6 +7,7 @@ export async function getUser(userData) {
       "http://localhost:3001/getUsers",
       userData
     );
+    console.log("getUsers_AxiosGetUsers",response.data);
     return response.data;
   } catch (error) {
     console.error(error);

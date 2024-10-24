@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import Clock from "./1stBanner/clock";
 import "./App.css";
 import "./WorkingPage.css";
@@ -16,13 +16,9 @@ import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MCalender from "./bannerCalender/MyCalender/MCalender";
 
-
-
 export default function WorkingPage() {
-  /*const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const singParam = searchParams.get("sing");*/
-  //const singFromQuery = singParam === "true";
+  const [quillContent, setQuillContent] = useState("");
+  const [todoList,setTodoList]=useState<string[]>([]);
 
   const getuserDataString = () => {
     return Cookies.get("userDatas");
@@ -33,8 +29,6 @@ export default function WorkingPage() {
   console.log("userDataString", userDataString);
 
   if (!userDataString) {
-    //const isLoggedIn = false;
-    //console.log("isLoggedIn", isLoggedIn);
     return (
       <div className="backgroundSite">
         <div className="errorSing">
@@ -75,29 +69,31 @@ export default function WorkingPage() {
                   <AlarmClock />
                 </div>
                 <div id="UserId">
-                  <UserId />
+                  <UserId quillContent={quillContent} ToDoList={todoList} />
                 </div>
               </div>
               <div className="containerNewsRadio">
-              <div className="newsbanner">
-                <NewsTabs />
-              </div>
-              <div className="banner5Radio">
+                <div className="newsbanner">
+                  <NewsTabs />
+                </div>
+                <div className="banner5Radio">
                   <Radio />
                 </div>
-                </div>
+              </div>
             </div>
             <div className="componentsBody">
               <div className="leftSide">
                 <div className="banner1Td">
-                  <ToDoList />{" "}
+                  <ToDoList onListChange={(items)=> setTodoList(items)}/>("")
                 </div>
                 <div className="banner2Calender">
                   <MCalender />
                 </div>
               </div>
               <div className="banner3Notes">
-                <TextEdit />
+                <TextEdit
+                  onContentChange={(content) => setQuillContent(content)}
+                />
               </div>
               <div className="rightSide">
                 <div className="bannerWeather">
