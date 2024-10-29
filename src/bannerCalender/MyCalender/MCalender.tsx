@@ -8,7 +8,12 @@ import EventMsg from "./EventMsg";
 import DeleteEvent from "./DeleteEvent";
 import CBox from "./StyledCalenderBoxCss";
 
-export default function MyCalendar() {
+
+interface McalenderProps {
+  onContentChange: (content: string) => void;
+}
+
+const MyCalendar: React.FC<McalenderProps> =({ onContentChange }) =>{
   const [selectedDate, setSelectDate] = React.useState<dayjs.Dayjs | null>(
     null,
   );
@@ -112,3 +117,4 @@ export default function MyCalendar() {
     </LocalizationProvider>
   );
 }
+export default MyCalendar;

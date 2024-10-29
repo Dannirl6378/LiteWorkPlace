@@ -22,19 +22,21 @@ interface UserData {
 
 interface UserIdProps {
   quillContent: string;
-  ToDoList: string[]; // Změňte na skutečný typ obsahu
+  ToDoList: string[];
+  callenAction: string; 
 }
 
-export default function UserId({ quillContent, ToDoList }: UserIdProps) {
+export default function UserId({ quillContent, ToDoList, callenAction }: UserIdProps) {
   const [open, setOpen] = useState(false);
   const [quillText, setQuillText] = useState(quillContent);
-  const [toDoListData,setToDoListData]=useState<string[]>(ToDoList)
+  const [toDoListData,setToDoListData]=useState<string[]>(ToDoList);
+  const [akceCalender, setAkceCalender]=useState<string>(callenAction);
   const [userData, setUserData] = useState<UserData | undefined>(undefined);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
 
   // Předpokládaná událost a úkoly
-  const akceCalander = ["Událost 1", "Událost 2"];
+  const Calander = ["Událost 1", "Událost 2"];
   const todoList = ["Úkol 1", "Úkol 2"];
   const quill = [...quillText];
 
@@ -82,7 +84,7 @@ export default function UserId({ quillContent, ToDoList }: UserIdProps) {
     try {
       if (userData) {
         // Uložení obsahu před odhlášením
-        await updateUserData(userData.email, akceCalander, quill, toDoListData);
+        await updateUserData(userData.email, akceCalender, quill, toDoListData);
       }
 
       Cookies.remove("userDatas"); // Ujistěte se, že název cookie je správný

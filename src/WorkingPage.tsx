@@ -13,18 +13,20 @@ import TextEdit from "./bannerTextEdit/TextEditMain";
 import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
-import MCalender from "./bannerCalender/MyCalender/MCalender";
+import MyCalendar from "./bannerCalender/MyCalender/MCalender"
+
 
 export default function WorkingPage() {
   const [quillContent, setQuillContent] = useState("");
   const [todoList, setTodoList] = useState<string[]>([]);
+  const [callenAction, setCalenAction]=useState<string>("");
 
   const getuserDataString = sessionStorage.getItem("userDatas");
   let userData;
   if (getuserDataString) {
     try {
       userData = JSON.parse(getuserDataString);
-      console.log("rozdelen user data", userData);
+      console.log("rozdeleni user data", userData);
     } catch (error) {
       console.error("chybav rodeleni dat", error);
     }
@@ -57,7 +59,7 @@ export default function WorkingPage() {
                   <AlarmClock />
                 </div>
                 <div id="UserId">
-                  <UserId quillContent={quillContent} ToDoList={todoList} />
+                  <UserId quillContent={quillContent} ToDoList={todoList} callenAction={callenAction}/>
                 </div>
               </div>
               <div className="containerNewsRadio">
@@ -75,7 +77,7 @@ export default function WorkingPage() {
                   <ToDoList onListChange={(items) => setTodoList(items)} />
                 </div>
                 <div className="banner2Calender">
-                  <MCalender />
+                  <MyCalendar onContentChange={(events: React.SetStateAction<string>)=> setCalenAction(events)}/>
                 </div>
               </div>
               <div className="banner3Notes">
