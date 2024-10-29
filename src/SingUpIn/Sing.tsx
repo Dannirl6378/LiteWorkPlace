@@ -19,7 +19,6 @@ import { handleRegistration } from "./Register";
 import { handleSignIn } from "./SingIn";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 export default function Sing() {
   const [action, setAction] = useState("Sing In");
@@ -37,33 +36,18 @@ export default function Sing() {
     const isValid = await handleSignIn(email, pwd, navigate);
     //const currentUser = user; // Zde získáme aktuální hodnotu user
     if (isValid) {
-      /*const userData = {
-        name: currentUser, // Použijeme aktuální hodnotu user
+      const userData = {
+        name: `${user}`, // Použijeme aktuální hodnotu user
+        email: `${email}`,
         loggedIn: isValid,
-      };*/
-      //const userDataString = JSON.stringify(userData);
-      Cookies.set(
-        "userDatas",
-        JSON.stringify({ name: `${user}`, email: `${email}`, loggedIn: `${isValid}` }),
-        {
-          sameSite: "none",
-          secure: true,
-          expires: 7 / 24,
-        },
-      );
+      }
+      sessionStorage.setItem("userDatas", JSON.stringify(userData));
       console.log("Přihlášení proběhlo úspěšně");
-    } else {
+  } else {
       navigate(`/workingPage`);
       console.error("Nesprávné přihlašovací údaje");
-    }
+  }
   };
-  /* useEffect(() => {
-    const updateURL = () => {
-      navigate(`/workingPage?sing=${sing}`);
-    };
-
-    updateURL(); // Aktualizujte URL po každé změně hodnoty sing
-  }, [sing]);*/
 
   const handleChangePassword = (e: { target: { value: any } }) => {
     const newPwd = e.target.value;

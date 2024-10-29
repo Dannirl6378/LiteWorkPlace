@@ -6,7 +6,6 @@ import "./WorkingPage.css";
 import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import Cookies from "js-cookie";
 import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
 import Radio from "./bannerRadio/radio";
@@ -18,17 +17,24 @@ import MCalender from "./bannerCalender/MyCalender/MCalender";
 
 export default function WorkingPage() {
   const [quillContent, setQuillContent] = useState("");
-  const [todoList,setTodoList]=useState<string[]>([]);
+  const [todoList, setTodoList] = useState<string[]>([]);
 
-  const getuserDataString = () => {
-    return Cookies.get("userDatas");
-  };
+  const getuserDataString = sessionStorage.getItem("userDatas");
+  let userData;
+  if (getuserDataString) {
+    try {
+      userData = JSON.parse(getuserDataString);
+      console.log("rozdelen user data", userData);
+    } catch (error) {
+      console.error("chybav rodeleni dat", error);
+    }
+  }
 
-  const userDataString = getuserDataString();
+  const isLoggedIn = userData?.loggedIn ?? false;
 
-  console.log("userDataString", userDataString);
+  console.log("isLogedIn", isLoggedIn);
 
-  if (!userDataString) {
+  if (!isLoggedIn) {
     return (
       <div className="backgroundSite">
         <div className="errorSing">
@@ -39,24 +45,6 @@ export default function WorkingPage() {
       </div>
     );
   }
-
-  let userData;
-  try {
-    userData = JSON.parse(userDataString);
-    console.log("Parsed user data:", userData);
-  } catch (error) {
-    console.error("Error parsing user data:", error);
-  }
-
-  const isLoggedIn = userData?.loggedIn ?? false;
-
-  console.log("Is logged in:", isLoggedIn);
-
-  //const userData = JSON.parse(userDataString);
-  //const isLoggedIn = userData.loggedIn;
-
-  console.log("isLoggedIn", isLoggedIn);
-  console.log("userDataName", userData);
   return (
     <>
       {isLoggedIn ? (
@@ -84,7 +72,7 @@ export default function WorkingPage() {
             <div className="componentsBody">
               <div className="leftSide">
                 <div className="banner1Td">
-                  <ToDoList onListChange={(items)=> setTodoList(items)}/>("")
+                  <ToDoList onListChange={(items) => setTodoList(items)} />
                 </div>
                 <div className="banner2Calender">
                   <MCalender />
