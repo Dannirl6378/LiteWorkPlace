@@ -28,40 +28,38 @@ interface UserIdProps {
 
 export default function UserId({ quillContent, ToDoList, callenAction }: UserIdProps) {
   const [open, setOpen] = useState(false);
-  const [quillText, setQuillText] = useState(quillContent);
-  const [toDoListData,setToDoListData]=useState<string[]>(ToDoList);
+  const [quillText, setQuillText] = useState<string>();
+  const [toDoListData,setToDoListData]=useState<string[]>();
   const [akceCalender, setAkceCalender]=useState<string>(callenAction);
   const [userData, setUserData] = useState<UserData | undefined>(undefined);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
 
   // Předpokládaná událost a úkoly
-  const Calander = ["Událost 1", "Událost 2"];
-  const todoList = ["Úkol 1", "Úkol 2"];
-  const quill = [...quillText];
+  const Calander = akceCalender;
+  const todoList= ToDoList;
+  const quill = quillContent;
+
+
+  console.log("todoList",ToDoList);
+  console.log("data",Calander, todoList, quillText )
+  const userDataString = sessionStorage.getItem("userDatas");
 
   useEffect(() => {
-    const getUserDataString = (): string | undefined => {
-      return Cookies.get("userDatas"); // Zajistěte, že název cookie je správný
-    };
-
-    const userDataString = getUserDataString();
-    console.log("userDataString", userDataString);
-
     if (userDataString) {
       try {
         // Parsování stringu na objekt
         const parsedUserData = JSON.parse(userDataString) as UserData;
         setUserData(parsedUserData);
         console.log("Parsed user data:", parsedUserData);
-
+  
         // Načtení dat
         fetchUserData(parsedUserData.email);
       } catch (error) {
         console.error("Error parsing user data:", error);
       }
     } else {
-      console.log("No user data found in cookies.");
+      console.log("No user data found.");
     }
   }, []);
 
@@ -84,7 +82,7 @@ export default function UserId({ quillContent, ToDoList, callenAction }: UserIdP
     try {
       if (userData) {
         // Uložení obsahu před odhlášením
-        await updateUserData(userData.email, akceCalender, quill, toDoListData);
+        await updateUserData(userData.email, Calander, quill, toDoListData);
       }
 
       Cookies.remove("userDatas"); // Ujistěte se, že název cookie je správný

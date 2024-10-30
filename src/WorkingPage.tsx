@@ -21,6 +21,8 @@ export default function WorkingPage() {
   const [todoList, setTodoList] = useState<string[]>([]);
   const [callenAction, setCalenAction]=useState<string>("");
 
+  console.log("data",quillContent,todoList,callenAction);
+
   const getuserDataString = sessionStorage.getItem("userDatas");
   let userData;
   if (getuserDataString) {
