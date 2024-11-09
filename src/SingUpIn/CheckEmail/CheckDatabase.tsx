@@ -15,6 +15,11 @@ export default function CheckDataseEmail({
   useEffect(() => {
     async function checkEmailExistence() {
       try {
+
+        if (!value.email) {
+          console.error("Email není zadán.");
+          return;
+        }
         const data = await getUser(value.email); // Získání dat z databáze
         // Zkontrolujeme, jestli je e-mail stejney
         const checkSameEmail =

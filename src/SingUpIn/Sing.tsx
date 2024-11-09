@@ -20,6 +20,7 @@ import { handleSignIn } from "./SingIn";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Sing() {
   const [action, setAction] = useState("Sing In");
   const [pwd, setPwd] = useState("");

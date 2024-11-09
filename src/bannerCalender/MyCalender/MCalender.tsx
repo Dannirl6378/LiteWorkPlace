@@ -39,8 +39,10 @@ const MyCalendar: React.FC<McalenderProps> =({ onContentChange }) =>{
         ...prevEvents,
         [dateString]: [...(prevEvents[dateString] || []), eventText],
       }));
+      const formattedEvents = JSON.stringify({ [dateString]: eventText });
       setEventText("");
       handleDiaClose();
+      onContentChange(formattedEvents);
     }
   };
  console.log("dayevents",events);

@@ -79,7 +79,7 @@ export default function WorkingPage() {
                   <ToDoList onListChange={(items) => setTodoList(items)} />
                 </div>
                 <div className="banner2Calender">
-                  <MyCalendar onContentChange={(events: React.SetStateAction<string>)=> setCalenAction(events)}/>
+                <MyCalendar onContentChange={(events: string) => setCalenAction(events)} />
                 </div>
               </div>
               <div className="banner3Notes">

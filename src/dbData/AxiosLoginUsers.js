@@ -4,7 +4,7 @@ import axios from "axios";
 export async function LoginUser(userData) {
   try {
     const response = await axios.post(
-      "http://localhost:3001/loginUser", // Opravená URL
+      "http://localhost:3001/api/login", // Opravená URL
       userData // Odeslání uživatelských dat jako tělo požadavku
     );
     console.log("AxiosLoginUser",response.data);
