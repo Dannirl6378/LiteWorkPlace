@@ -13,15 +13,14 @@ import TextEdit from "./bannerTextEdit/TextEditMain";
 import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
-import MyCalendar from "./bannerCalender/MyCalender/MCalender"
-
+import MyCalendar from "./bannerCalender/MyCalender/MCalender";
 
 export default function WorkingPage() {
   const [quillContent, setQuillContent] = useState("");
   const [todoList, setTodoList] = useState<string[]>([]);
-  const [callenAction, setCalenAction]=useState<string>("");
+  const [callenAction, setCalenAction] = useState<string>("");
 
-  console.log("data",quillContent,todoList,callenAction);
+  console.log("data", quillContent, todoList, callenAction);
 
   const getuserDataString = sessionStorage.getItem("userDatas");
   let userData;
@@ -61,7 +60,14 @@ export default function WorkingPage() {
                   <AlarmClock />
                 </div>
                 <div id="UserId">
-                  <UserId quillContent={quillContent} ToDoList={todoList} callenAction={callenAction}/>
+                  <UserId
+                    quillContent={quillContent}
+                    ToDoList={todoList}
+                    callenAction={callenAction}
+                    setQuillContent={setQuillContent}
+                    setToDoList={setTodoList}
+                    setCalenAction={setCalenAction}
+                  />
                 </div>
               </div>
               <div className="containerNewsRadio">
@@ -76,10 +82,12 @@ export default function WorkingPage() {
             <div className="componentsBody">
               <div className="leftSide">
                 <div className="banner1Td">
-                  <ToDoList onListChange={(items) => setTodoList(items)} />
+                  <ToDoList onListChange={(items) => setTodoList(items)} todoList={todoList}/>
                 </div>
                 <div className="banner2Calender">
-                <MyCalendar onContentChange={(events: string) => setCalenAction(events)} />
+                  <MyCalendar
+                    onContentChange={(events: string) => setCalenAction(events)} callenAction={callenAction}
+                  />
                 </div>
               </div>
               <div className="banner3Notes">

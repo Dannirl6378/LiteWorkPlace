@@ -8,10 +8,9 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { updateUserData, fetchUserData } from "../dbData/PushGetData";
-import ToDoList from "../bannerTODoLIST/ToDoListMain";
+
 
 // Definice typu pro uživatelská data
 interface UserData {
@@ -23,14 +22,19 @@ interface UserData {
 interface UserIdProps {
   quillContent: string;
   ToDoList: string[];
-  callenAction: string; 
+  callenAction: string;
+  setQuillContent: (content: string) => void;
+  setToDoList: (list: string[]) => void;
+  setCalenAction: (action: string) => void; 
 }
 
-export default function UserId({ quillContent, ToDoList, callenAction }: UserIdProps) {
+export default function UserId({ quillContent,
+  ToDoList,
+  callenAction,
+  setQuillContent,
+  setToDoList,
+  setCalenAction, }: UserIdProps) {
   const [open, setOpen] = useState(false);
-  const [quillText, setQuillText] = useState<string>();
-  const [toDoListData,setToDoListData]=useState<string[]>();
-  const [akceCalender, setAkceCalender]=useState<string>(callenAction);
   const [userData, setUserData] = useState<UserData | undefined>(undefined);
   const anchorRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
@@ -54,14 +58,23 @@ export default function UserId({ quillContent, ToDoList, callenAction }: UserIdP
         console.log("Parsed user data:", parsedUserData);
   
         // Načtení dat
-        fetchUserData(parsedUserData.email);
+        const fetchData = async () => {
+          const fetchedData = await fetchUserData(parsedUserData.email);
+          if (fetchedData) {
+            setQuillContent(fetchedData.Quilltext || "");
+            setToDoList(fetchedData.todoList || []);
+            setCalenAction(fetchedData.akceCalander || "");
+          }
+        };
+
+        fetchData();
       } catch (error) {
         console.error("Error parsing user data:", error);
       }
     } else {
       console.log("No user data found.");
     }
-  }, []);
+  }, [userDataString, setQuillContent, setToDoList, setCalenAction]);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -84,8 +97,6 @@ export default function UserId({ quillContent, ToDoList, callenAction }: UserIdP
         // Uložení obsahu před odhlášením
         await updateUserData(userData.email, Calander, quill, ToDo);
       }
-
-      Cookies.remove("userDatas"); // Ujistěte se, že název cookie je správný
       navigate(`/`);
     } catch (error) {
       console.error("Error during logout and data saving:", error);
@@ -107,7 +118,6 @@ export default function UserId({ quillContent, ToDoList, callenAction }: UserIdP
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      Cookies.remove("userDatas"); // Ujistěte se, že název cookie je správný
       localStorage.removeItem("userDatas"); // Ujistěte se, že název localStorage položky je správný
     };
     window.addEventListener("beforeunload", handleBeforeUnload);

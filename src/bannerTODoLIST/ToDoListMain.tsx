@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, MouseEvent } from "react";
+import React, { FunctionComponent, useState, MouseEvent, useEffect } from "react";
 import {
   Button,
   Menu,
@@ -14,12 +14,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 interface ToDoListProps{
   onListChange:(items: string[]) => void;
+  todoList: string[];
 }
 
-const ToDoList: React.FC<ToDoListProps> = ({ onListChange }) => {
+const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<string[]>(todoList || []);
   const [newItem, setNewItem] = useState<string>("");
+
+  useEffect(() => {
+    setItems(todoList); // Ensure this is passed as a prop from WorkingPage
+  }, [todoList]);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

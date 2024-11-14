@@ -29,7 +29,7 @@ const EventMsg: React.FC<EventMsgProps> = ({
   setEvents,
 }) => {
   const dateString = selectedDate ? selectedDate.format('YYYY-MM-DD') : '';
-  const dayEvents = events[dateString] || [];
+  const dayEvents = events[dateString] || []; // Ensure this defaults to an empty array
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -50,6 +50,7 @@ const EventMsg: React.FC<EventMsgProps> = ({
       setSelectedEvent(null); 
     }
   };
+  console.log("events",dayEvents)
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -65,19 +66,23 @@ const EventMsg: React.FC<EventMsgProps> = ({
           onChange={(e) => setMsg(e.target.value)}
         />
         <Box>
-          {dayEvents.map((event, index) => (
-            <FormControlLabel
-              key={index}
-              control={
-                <Checkbox
-                  checked={selectedEvent === event}
-                  onChange={handleCheckboxChange}
-                  value={event}
-                />
-              }
-              label={event}
-            />
-          ))}
+          {Array.isArray(dayEvents) && dayEvents.length > 0 ? (
+            dayEvents.map((event, index) => (
+              <FormControlLabel
+                key={index}
+                control={
+                  <Checkbox
+                    checked={selectedEvent === event}
+                    onChange={handleCheckboxChange}
+                    value={event}
+                  />
+                }
+                label={event}
+              />
+            ))
+          ) : (
+            <p>No events for this date.</p> // Fallback message if no events
+          )}
         </Box>
       </DialogContent>
       <DialogActions>
