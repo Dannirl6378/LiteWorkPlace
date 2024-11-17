@@ -1,12 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import Clock from "./1stBanner/clock";
 import "./App.css";
 import "./WorkingPage.css";
 import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import Cookies from "js-cookie";
 import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
 import Radio from "./bannerRadio/radio";
@@ -14,27 +13,32 @@ import TextEdit from "./bannerTextEdit/TextEditMain";
 import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
-import MCalender from "./bannerCalender/MyCalender/MCalender";
-
-
+import MyCalendar from "./bannerCalender/MyCalender/MCalender";
+import { DeltaStatic } from "quill";
 
 export default function WorkingPage() {
-  /*const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const singParam = searchParams.get("sing");*/
-  //const singFromQuery = singParam === "true";
+  const [quillContent, setQuillContent] = useState(""); // Změněno na DeltaStatic | string
+  const [todoList, setTodoList] = useState<string[]>([]);
+  const [callenAction, setCalenAction] = useState<string>("");
 
-  const getuserDataString = () => {
-    return Cookies.get("userDatas");
-  };
+  console.log("data", quillContent, todoList, callenAction);
 
-  const userDataString = getuserDataString();
+  const getuserDataString = sessionStorage.getItem("userDatas");
+  let userData;
+  if (getuserDataString) {
+    try {
+      userData = JSON.parse(getuserDataString);
+      console.log("rozdeleni user data", userData);
+    } catch (error) {
+      console.error("chybav rodeleni dat", error);
+    }
+  }
 
-  console.log("userDataString", userDataString);
+  const isLoggedIn = userData?.loggedIn ?? false;
 
-  if (!userDataString) {
-    //const isLoggedIn = false;
-    //console.log("isLoggedIn", isLoggedIn);
+  console.log("isLogedIn", isLoggedIn);
+
+  if (!isLoggedIn) {
     return (
       <div className="backgroundSite">
         <div className="errorSing">
@@ -45,24 +49,6 @@ export default function WorkingPage() {
       </div>
     );
   }
-
-  let userData;
-  try {
-    userData = JSON.parse(userDataString);
-    console.log("Parsed user data:", userData);
-  } catch (error) {
-    console.error("Error parsing user data:", error);
-  }
-
-  const isLoggedIn = userData?.loggedIn ?? false;
-
-  console.log("Is logged in:", isLoggedIn);
-
-  //const userData = JSON.parse(userDataString);
-  //const isLoggedIn = userData.loggedIn;
-
-  console.log("isLoggedIn", isLoggedIn);
-  console.log("userDataName", userData);
   return (
     <>
       {isLoggedIn ? (
@@ -75,29 +61,40 @@ export default function WorkingPage() {
                   <AlarmClock />
                 </div>
                 <div id="UserId">
-                  <UserId />
+                  <UserId
+                    quillContent={quillContent}
+                    ToDoList={todoList}
+                    callenAction={callenAction}
+                    setQuillContent={setQuillContent}
+                    setToDoList={setTodoList}
+                    setCalenAction={setCalenAction}
+                  />
                 </div>
               </div>
               <div className="containerNewsRadio">
-              <div className="newsbanner">
-                <NewsTabs />
-              </div>
-              <div className="banner5Radio">
+                <div className="newsbanner">
+                  <NewsTabs />
+                </div>
+                <div className="banner5Radio">
                   <Radio />
                 </div>
-                </div>
+              </div>
             </div>
             <div className="componentsBody">
               <div className="leftSide">
                 <div className="banner1Td">
-                  <ToDoList />{" "}
+                  <ToDoList onListChange={(items) => setTodoList(items)} todoList={todoList}/>
                 </div>
                 <div className="banner2Calender">
-                  <MCalender />
+                  <MyCalendar
+                    onContentChange={(events: string) => setCalenAction(events)} callenAction={callenAction}
+                  />
                 </div>
               </div>
               <div className="banner3Notes">
-                <TextEdit />
+                <TextEdit
+                  onContentChange={(content: any) => setQuillContent(JSON.stringify(content))} quillContent={quillContent}
+                />
               </div>
               <div className="rightSide">
                 <div className="bannerWeather">

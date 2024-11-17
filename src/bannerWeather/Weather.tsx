@@ -90,7 +90,7 @@ export default function Weather() {
     <div className="appWeather">
       <div className="searchWeather">
         <input
-        className="inputweather"
+          className="inputweather"
           value={location}
           onChange={(event) => setLocation(event.target.value)}
           onKeyDown={handleSearch}
@@ -100,9 +100,9 @@ export default function Weather() {
       </div>
       {data?.name !== undefined && (
         <div className="containerWeather">
-          <h3 className="location">{data?.name}</h3>
+          <h3 className="location">{data?.name}  {data?.main.temp}C</h3>
           <div className="wshow">
-          <h4 className="descript">{data?.weather[0].description}</h4>
+            <h4 className="descript">{data?.weather[0].description}</h4>
             <div className="weatherData">
               <p className="Icons">
                 {data?.weather[0].icon && (
@@ -112,7 +112,6 @@ export default function Weather() {
                   />
                 )}
               </p>
-            <p className="descript">{data?.weather[0].description}</p>
             </div>
           </div>
         </div>

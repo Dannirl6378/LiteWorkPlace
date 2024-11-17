@@ -25,16 +25,15 @@ img {
 .wshow {
   display: flex;
   flex-direction: column;
-  margin-top: 30%;
+  margin-top: 35%;
 }
-.descript{
-  margin:0 20% 10% 0;
+.descript {
+  margin: 0 20% 10% 0;
 }
-.location{
+.location {
   margin-left: 25%;
 }
-.weatherData{
+.weatherData {
   display: flex;
   flex-direction: row;
 }
-

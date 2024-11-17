@@ -3,13 +3,21 @@ import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar, PickersDay } from "@mui/x-date-pickers";
-import { autocompleteClasses, Box, Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import EventMsg from "./EventMsg";
 import DeleteEvent from "./DeleteEvent";
 import CBox from "./StyledCalenderBoxCss";
 
-export default function MyCalendar() {
-  const [selectedDate, setSelectDate] = React.useState<dayjs.Dayjs | null>(
+interface McalenderProps {
+  onContentChange: (content: string) => void;
+  callenAction: string;
+}
+
+const MyCalendar: React.FC<McalenderProps> = ({
+  onContentChange,
+  callenAction,
+}) => {
+  const [selectedDate, setSelectedDate] = React.useState<dayjs.Dayjs | null>(
     null,
   );
   const [openPopUp, setOpenPopUp] = React.useState(false);
@@ -17,8 +25,34 @@ export default function MyCalendar() {
   const [eventText, setEventText] = React.useState("");
   const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
 
+  React.useEffect(() => {
+    if (!callenAction) {
+      // If `callenAction` is empty, return early and don't try to parse
+      setEvents({});
+      return;
+    }
+    try {
+      const parsedData = JSON.parse(callenAction);
+      if (typeof parsedData === "object" && !Array.isArray(parsedData)) {
+        const formattedData = Object.entries(parsedData).reduce(
+          (acc, [key, value]) => {
+            acc[key] = Array.isArray(value) ? value : [value];
+            return acc;
+          },
+          {} as { [key: string]: string[] },
+        );
+        setEvents(formattedData);
+      } else {
+        setEvents({});
+      }
+    } catch (error) {
+      console.error("Failed to parse callenAction data:", error);
+      setEvents({});
+    }
+  }, [callenAction]);
+
   const handleDateClick = (date: dayjs.Dayjs) => {
-    setSelectDate(date);
+    setSelectedDate(date);
     setOpenPopUp(true);
     setSelectedEvent(null);
   };
@@ -26,19 +60,28 @@ export default function MyCalendar() {
   const handleDiaClose = () => {
     setOpenPopUp(false);
   };
-
   const handleSaveEvent = () => {
     if (selectedDate) {
       const dateString = selectedDate.format("YYYY-MM-DD");
-      setEvents((prevEvents) => ({
-        ...prevEvents,
-        [dateString]: [...(prevEvents[dateString] || []), eventText],
-      }));
-      setEventText("");
-      handleDiaClose();
+
+      // Update the events state using the updater function
+      setEvents((prevEvents) => {
+        const updatedEvents = {
+          ...prevEvents,
+          [dateString]: [...(prevEvents[dateString] || []), eventText], // Add the new event
+        };
+
+        // Update the content in the parent component
+        onContentChange(JSON.stringify(updatedEvents));
+
+        return updatedEvents; // Return the updated state
+      });
+
+      setEventText(""); // Clear the event text
+      handleDiaClose(); // Close the popup/modal
     }
   };
- console.log("dayevents",events);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <CBox>
@@ -48,13 +91,13 @@ export default function MyCalendar() {
           slots={{
             day: (props) => {
               const dateString = props.day.format("YYYY-MM-DD");
-              const dayEvents = events[dateString];
+              const dayEvents = events[dateString] || [];
 
               return (
                 <Tooltip
                   key={dateString}
                   title={
-                    dayEvents ? (
+                    Array.isArray(dayEvents) && dayEvents.length > 0 ? (
                       <Box>
                         {dayEvents.map((event, index) => (
                           <Box
@@ -83,11 +126,13 @@ export default function MyCalendar() {
                   <PickersDay
                     {...props}
                     sx={{
-                      backgroundColor: dayEvents ? "red" : "transparent",
+                      backgroundColor:
+                        dayEvents.length > 0 ? "red" : "transparent",
                       borderRadius: "50%",
                       height: "80%",
                       "&:hover": {
-                        backgroundColor: dayEvents ? "darkblue" : undefined,
+                        backgroundColor:
+                          dayEvents.length > 0 ? "darkblue" : undefined,
                       },
                     }}
                   />
@@ -97,6 +142,7 @@ export default function MyCalendar() {
           }}
         />
       </CBox>
+
       <EventMsg
         open={openPopUp}
         onClose={handleDiaClose}
@@ -111,4 +157,6 @@ export default function MyCalendar() {
       />
     </LocalizationProvider>
   );
-}
+};
+
+export default MyCalendar;
