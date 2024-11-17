@@ -44,9 +44,9 @@ export default function UserId({ quillContent,
   const ToDo= ToDoList;
   const quill = quillContent;
 
-  console.log("callen",callenAction, Calander);
-  console.log("todoList",ToDo,callenAction);
-  console.log("data", ToDo, quill,Calander );
+  console.log("callen", Calander);
+  console.log("todoList",ToDo);
+  console.log("data",quill);
   const userDataString = sessionStorage.getItem("userDatas");
 
   useEffect(() => {

@@ -14,9 +14,10 @@ import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MyCalendar from "./bannerCalender/MyCalender/MCalender";
+import { DeltaStatic } from "quill";
 
 export default function WorkingPage() {
-  const [quillContent, setQuillContent] = useState("");
+  const [quillContent, setQuillContent] = useState(""); // Změněno na DeltaStatic | string
   const [todoList, setTodoList] = useState<string[]>([]);
   const [callenAction, setCalenAction] = useState<string>("");
 
@@ -92,7 +93,7 @@ export default function WorkingPage() {
               </div>
               <div className="banner3Notes">
                 <TextEdit
-                  onContentChange={(content) => setQuillContent(content)}
+                  onContentChange={(content: any) => setQuillContent(JSON.stringify(content))} quillContent={quillContent}
                 />
               </div>
               <div className="rightSide">
