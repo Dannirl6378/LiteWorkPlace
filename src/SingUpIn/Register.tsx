@@ -1,10 +1,8 @@
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export async function handleRegistration(
-  user: string,
-  email: string,
-  pwd: string
-) {
+export async function handleRegistration(user: string, email: string, pwd: string) {
   const userData = {
     name: user,
     email: email,
@@ -13,17 +11,26 @@ export async function handleRegistration(
 
   try {
     const response = await axios.post("http://localhost:3001/api/register", userData);
-    console.log(response.data.message); // Display success or error message from the server
+
+    // Zobrazíme notifikaci o úspěchu
+    toast.success("Registrace úspěšná, můžete se přihlásit!");
+    console.log(response.data.message); // Zobrazení zprávy z serveru (např. o úspěchu)
   } catch (error) {
+    // Při chybě zobrazíme notifikaci s chybovým hlášením
     if (axios.isAxiosError(error)) {
-      // Handle known Axios errors
+      // Pokud se jedná o Axios chybu
+      toast.error(`Chyba při registraci: ${error.response?.data?.error || error.message}`);
       console.error("Registration error:", error.response?.data?.error || error.message);
     } else if (error instanceof Error) {
-      // Handle other errors with Error type
+      // Při jiných typech chyb
+      toast.error(`Neočekávaná chyba při registraci: ${error.message}`);
       console.error("Unexpected error during registration:", error.message);
     } else {
-      // Catch-all for unknown error types
+      // Pro neznámé chyby
+      toast.error("Došlo k neznámé chybě při registraci.");
       console.error("An unknown error occurred during registration:", error);
     }
   }
 }
+
+// Nezapomeňte přidat <ToastContainer /> do hlavní komponenty vašeho projektu

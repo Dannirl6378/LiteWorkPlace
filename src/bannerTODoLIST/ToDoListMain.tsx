@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useState, MouseEvent, useEffect } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
+import Checkbox from "@mui/material/Checkbox";
 import {
   Button,
   Menu,
@@ -9,41 +10,61 @@ import {
   ListItem,
   ListItemText,
   Badge,
+  Box,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-interface ToDoListProps{
-  onListChange:(items: string[]) => void;
-  todoList: string[];
+interface ToDoListProps {
+  onListChange: (items: string[]) => void; // Pro uložení do databáze
+  todoList: string[]; // Načteno z databáze
+}
+
+interface ToDoItem {
+  text: string;
+  checked: boolean;
 }
 
 const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [items, setItems] = useState<string[]>(todoList || []);
+  const [items, setItems] = useState<ToDoItem[]>([]); // Prázdné pole jako výchozí hodnota
   const [newItem, setNewItem] = useState<string>("");
 
   useEffect(() => {
-    setItems(todoList); // Ensure this is passed as a prop from WorkingPage
+    // Načtení a synchronizace dat z todoList
+    console.log("todoList z databáze:", todoList);
+    const parsedItems = todoList.map((item) => JSON.parse(item)); // Konverze
+    setItems(parsedItems); // Nastavení
   }, [todoList]);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleAddItem = () => {
     if (newItem.trim() !== "") {
-      const updatedItems = [...items, newItem];
+      const updatedItems = [...items, { text: newItem, checked: false }];
       setItems(updatedItems);
       setNewItem("");
-      onListChange(updatedItems); // Předáváme změněný seznam zpět
+      onListChange(updatedItems.map((item) => JSON.stringify(item))); // Aktualizace databáze
     }
   };
-  const handleDeleteItems = (index: number) => {
+
+  const handleDeleteItem = (index: number) => {
     const updatedItems = items.filter((_, i) => i !== index);
     setItems(updatedItems);
-    onListChange(updatedItems); // Předáváme změněný seznam zpět
+    onListChange(updatedItems.map((item) => JSON.stringify(item))); // Aktualizace databáze
+  };
+
+  const handleToggleChecked = (index: number) => {
+    const updatedItems = items.map((item, i) =>
+      i === index ? { ...item, checked: !item.checked } : item
+    );
+    setItems(updatedItems);
+    onListChange(updatedItems.map((item) => JSON.stringify(item))); // Aktualizace databáze
   };
 
   return (
@@ -88,16 +109,23 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
             <ListItem
               key={index}
               secondaryAction={
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={() => handleDeleteItems(index)}
-                >
-                  <DeleteIcon />
-                </IconButton>
+                <Box display="flex" alignItems="center">
+                  <Checkbox
+                    checked={item.checked}
+                    onChange={() => handleToggleChecked(index)}
+                    size="small"
+                  />
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => handleDeleteItem(index)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Box>
               }
             >
-              <ListItemText primary={item} />
+              <ListItemText primary={item.text} />
             </ListItem>
           ))}
         </List>

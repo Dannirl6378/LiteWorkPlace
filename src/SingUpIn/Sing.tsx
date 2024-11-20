@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import {ToastContainer } from "react-toastify";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -65,6 +66,7 @@ export default function Sing() {
   console.log("Password", validationResultPassword);
 
   return (
+    <>
     <div className="background">
       <div className="form">
         <Box
@@ -287,5 +289,7 @@ export default function Sing() {
         </Box>
       </div>
     </div>
+    <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
+    </>
   );
 }

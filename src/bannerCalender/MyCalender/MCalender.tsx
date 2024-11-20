@@ -26,8 +26,7 @@ const MyCalendar: React.FC<McalenderProps> = ({
   const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    if (!callenAction) {
-      // If `callenAction` is empty, return early and don't try to parse
+    if (typeof callenAction !== "string" || !callenAction.trim()) {
       setEvents({});
       return;
     }
