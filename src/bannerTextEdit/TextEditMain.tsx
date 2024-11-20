@@ -15,7 +15,6 @@ const TextEdit: React.FC<TextEditProps> = ({
   quillContent,
 }) => {
   const [content, setContent] = useState(quillContent);
-  const [switchState, setSwitch] = useState(true);
 
   const quillRef = useRef<ReactQuill | null>(null);
   console.log("content", quillContent);
