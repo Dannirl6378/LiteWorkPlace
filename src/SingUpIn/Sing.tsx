@@ -282,9 +282,9 @@ export default function Sing() {
             >
               Sing In
             </Button>
-            <Link to={{ pathname: "/workingPage", search: `?sing=$true` }}>
+            {/*<Link to={{ pathname: "/workingPage", search: `?sing=$true` }}>
               <Button variant="contained">Main Page</Button>
-            </Link>
+            </Link>*/}
           </Stack>
         </Box>
       </div>
