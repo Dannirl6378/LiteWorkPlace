@@ -17,11 +17,11 @@ const TextEdit: React.FC<TextEditProps> = ({
   const [content, setContent] = useState(quillContent);
 
   const quillRef = useRef<ReactQuill | null>(null);
-  console.log("content", quillContent);
+
 
   const textIsInDb = useRef(true);
 
-  console.log("quillContent", content);
+ 
   // Funkce na odstranění escape znaků z HTML
   const unescapeHtml = (html: string) => {
     let cleanedHtml = html;
@@ -36,7 +36,6 @@ const TextEdit: React.FC<TextEditProps> = ({
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
       const cleanedQuill = unescapeHtml(quillContent);
-      console.log("cleanQuill", cleanedQuill);
       editor.clipboard.dangerouslyPasteHTML(cleanedQuill);
 
       // Můžeme nastavit stav pouze pro inicializaci
@@ -52,7 +51,6 @@ const TextEdit: React.FC<TextEditProps> = ({
 
       setContent(htmlContent);
       onContentChange(htmlContent);
-      console.log("htmlcontent",htmlContent);
     }
   };
 

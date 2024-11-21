@@ -14,21 +14,19 @@ import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MyCalendar from "./bannerCalender/MyCalender/MCalender";
-import { DeltaStatic } from "quill";
 
 export default function WorkingPage() {
   const [quillContent, setQuillContent] = useState(""); // Změněno na DeltaStatic | string
   const [todoList, setTodoList] = useState<string[]>([]);
   const [callenAction, setCalenAction] = useState<string>("");
 
-  console.log("data", quillContent, todoList, callenAction);
+ 
 
   const getuserDataString = sessionStorage.getItem("userDatas");
   let userData;
   if (getuserDataString) {
     try {
       userData = JSON.parse(getuserDataString);
-      console.log("rozdeleni user data", userData);
     } catch (error) {
       console.error("chybav rodeleni dat", error);
     }
@@ -36,7 +34,6 @@ export default function WorkingPage() {
 
   const isLoggedIn = userData?.loggedIn ?? false;
 
-  console.log("isLogedIn", isLoggedIn);
 
   if (!isLoggedIn) {
     return (
