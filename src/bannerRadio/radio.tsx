@@ -28,7 +28,9 @@ const Radio = () => {
       // Filtrování konkrétních stanic podle názvu
       const allStations = response.data;
       const filteredStations = allStations.filter((station: any) =>
-        ["Color Music Radio", "Rock Radio", "Kiss Radio"].includes(station.name),
+        ["Color Music Radio", "Rock Radio", "Kiss Radio"].includes(
+          station.name,
+        ),
       );
 
       // Mapa potřebných dat
@@ -68,7 +70,7 @@ const Radio = () => {
     setCurrentStation(selectedStream);
     if (audioRef.current) {
       audioRef.current.src = selectedStream; // Nastav novou stanici
-      audioRef.current.play(); 
+      audioRef.current.play();
     }
   };
 

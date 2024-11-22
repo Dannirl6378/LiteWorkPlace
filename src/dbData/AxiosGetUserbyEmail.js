@@ -6,7 +6,7 @@ export async function getUser(email) {
     const response = await axios.get(
       `http://localhost:3001/api/getUser/${email}`,
     );
-    console.log("AxiosGetUserbyEmail", response.data);
+    //console.log("AxiosGetUserbyEmail", response.data);
     return response.data; // Return the user data
   } catch (error) {
     console.error("Error fetching user data:", error);

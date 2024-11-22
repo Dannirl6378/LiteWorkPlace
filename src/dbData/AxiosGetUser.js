@@ -7,7 +7,7 @@ export async function getUser(userData) {
       "http://localhost:3001/api/all",
       userData
     );
-    console.log("getUsers_AxiosGetUsers",response.data);
+    //console.log("getUsers_AxiosGetUsers",response.data);
     return response.data;
   } catch (error) {
     console.error(error);

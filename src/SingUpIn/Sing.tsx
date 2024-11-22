@@ -62,8 +62,8 @@ export default function Sing() {
     setValidationResultEmail(false);
   };
 
-  console.log("email", validationResultEmail);
-  console.log("Password", validationResultPassword);
+  //console.log("email", validationResultEmail);
+  //console.log("Password", validationResultPassword);
 
   return (
     <>

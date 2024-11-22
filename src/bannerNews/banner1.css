@@ -1,93 +1,107 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: 100%; /* Nastaví, aby zabíralo celou dostupnou výšku */
+  overflow: hidden; /* Skryje obsah přesahující mimo hranice */
+}
+
+.tabs-container {
+  flex-shrink: 0;
+  max-height: 100%; /* Přizpůsobí se rodiči */
+  overflow-y: auto; /* Posouvání pouze ve vertikálním směru */
+  background-color: rgba(236, 229, 229, 0.5); /* Volitelný styl pozadí */
+}
+
+.tab {
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: bold;
+  box-sizing: border-box;
+  text-align: left;
+  white-space: nowrap; /* Zabrání přetečení textu */
+  cursor: pointer; /* Změna kurzoru na ukazatel */
+}
+
+.content {
+  flex-grow: 1; /* Zaujme zbývající prostor */
+  max-height: 100%; /* Zabrání obsahu přesahovat rodiče */
+  padding: 5px;
+  display: flex;
+  flex-direction: column; /* Zajistí, že se obsah bude rolovat vertikálně */
+}
+
+.newstabs {
+  display: flex;
+  flex-wrap: wrap; /* Zprávy se zarovnají na nový řádek */
+  gap: 10px; /* Mezera mezi články */
+  justify-content: space-evenly;
+  max-height: 100%; /* Zachování výšky */
+  overflow-y: auto; /* Pokud bude obsah větší než plocha, umožní posouvání */
+}
+
 .news-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Mezera mezi články */
-  }
-  
-  .newstabs {
-    display: flex; /* 3 články na řádek s mezerou */
-    flex-direction: column;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-left: 10%;
-    max-height: 10vh;
-    min-height: 6vh;
-    max-width: 35vw;
-    border-radius: 8px;
-    background-color: rgba(233, 95, 95, 0.6);
-    overflow: auto;
-}   
-  
-  .newstabs h4 {
-    margin: 0;
-  }
-  
-  .newstabs a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  .newstabs a:hover {
-    text-decoration: underline;
-  }
+  display: flex;
+  gap: 10px;
+  max-height: 100%; /* Zabrání přesahování */
+  overflow-y: auto; /* Umožní posouvání pouze, když bude potřeba */
+}
+
+.news-banner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Vertikální zarovnání obsahu */
+  text-align: left;
+  width: 60%;
+  height: 9vh;
+  margin-left: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: rgba(233, 182, 115, 0.6);
+}
+.scrolling-cylinder {
+  position: relative; /* Zajistí, že válce zabírá celou výšku rodiče */
+  overflow: hidden; /* Skryje obsah, který přesahuje */
+  display: flex;
+  flex-direction: column;
+}
+.scrolling-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: scroll-vertical 15s linear infinite;
+}
+@media (max-width: 600px) {
   .container {
-    display: flex;
-    flex-direction: row;
-    overflow-wrap: normal;
-    border: 0px solid;
-    overflow: auto;
+    flex-direction: column;
+    height: auto; /* Přizpůsobení výšky pro mobilní zařízení */
   }
-  
-  .tabs {
-    overflow: auto;
-    max-height: 50vh;
-    border-right: 0px solid #ccc;
+
+  .tabs-container {
+    max-height: 20vh; /* Přizpůsobení výšky záložek pro mobil */
+    overflow-y: auto;
   }
-  
-  .tab {
-    padding: 10px 20px;
-    font-size: 15px;
-    font-weight: bold;
-    box-sizing: border-box;
-    width: fit-content;
-    height: fit-content;
-  }
-  
+
   .content {
-    flex-grow: 1;
-    padding-left: 10px;
+    max-height: 80vh; /* Omezí výšku obsahu na 80% obrazovky */
   }
 
-  @media (max-width: 600px) {
-    .container {
-      flex-direction: column;
-      overflow:auto;
-    }
-  
-    .tabs-container {
-      box-sizing: border-box;
-      border: 0px solid #ddd;
-      max-height: 12Vh; /* Adjust this value as needed */
-      display: flex;
-      border-bottom: 0px solid #ccc;
-    }
-  
-    .tab {
-      white-space: nowrap;
-    }
-
-    .content {
-      position: absolute;
-      max-width: 70%;
-      margin-left: 20%;
-      margin-bottom: 10%;
-      padding-bottom:3%;
+  .news-banner {
+    width: 90%;
+    height: auto; /* Automatická výška na menších obrazovkách */
+    margin: 1rem auto; /* Vycentrování */
   }
-  .newstabs{
-    max-height: 8vh;
+}
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(30%);
   }
-  .newstabs h4{
-    font-size: small;
+  50% {
+    transform: translateY(-100%); /* Posune obsah na polovinu výšky */
   }
+  100% {
+    transform: translateY(-200%); /* Posune obsah úplně mimo */
   }
+}
