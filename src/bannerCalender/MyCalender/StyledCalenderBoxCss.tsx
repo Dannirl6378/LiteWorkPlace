@@ -17,7 +17,6 @@ const CBox = styled(Box)`
     justify-content: center;
     height: auto;
     margin: auto;
-    margin-top:25%;
   }
     &.css-1t0788u-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition {
     display:block;
@@ -27,7 +26,7 @@ const CBox = styled(Box)`
   }
 
   & .MuiDayCalendar-weekContainer {
-    width: 96%;
+    width: 97%;
     display: flex;
     justify-content: space-between; /* Ensure days are evenly distributed */
   }
@@ -43,20 +42,40 @@ const CBox = styled(Box)`
   }
 
   & .MuiDayCalendar-weekDayLabel {
-    font-size: 1.5vw;
     line-height: 1vw;
     text-align: center;
     letter-spacing: 9px;
   }
+    & .MuiAccordionDetails-root {
+    padding: 8px 16px 16px;
+    height:30vh;
+  }
+    
 
-  @media (min-width: 600px) {
+  @media (min-width: 600px) 
+  height: 15vh;
+   font-size: 2vw;
+  {
     & .MuiPickersDay-root {
       max-width: 12.5%; /* Slightly larger cells */
     }
+      & .MuiAccordionDetails-root {
+    padding: 8px 16px 16px;
+  }
 
-    & .MuiDayCalendar-weekDayLabel {
-      font-size: 1.2vw;
+    .MuiPickersCalendarHeader-root {
+    letter-spacing: 2px !important;
+    letter-spacing: 9px;
+    height:15vh;
+    font-size:1.5vw;
     }
+    & .MuiDayCalendar-weekDayLabel {
+    letter-spacing: 2px !important;
+   
+    line-height: 1vw;
+    text-align: center;
+  }
+
   }
 
   @media (min-width: 960px) {
@@ -64,9 +83,23 @@ const CBox = styled(Box)`
       max-width: 10%;
     }
 
-    & .MuiDayCalendar-weekDayLabel {
-      font-size: 1vw;
+   
+      @media (max-width: 200px) {
+    width: 50%; /* Plná šířka na mobilu */
+    height: 40vh; /* Zvýšená výška pro lepší čitelnost */
+
+    & .MuiPickersDay-root {
+      max-width: 100%; /* Zajistit čtvercový formát na mobilu */
     }
+      & .MuiDayCalendar-weekDayLabel {
+  width:100%;
+    font-size: 1.3vw;
+    }
+
+    & .MuiDayCalendar-weekContainer {
+      width: 100%; /* Plná šířka */
+    }
+      
   }
 `;
 

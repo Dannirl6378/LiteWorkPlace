@@ -6,53 +6,24 @@ import { formats } from "./Format"; // Import formats
 import "./TextEditor.css"; // Import the CSS file
 
 interface TextEditProps {
-  onContentChange: (content: string) => void; // content bude HTML
-  quillContent: string; // Obsah ve formátu HTML
+  onContentChange: (content: string) => void;
+  quillContent: string;
 }
 
-const TextEdit: React.FC<TextEditProps> = ({
-  onContentChange,
-  quillContent,
-}) => {
+const TextEdit: React.FC<TextEditProps> = ({ onContentChange, quillContent }) => {
   const [content, setContent] = useState(quillContent);
-
   const quillRef = useRef<ReactQuill | null>(null);
-
-
-  const textIsInDb = useRef(true);
-
- 
-  // Funkce na odstranění escape znaků z HTML
-  const unescapeHtml = (html: string) => {
-    let cleanedHtml = html;
-    cleanedHtml = cleanedHtml.replace(/\\"/g, '"').replace(/\\\\/g, "\\");
-    if (cleanedHtml.startsWith('"') && cleanedHtml.endsWith('"')) {
-      cleanedHtml = cleanedHtml.slice(1, -1);
-    }
-    return cleanedHtml;
-  };
-
-  useEffect(() => {
-    if (quillRef.current) {
-      const editor = quillRef.current.getEditor();
-      const cleanedQuill = unescapeHtml(quillContent);
-      editor.clipboard.dangerouslyPasteHTML(cleanedQuill);
-
-      // Můžeme nastavit stav pouze pro inicializaci
-      setContent(cleanedQuill);
-      textIsInDb.current=false;
-    }
-  }, [textIsInDb.current]);
 
   const handleAddContent = () => {
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
       const htmlContent = editor.root.innerHTML;
-
       setContent(htmlContent);
       onContentChange(htmlContent);
     }
   };
+
+  const isMobile = window.innerWidth < 768;
 
   return (
     <div className="positionTextEdit">
@@ -60,7 +31,12 @@ const TextEdit: React.FC<TextEditProps> = ({
         <ReactQuill
           ref={quillRef}
           theme="snow"
-          modules={modules}
+          modules={isMobile ? {
+            toolbar: [
+              ["bold", "italic", "underline"],
+              ["clean"]
+            ]
+          } : modules}
           formats={formats}
           value={content}
           placeholder="Write your content..."

@@ -4,86 +4,74 @@ import "./Weather.css";
 
 interface WeatherData {
   name: string;
-  temp: number;
-  humidity: number;
-  wind: { speed: number };
-  feels_like: number;
   main: {
     temp: number;
     feels_like: number;
     humidity: number;
   };
   weather: {
-    id: number;
-    main: string;
     description: string;
     icon: string;
   }[];
+  wind: { speed: number };
 }
 
 export default function Weather() {
   const [data, setData] = useState<WeatherData | null>(null);
-  //const [icons, setIcons] = useState("");
-  const [location, setLocation] = useState(``);
+  const [location, setLocation] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const API_KEY = "db0840f95d9213c5790cddb57ac9d6cf";
-  /*
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=db0840f95d9213c5790cddb57ac9d6cf&units=metric`;
-  */
-  //const iconUrl = `https://openweathermap.org/img/wn/${icons}d@2x.png`;
 
-  const callWeatherAPI = async (url: string) => {
+  // Získání dat o počasí pomocí API
+  const fetchWeather = async (url: string) => {
     try {
       setLoading(true);
       const response = await axios.get(url);
       setData(response.data);
       setError(null);
-    } catch (error) {
+    } catch {
       setError("Nepodařilo se načíst data o počasí.");
     } finally {
       setLoading(false);
     }
   };
 
-  // Funkce pro získání počasí podle polohy
-  const fetchWeatherByLocation = (latitude: number, longitude: number) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
-    callWeatherAPI(url);
-  };
-
-  // Funkce pro získání počasí podle zadané lokality
+  // Počasí podle města
   const fetchWeatherByCity = (city: string) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
-    callWeatherAPI(url);
+    fetchWeather(url);
   };
 
+  // Počasí podle polohy
+  const fetchWeatherByLocation = (latitude: number, longitude: number) => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+    fetchWeather(url);
+  };
+
+  // Hledání při Enter
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && location) {
+    if (event.key === "Enter" && location.trim() !== "") {
       fetchWeatherByCity(location);
     }
   };
 
+  // Získání polohy při načtení stránky
   useEffect(() => {
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            fetchWeatherByLocation(latitude, longitude);
-          },
-          (error) => {
-            setError(
-              "Nepodařilo se získat polohu. Zkontrolujte povolení geolokace.",
-            );
-          },
-        );
-      } else {
-        setError("Geolokace není podporována vaším prohlížečem.");
-      }
-    };
-    getLocation();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchWeatherByLocation(latitude, longitude);
+        },
+        () => {
+          setError("Nepodařilo se získat polohu. Zkontrolujte povolení.");
+        },
+      );
+    } else {
+      setError("Geolokace není podporována vaším prohlížečem.");
+    }
   }, []);
 
   return (
@@ -92,25 +80,37 @@ export default function Weather() {
         <input
           className="inputweather"
           value={location}
-          onChange={(event) => setLocation(event.target.value)}
+          onChange={(e) => setLocation(e.target.value)}
           onKeyDown={handleSearch}
           placeholder="Enter Location"
           type="text"
         />
       </div>
-      {data?.name !== undefined && (
+      {loading && <p>Načítám...</p>}
+      {error && <p className="error">{error}</p>}
+      {data && (
         <div className="containerWeather">
-          <h3 className="location">{data?.name}  {data?.main.temp}C</h3>
-          <div className="wshow">
-            <h4 className="descript">{data?.weather[0].description}</h4>
-            <div className="weatherData">
-              <p className="Icons">
-                {data?.weather[0].icon && (
+          <div className="headerWeather">
+            <h3 className="location">{data.name}</h3>
+
+            <h4 className="temperature">{Math.round(data.main.temp)}°C</h4>
+          </div>
+          <div className="descriptionAndWind">
+            <div className="descpWeather">
+              <div className="weatherIcon">
+                {data.weather[0].icon && (
                   <img
                     src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
                     alt="Weather Icon"
                   />
                 )}
+              </div>
+              <h4 className="descript">{data.weather[0].description}</h4>
+            </div>
+            <div>
+              <p className="windSpeed">Wind: {data.wind.speed} m/s</p>
+              <p className="feelsLike">
+                Feels like: {Math.round(data.main.feels_like)}°C
               </p>
             </div>
           </div>
@@ -119,4 +119,3 @@ export default function Weather() {
     </div>
   );
 }
-//https://api.openweathermap.org/data/2.5/weather?q=Praha&appid=db0840f95d9213c5790cddb57ac9d6cf&units=metric

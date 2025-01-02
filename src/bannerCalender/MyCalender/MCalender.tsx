@@ -85,6 +85,18 @@ const MyCalendar: React.FC<McalenderProps> = ({
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <CBox>
         <DateCalendar
+          sx={{
+            height: "35vh",
+            margin: "auto",
+            marginTop: "5%",
+            "& .MuiDayCalendar-weekDayLabel": {
+              fontSize: "1.3rem",
+              width:"100%", // Nastaví pevnou velikost
+              "@media (max-width: 600px)": {
+                fontSize: "1rem", // Pro menší obrazovky
+              },
+            },
+          }}
           value={selectedDate || dayjs()}
           onChange={handleDateClick}
           slots={{
