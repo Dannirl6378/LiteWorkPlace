@@ -32,7 +32,7 @@ const News2: React.FC = () => {
   return (
     <div className="scrolling-cylinder">
       <div className="scrolling-content">
-        {news.slice(0, 10).map((article, index) => (
+        {[...news,...news].map((article, index) => (
           <div key={index} className="news-item">
             <div className="bullet"></div>
             <a href={article.url} target="_blank" rel="noopener noreferrer">

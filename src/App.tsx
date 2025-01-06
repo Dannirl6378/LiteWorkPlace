@@ -4,6 +4,7 @@ import Sing from "./SingUpIn/Sing";
 import WorkingPage from "./WorkingPage";
 import MyProfile from "./myProfile/MyProfile";
 //import TestComponent from "./testacess"
+import './i18n';
 
 export default function App() {
   return (

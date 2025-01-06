@@ -27,6 +27,7 @@
 
 .content {
   flex-grow: 1;
+  font-size: 10px;
   padding: 10px;
 }
 
@@ -35,6 +36,55 @@
 }
 .noIndicator .MuiTabs-indicator {
   display: none;
+}
+
+.scrolling-cylinder {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Výška válce */
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(0, 0, 255, 0.1)
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scrolling-cylinder .scrolling-content {
+  display: flex;
+  flex-direction: column;
+  max-height: fit-content; /* Vertikální směr */
+  max-width: 95%;
+  animation: scroll-vertical 90s linear infinite; /* Vertikální animace */
+}
+
+@keyframes scroll-vertical {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.scrolling-cylinder:hover .scrolling-content {
+  animation-play-state: paused; /* Zastavení animace při najetí myši */
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+  white-space: normal; /* Povolit zalamování textu */
+    word-wrap: break-word; /* Zajistí zalamování dlouhých slov */
+    max-width: 100%; 
 }
 
 
@@ -54,7 +104,35 @@
     max-height: 80vh;
     overflow-y: auto; /* Umožní rolování obsahu na menších obrazovkách */
   }
-
+  .scrolling-cylinder {
+    width: 100%;
+    height: 300px; /* Zachování výšky pro válcový efekt */
+    overflow-y: auto; /* Umožní vertikální rolování */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .news-item {
+    display: flex;
+    flex-direction: column; /* Aby se text zalamoval a ne byl v jednom řádku */
+    align-items: flex-start; /* Zarovnání textu vlevo */
+    margin: 10px 0;
+    font-size: 10px; /* Změna velikosti textu na 10px */
+    font-weight: bold;
+    color: #333;
+    white-space: normal; /* Povolit zalamování textu */
+    word-wrap: break-word; /* Zajistí zalamování dlouhých slov */
+    max-width: 100%; /* Zabrání textu, aby přesáhl šířku */
+  }
+  .scrolling-cylinder .scrolling-content {
+    display: flex;
+    flex-direction: column;
+    max-height: fit-content; /* Vertikální směr */
+    animation: scroll-vertical 180s linear infinite; /* Vertikální animace */
+  }
+  .scrolling-cylinder:hover .scrolling-content {
+    animation-play-state: paused; /* Zastavení animace při najetí myši */
+  }
   .MuiTabs-root {
     width: 100%;
   }
