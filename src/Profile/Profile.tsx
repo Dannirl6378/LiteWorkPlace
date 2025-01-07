@@ -8,7 +8,6 @@ function Profile() {
   const [deletePassword, setDeletePassword] = useState('');
   const [isDialogOpen, setDialogOpen] = useState(false);
 
-
   const getuserDataString = sessionStorage.getItem("userDatas");
   let userData;
   if (getuserDataString) {
@@ -16,34 +15,37 @@ function Profile() {
       userData = JSON.parse(getuserDataString);
       console.log(userData);
     } catch (error) {
-      console.error("chybav rodeleni dat", error);
+      console.error("Error parsing user data", error);
     }
   }
 
-  const userName = userData?.name ?? null;
-  console.log("userNameworkingpage", userName);
- 
+  const userEmail = userData?.email ?? null;
+  console.log("email working page", userEmail);
 
-  const handleUpdate = () => {
-    if (username && password && userName) {
-        Update(username, password); // Aktualizace uživatelského jména a hesla
-      } else {
-        alert('Please fill in both username and password.');
-      }
+  const handleUpdate = (field:string) => {
+    if (field === 'username' && userEmail) {
+      Update(username, userEmail, null); // Only update username
+    } else if (field === 'password' && password) {
+      Update(null,userEmail, password); // Only update password
+    } else {
+      alert('Please fill in a valid field.');
+    }
   };
 
   const handleDelete = () => {
-    if (deletePassword && userName) {
-        Delete(deletePassword, userName ); // Smazání dat s heslem uživatele
-        setDialogOpen(false);
-      } else {
-        alert('Please enter your password to delete data.');
-      }
+    if (deletePassword && userEmail) {
+      Delete(deletePassword, userEmail); // Delete user data
+      setDialogOpen(false);
+    } else {
+      alert('Please enter your password to delete data.');
+    }
   };
 
   return (
     <Box sx={{ padding: '16px', maxWidth: '400px', margin: 'auto' }}>
       <Typography variant="h5" sx={{ marginBottom: '16px' }}>Profile Settings</Typography>
+
+      {/* Username Input */}
       <TextField
         label="Username"
         fullWidth
@@ -51,6 +53,11 @@ function Profile() {
         onChange={(e) => setUsername(e.target.value)}
         sx={{ marginBottom: '16px' }}
       />
+      <Button variant="contained" onClick={() => handleUpdate('username')} fullWidth>
+        Update Username
+      </Button>
+
+      {/* Password Input */}
       <TextField
         label="New Password"
         type="password"
@@ -59,9 +66,11 @@ function Profile() {
         onChange={(e) => setPassword(e.target.value)}
         sx={{ marginBottom: '16px' }}
       />
-      <Button variant="contained" onClick={handleUpdate} fullWidth>
-        Update
+      <Button variant="contained" onClick={() => handleUpdate('password')} fullWidth>
+        Update Password
       </Button>
+
+      {/* Delete Data Button */}
       <Button
         variant="outlined"
         color="error"
@@ -69,7 +78,7 @@ function Profile() {
         fullWidth
         sx={{ marginTop: '16px' }}
       >
-        Delete Data
+        Delete Profile
       </Button>
 
       {/* Confirmation Dialog */}

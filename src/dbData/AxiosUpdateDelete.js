@@ -1,40 +1,37 @@
-import axios from "axios";
 
-export async function Update(username, password) {
+
+export async function Update(newName,userEmail, newPassword,password) {
     try {
-        const response = await fetch('/api/updateData', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password }),
+        const response = await fetch('http://localhost:3001/api/updateData', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({email:userEmail, newName, newPassword, currentPassword: password }),
         });
         const result = await response.json();
-        if (result.success) {
-          alert('Profile updated successfully!');
+        if (result.message) {
+            alert('Profile updated successfully!');
         } else {
-          alert('Failed to update profile: ' + result.message);
+            alert('Failed to update profile: ' + result.error);
         }
-      } catch (error) {
+    } catch (error) {
         console.error('Error updating profile:', error);
-      }
+    }
 }
 
-export async function Delete(deletePassword, userId) {
-    
+export async function Delete(deletePassword, userEmail) {
     try {
-        const response = await fetch('/api/deleteData', {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: deletePassword, userId: userId }), // Send userId and password
+        const response = await fetch('http://localhost:3001/api/deleteData', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: deletePassword, email: userEmail }),
         });
-    
         const result = await response.json();
-        if (result.success) {
-          alert('Data deleted successfully.');
+        if (result.message) {
+            alert('Data deleted successfully.');
         } else {
-          alert('Failed to delete data: ' + result.message);
+            alert('Failed to delete data: ' + result.error);
         }
-      } catch (error) {
+    } catch (error) {
         console.error('Error deleting data:', error);
-      }
-    
+    }
 }
