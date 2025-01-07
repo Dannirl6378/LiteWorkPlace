@@ -1,61 +1,33 @@
-import React from "react";
-
-type Coordinate = [number, number];
+type Coordinate = [number, number, string];
 
 export function TicTacToeFirst(nGrid: Coordinate[], size: number) {
-  const minLength = size > 4 ? 4 : size;
+  // Statické definice výherních kombinací pro řady, sloupce a diagonály
+  const winningCombinations: Array<[number, number][]> = [
+    // Řady
+    [[0, 0], [0, 1], [0, 2]],  // První řada
+    [[1, 0], [1, 1], [1, 2]],  // Druhá řada
+    [[2, 0], [2, 1], [2, 2]],  // Třetí řada
+    
+    // Sloupce
+    [[0, 0], [1, 0], [2, 0]],  // První sloupec
+    [[0, 1], [1, 1], [2, 1]],  // Druhý sloupec
+    [[0, 2], [1, 2], [2, 2]],  // Třetí sloupec
+    
+    // Diagonály
+    [[0, 0], [1, 1], [2, 2]],  // Diagonála zleva doprava
+    [[0, 2], [1, 1], [2, 0]],  // Diagonála zprava doleva
+  ];
 
-  const sortCoordinates = (coordinates: Coordinate[]): Coordinate[] => {
-    return coordinates.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
-  };
-
-  const hasSequence = (coordinates: Coordinate[], minLength: number): boolean => {
-    const sortedCoordinates = sortCoordinates(coordinates);
-    const xSequence = sortedCoordinates.map(coord => coord[0]);
-    const ySequence = sortedCoordinates.map(coord => coord[1]);
-
-    // Check if both x and y sequences meet the minimum length condition
-    return (
-      (hasMinSequenceLength(xSequence, minLength) || hasConstantValueLength(xSequence, minLength)) &&
-      (hasMinSequenceLength(ySequence, minLength) || hasConstantValueLength(ySequence, minLength))
+  // Pomocná funkce pro kontrolu, zda jsou všechny pozice v kombinaci obsazeny jedním hráčem
+  const checkCombination = (combination: [number, number][], player: string): boolean => {
+    return combination.every(([row, col]) => 
+      nGrid.some(([r, c, symbol]) => r === row && c === col && symbol === player)
     );
   };
 
-  const hasMinSequenceLength = (sequence: number[], minLength: number): boolean => {
-    if (sequence.length < minLength) return false;
+  // Kontrola výhry pro "X" a "O"
+  const hasXSequence = winningCombinations.some(combination => checkCombination(combination, 'X'));
+  const hasOSequence = winningCombinations.some(combination => checkCombination(combination, 'O'));
 
-    let count = 1;
-    for (let i = 1; i < sequence.length; i++) {
-      if (sequence[i] === sequence[i - 1] + 1) {
-        count++;
-        if (count >= minLength) {
-          return true;
-        }
-      } else {
-        count = 1;
-      }
-    }
-    return false;
-  };
-
-  const hasConstantValueLength = (sequence: number[], minLength: number): boolean => {
-    if (sequence.length < minLength) return false;
-
-    let count = 1;
-    for (let i = 1; i < sequence.length; i++) {
-      if (sequence[i] === sequence[i - 1]) {
-        count++;
-        if (count >= minLength) {
-          return true;
-        }
-      } else {
-        count = 1;
-      }
-    }
-    return false;
-  };
-
-  const hasXSequence = hasSequence(nGrid, minLength);
-
-  return { hasXSequence };
+  return { hasXSequence, hasOSequence };
 }

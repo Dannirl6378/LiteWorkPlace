@@ -26,8 +26,7 @@ const MyCalendar: React.FC<McalenderProps> = ({
   const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    if (!callenAction) {
-      // If `callenAction` is empty, return early and don't try to parse
+    if (typeof callenAction !== "string" || !callenAction.trim()) {
       setEvents({});
       return;
     }
@@ -86,6 +85,18 @@ const MyCalendar: React.FC<McalenderProps> = ({
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <CBox>
         <DateCalendar
+          sx={{
+            height: "35vh",
+            margin: "auto",
+            marginTop: "5%",
+            "& .MuiDayCalendar-weekDayLabel": {
+              fontSize: "1.3rem",
+              width:"100%", // Nastaví pevnou velikost
+              "@media (max-width: 600px)": {
+                fontSize: "1rem", // Pro menší obrazovky
+              },
+            },
+          }}
           value={selectedDate || dayjs()}
           onChange={handleDateClick}
           slots={{

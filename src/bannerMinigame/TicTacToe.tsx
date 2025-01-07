@@ -1,104 +1,129 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
-import "./TicTacToe.css"; // Přidání CSS souboru
-
+import { useState, useEffect } from "react";
+import "./TicTacToe.css";
 import { generateXGrid } from "./utils";
 import { TicTacToeFirst } from "./TicTacToeFirst";
 
 export default function TicTacToe() {
   const size = 3;
-  const [newValues, setNewValues] = useState<[number, number] | null>(null);
-  const [circleGrid, setCircleGrid] = useState<[number, number][]>([]);
-  const [xGrid, setXGrid] = useState<[number, number][]>([]);
-  const [isNextCircle, setIsNextCircle] = useState<boolean>(true);
-  const [isWinnerO, setIsWinnerO] = useState<boolean>(false);
-  const [isWinnerX, setIsWinnerX] = useState<boolean>(false);
+
+  const [gameState, setGameState] = useState({
+    circleGrid: [] as [number, number, string][],
+    xGrid: [] as [number, number, string][],
+    isNextCircle: true, // "O" goes first
+    winner: null as "X" | "O" | null,
+    isDraw: false,
+    moveCount: size * size, 
+  });
 
   const gridMap = Array(size)
     .fill("")
     .map(() => Array(size).fill(""));
 
-  const handleClick = (rowIndex: number, cellIndex: number) => {
-    const coord: [number, number] = [rowIndex, cellIndex];
-    if (
-      circleGrid.some(([row, col]) => row === rowIndex && col === cellIndex) ||
-      xGrid.some(([row, col]) => row === rowIndex && col === cellIndex) ||
-      isWinnerO ||
-      isWinnerX
-    ) {
-      return; // Pokud je pole obsazeno nebo je hra již vyhraná, nic nedělej
-    }
-
-    if (isNextCircle) {
-      setCircleGrid([...circleGrid, coord]);
-    } else {
-      setXGrid([...xGrid, coord]);
-    }
-    setIsNextCircle(false);
-  };
-  console.log("xGrid",xGrid);
-
-  const generateNewValues = () => {
-    let newCoord: [number, number] | null = null;
-    while (!newCoord) {
-      const potentialCoord = generateXGrid(size);
+    const handleClick = (rowIndex: number, cellIndex: number) => {
+      const { circleGrid, xGrid, isNextCircle, winner, isDraw } = gameState;
+    
       if (
-        potentialCoord &&
-        !circleGrid.some(
-          ([row, col]) => row === potentialCoord[0] && col === potentialCoord[1]
-        ) &&
-        !xGrid.some(
-          ([row, col]) => row === potentialCoord[0] && col === potentialCoord[1]
-        )
+        circleGrid.some(([row, col]) => row === rowIndex && col === cellIndex) ||
+        xGrid.some(([row, col]) => row === rowIndex && col === cellIndex) ||
+        winner ||
+        isDraw
       ) {
-        newCoord = potentialCoord;
-        console.log("potentialcoord",potentialCoord);
+        return;
+      }
+    
+      // Update state
+      setGameState((prevState) => ({
+        ...prevState,
+        circleGrid: isNextCircle
+          ? [...prevState.circleGrid, [rowIndex, cellIndex, "O"]]
+          : prevState.circleGrid,
+        xGrid: !isNextCircle
+          ? [...prevState.xGrid, [rowIndex, cellIndex, "X"]]
+          : prevState.xGrid,
+        isNextCircle: !isNextCircle,
+        moveCount: prevState.moveCount - 1, // Always decrement moves
+      }));
+    };
+
+  const checkWinCondition = (grid: [number, number, string][]) => {
+    const result = TicTacToeFirst(grid, size);
+    return result.hasXSequence || result.hasOSequence;
+  };
+
+  const checkDrawCondition = () => {
+    const { moveCount, winner } = gameState;
+    return moveCount === 0 && !winner; // Check draw condition
+  };
+
+  useEffect(() => {
+    const { circleGrid, xGrid, moveCount, winner } = gameState;
+
+    if (!winner) {
+      // Check winner or draw after a move
+      if (checkWinCondition(circleGrid)) {
+        setGameState((prevState) => ({ ...prevState, winner: "O" }));
+      } else if (checkWinCondition(xGrid)) {
+        setGameState((prevState) => ({ ...prevState, winner: "X" }));
+      } else if (checkDrawCondition()) {
+        setGameState((prevState) => ({ ...prevState, isDraw: true }));
       }
     }
-    
-    setNewValues(newCoord);
+  }, [gameState.circleGrid, gameState.xGrid, gameState.moveCount]);
+
+  const generateNewValues = (): [number, number, string] | null => {
+    const { circleGrid, xGrid } = gameState;
+    const emptyCells: [number, number][] = [];
+
+    // Collect all empty cells
+    for (let row = 0; row < size; row++) {
+      for (let col = 0; col < size; col++) {
+        if (
+          !circleGrid.some(([r, c]) => r === row && c === col) &&
+          !xGrid.some(([r, c]) => r === row && c === col)
+        ) {
+          emptyCells.push([row, col]);
+        }
+      }
+    }
+
+    if (emptyCells.length > 0) {
+      const randomIndex = Math.floor(Math.random() * emptyCells.length);
+      const [row, col] = emptyCells[randomIndex];
+      return [row, col, "X"];
+    }
+    return null;
   };
 
   useEffect(() => {
-    if (circleGrid.length > 0 && !isNextCircle && !isWinnerO && !isWinnerX) {
-      generateNewValues(); // Spustí generování nových souřadnic pro `X`
-    }
-  }, [circleGrid, isNextCircle, isWinnerO, isWinnerX]);
+    const { isNextCircle, winner, isDraw } = gameState;
 
-  useEffect(() => {
-    if (newValues && !isNextCircle) {
-      setXGrid([...xGrid, newValues]);
-      setIsNextCircle(true);
+    // Generate new values for "X" if no winner and it's AI's turn
+    if (!isNextCircle && !winner && !isDraw) {
+      const newValues = generateNewValues();
+      if (newValues) {
+        setGameState((prevState) => ({
+          ...prevState,
+          xGrid: [...prevState.xGrid, newValues],
+          isNextCircle: true,
+          moveCount: prevState.moveCount - 1,
+        }));
+      }
     }
-  }, [newValues]);
-
-  const checkWinCondition = (grid: [number, number][]) => {
-    const result = TicTacToeFirst(grid, size);
-    return result.hasXSequence;
-  };
-console.log("circleGrid",circleGrid);
-  useEffect(() => {
-    if (checkWinCondition(circleGrid)) {
-      setIsWinnerO(true);
-    }
-  }, [circleGrid]);
-
-  useEffect(() => {
-    if (checkWinCondition(xGrid)) {
-      setIsWinnerX(true);
-    }
-  }, [xGrid]);
+  }, [gameState.circleGrid, gameState.isNextCircle, gameState.winner, gameState.isDraw]);
 
   const renderGridMap = () => {
     return gridMap.map((rowData, rowIndex) => (
       <tr key={rowIndex}>
         {rowData.map((_, cellIndex) => {
+          const { circleGrid, xGrid } = gameState;
           const isCircle = circleGrid.some(
             ([row, col]) => row === rowIndex && col === cellIndex,
           );
           const isCross = xGrid.some(
             ([row, col]) => row === rowIndex && col === cellIndex,
           );
+
           return (
             <td
               className="border"
@@ -118,11 +143,14 @@ console.log("circleGrid",circleGrid);
     <>
       <button
         onClick={() => {
-          setCircleGrid([]);
-          setXGrid([]);
-          setIsWinnerO(false);
-          setIsWinnerX(false);
-          setIsNextCircle(true);
+          setGameState({
+            circleGrid: [],
+            xGrid: [],
+            isNextCircle: true,
+            winner: null,
+            isDraw: false,
+            moveCount: size * size,
+          });
         }}
       >
         Nová Hra
@@ -130,7 +158,8 @@ console.log("circleGrid",circleGrid);
       <div className="TicTacToePosition">
         <div>
           <p>Vyhrává</p>
-          {isWinnerX ? <h4>Hráč X</h4> : isWinnerO ? <h4> Hráč O</h4> : null}
+          {gameState.winner ? <h4>Hráč {gameState.winner}</h4> : null}
+          {gameState.isDraw ? <h4>Remíza</h4> : null}
         </div>
         <div>
           <table className="table">
@@ -140,4 +169,4 @@ console.log("circleGrid",circleGrid);
       </div>
     </>
   );
-}
+};

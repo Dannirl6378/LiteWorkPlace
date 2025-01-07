@@ -1,0 +1,299 @@
+.app::before {
+    content: "";
+    background: url("./backgroundImg/BcImg.jpg") center center/cover no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+  
+  .skelet {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    height: 100vh;
+  }
+  
+  .componentsHead {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+  }
+  .banner0 {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    width: 95%;
+    max-height: 8vh;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  .newsbanner {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    width: 60%;
+    height: 9vh;
+    margin-left: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .componentsBody {
+    height: 62vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+  }
+  .leftSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 25%;
+  }
+  .banner1Td {
+    width: 80%;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .banner2Calender {
+    border: solid 0px;
+    width: 80%;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    max-height: 40vh;
+  }
+  .banner3Notes {
+    position: relative;
+    display: flex;
+    align-content: stretch;
+    text-align: left;
+    width: 50%;
+    margin: 1rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .rightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 25%;
+  }
+  .bannerWeather {
+    width: 80%;
+    margin-top: 10px;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 25vh;
+  }
+  .banner5Radio {
+    width: 30%;
+    height: fit-content;
+    margin-right: 2rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .banner6MiniGame {
+    width: 80%;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 20vh;
+  }
+  .clock {
+    position: relative;
+    margin: -3rem 1rem auto;
+    color: #000000;
+    text-shadow: 15px 8px 2px #00000038;
+    z-index: 1;
+    font-family: fantasy;
+    font-size: 2rem;
+  }
+  #Alarm {
+    position: relative;
+    margin-right: 60%;
+    color: #000000;
+    text-shadow: 15px 8px 2px #00000038;
+    z-index: 1;
+    font-family: fantasy;
+    font-size: 2rem;
+  }
+  .backgroundSite {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+  }
+  .backgroundSite::before {
+    content: "";
+    background: url("./backgroundImg/sing.jpg") center center/cover no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+  .errorSing {
+    margin-left: 50%;
+    margin-top: 25%;
+  }
+  #UserId {
+    z-index: 1;
+    position: absolute;
+    margin-left: 85%;
+  }
+  .containerNewsRadio {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  /*
+  import React from "react";
+import { useState } from "react";
+import Clock from "./1stBanner/clock";
+import "./App.css";
+import "./WorkingPage.css";
+import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import UserId from "./1stBanner/UserId";
+import NewsTabs from "./bannerNews/newsTabs";
+import Radio from "./bannerRadio/radio";
+import TextEdit from "./bannerTextEdit/TextEditMain";
+import TicTacToe from "./bannerMinigame/TicTacToe";
+import Weather from "./bannerWeather/Weather";
+import ToDoList from "./bannerTODoLIST/ToDoListMain";
+import MyCalendar from "./bannerCalender/MyCalender/MCalender";
+
+export default function WorkingPage() {
+  const [quillContent, setQuillContent] = useState(""); // Změněno na DeltaStatic | string
+  const [todoList, setTodoList] = useState<string[]>([]);
+  const [callenAction, setCalenAction] = useState<string>("");
+
+ 
+
+  const getuserDataString = sessionStorage.getItem("userDatas");
+  let userData;
+  if (getuserDataString) {
+    try {
+      
+      userData = JSON.parse(getuserDataString);
+      console.log(userData);
+    } catch (error) {
+      console.error("chybav rodeleni dat", error);
+    }
+  }
+  
+const userName = userData?.name ?? false;
+console.log("userNameworkingpage", userName);
+  const isLoggedIn = userData?.loggedIn ?? false;
+
+
+  if (!isLoggedIn) {
+    return (
+      <div className="backgroundSite">
+        <div className="errorSing">
+          <Link to="/">
+            <Button variant="contained">Přihlášení neproběho úspěšně</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <>
+      {isLoggedIn ? (
+        <div className="app">
+          <div className="skelet">
+            <div className="componentsHead">
+              <div className="banner0">
+                <Clock />
+                <h3>{userName}</h3>
+                <div id="Alarm">
+                  <AlarmClock />
+                </div>
+                <div id="UserId">
+                  <UserId
+                    quillContent={quillContent}
+                    ToDoList={todoList}
+                    callenAction={callenAction}
+                    setQuillContent={setQuillContent}
+                    setToDoList={setTodoList}
+                    setCalenAction={setCalenAction}
+                  />
+                </div>
+              </div>
+              <div className="containerNewsRadio">
+                <div className="newsbanner">
+                  <NewsTabs />
+                </div>
+                <div className="banner5Radio">
+                  <Radio />
+                </div>
+              </div>
+            </div>
+            <div className="componentsBody">
+              <div className="leftSide">
+                <div className="banner1Td">
+                  <ToDoList onListChange={(items) => setTodoList(items)} todoList={todoList}/>
+                </div>
+                <div className="banner2Calender">
+                  <MyCalendar
+                    onContentChange={(events: string) => setCalenAction(events)} callenAction={callenAction}
+                  />
+                </div>
+              </div>
+              <div className="banner3Notes">
+                <TextEdit
+                  onContentChange={(content: any) => setQuillContent(JSON.stringify(content))} quillContent={quillContent}
+                />
+              </div>
+              <div className="rightSide">
+                <div className="bannerWeather">
+                  <Weather />
+                </div>
+                <div className="banner6MiniGame">
+                  <TicTacToe />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="backgroundSite">
+          <div className="errorSing">
+            <Link to="/">
+              <Button variant="contained">Přihlašení neproběho úspěšně</Button>
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+  */

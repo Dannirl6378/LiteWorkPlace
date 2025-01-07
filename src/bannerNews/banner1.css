@@ -1,93 +1,144 @@
-.news-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Mezera mezi články */
+/* Kontejner pro celou aplikaci */
+.container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.tabs-container {
+  flex-shrink: 0;
+  background-color: rgba(236, 229, 229, 0.952);
+  height: 65px;
+  margin-right: 5px;
+  font-size: small;
+  width: 200px; /* Nastavíme šířku pro vertikální verzi */
+}
+
+#tab {
+  padding: 5px 15px 20px; /* Snížený padding */
+  font-size: 12px; /* Menší písmo */
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: none; /* Nepřevádí text na velká písmena */
+}
+
+.content {
+  flex-grow: 1;
+  font-size: 10px;
+  padding: 10px;
+}
+
+.MuiTab-root {
+  height: auto !important; /* Dynamická výška pro přizpůsobení obsahu */
+}
+.noIndicator .MuiTabs-indicator {
+  display: none;
+}
+
+.scrolling-cylinder {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Výška válce */
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(0, 0, 255, 0.1)
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scrolling-cylinder .scrolling-content {
+  display: flex;
+  flex-direction: column;
+  max-height: fit-content; /* Vertikální směr */
+  max-width: 95%;
+  animation: scroll-vertical 90s linear infinite; /* Vertikální animace */
+}
+
+@keyframes scroll-vertical {
+  from {
+    transform: translateY(0%);
   }
-  
-  .newstabs {
-    display: flex; /* 3 články na řádek s mezerou */
-    flex-direction: column;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-left: 10%;
-    max-height: 10vh;
-    min-height: 6vh;
-    max-width: 35vw;
-    border-radius: 8px;
-    background-color: rgba(233, 95, 95, 0.6);
-    overflow: auto;
-}   
-  
-  .newstabs h4 {
-    margin: 0;
+  to {
+    transform: translateY(-100%);
   }
-  
-  .newstabs a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  .newstabs a:hover {
-    text-decoration: underline;
-  }
+}
+
+.scrolling-cylinder:hover .scrolling-content {
+  animation-play-state: paused; /* Zastavení animace při najetí myši */
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+  white-space: normal; /* Povolit zalamování textu */
+    word-wrap: break-word; /* Zajistí zalamování dlouhých slov */
+    max-width: 100%; 
+}
+
+
+/* Responsivní úpravy pro mobilní zařízení */
+@media (max-width: 600px) {
   .container {
-    display: flex;
-    flex-direction: row;
-    overflow-wrap: normal;
-    border: 0px solid;
-    overflow: auto;
+    flex-direction: column;
   }
-  
-  .tabs {
-    overflow: auto;
-    max-height: 50vh;
-    border-right: 0px solid #ccc;
+
+  .tabs-container {
+    width: 100%;
+    max-height: 3vh;
+    margin-right: 0; /* Odstranění mezery na mobilních zařízeních */
   }
-  
-  .tab {
-    padding: 10px 20px;
-    font-size: 15px;
-    font-weight: bold;
-    box-sizing: border-box;
-    width: fit-content;
-    height: fit-content;
-  }
-  
+
   .content {
-    flex-grow: 1;
-    padding-left: 10px;
+    max-height: 80vh;
+    overflow-y: auto; /* Umožní rolování obsahu na menších obrazovkách */
+  }
+  .scrolling-cylinder {
+    width: 100%;
+    height: 300px; /* Zachování výšky pro válcový efekt */
+    overflow-y: auto; /* Umožní vertikální rolování */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .news-item {
+    display: flex;
+    flex-direction: column; /* Aby se text zalamoval a ne byl v jednom řádku */
+    align-items: flex-start; /* Zarovnání textu vlevo */
+    margin: 10px 0;
+    font-size: 10px; /* Změna velikosti textu na 10px */
+    font-weight: bold;
+    color: #333;
+    white-space: normal; /* Povolit zalamování textu */
+    word-wrap: break-word; /* Zajistí zalamování dlouhých slov */
+    max-width: 100%; /* Zabrání textu, aby přesáhl šířku */
+  }
+  .scrolling-cylinder .scrolling-content {
+    display: flex;
+    flex-direction: column;
+    max-height: fit-content; /* Vertikální směr */
+    animation: scroll-vertical 180s linear infinite; /* Vertikální animace */
+  }
+  .scrolling-cylinder:hover .scrolling-content {
+    animation-play-state: paused; /* Zastavení animace při najetí myši */
+  }
+  .MuiTabs-root {
+    width: 100%;
   }
 
-  @media (max-width: 600px) {
-    .container {
-      flex-direction: column;
-      overflow:auto;
-    }
-  
-    .tabs-container {
-      box-sizing: border-box;
-      border: 0px solid #ddd;
-      max-height: 12Vh; /* Adjust this value as needed */
-      display: flex;
-      border-bottom: 0px solid #ccc;
-    }
-  
-    .tab {
-      white-space: nowrap;
-    }
-
-    .content {
-      position: absolute;
-      max-width: 70%;
-      margin-left: 20%;
-      margin-bottom: 10%;
-      padding-bottom:3%;
+  .MuiTab-root {
+    font-size: 14px;
+    padding: 10px;
   }
-  .newstabs{
-    max-height: 8vh;
-  }
-  .newstabs h4{
-    font-size: small;
-  }
-  }
+}

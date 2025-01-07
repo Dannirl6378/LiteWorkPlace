@@ -5,7 +5,14 @@ import "./App.css";
 import "./WorkingPage.css";
 import AlarmClock from "./1stBanner/ReminderClock/clockRemind";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
 import Radio from "./bannerRadio/radio";
@@ -14,29 +21,30 @@ import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MyCalendar from "./bannerCalender/MyCalender/MCalender";
-import { DeltaStatic } from "quill";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Profile from "./Profile/Profile";
 
 export default function WorkingPage() {
   const [quillContent, setQuillContent] = useState(""); // Změněno na DeltaStatic | string
   const [todoList, setTodoList] = useState<string[]>([]);
   const [callenAction, setCalenAction] = useState<string>("");
 
-  console.log("data", quillContent, todoList, callenAction);
+  const isMobile = useMediaQuery("(max-width:1024px)");
 
   const getuserDataString = sessionStorage.getItem("userDatas");
   let userData;
   if (getuserDataString) {
     try {
       userData = JSON.parse(getuserDataString);
-      console.log("rozdeleni user data", userData);
+      console.log(userData);
     } catch (error) {
       console.error("chybav rodeleni dat", error);
     }
   }
 
+  const userName = userData?.name ?? false;
+  console.log("userNameworkingpage", userName);
   const isLoggedIn = userData?.loggedIn ?? false;
-
-  console.log("isLogedIn", isLoggedIn);
 
   if (!isLoggedIn) {
     return (
@@ -50,72 +58,164 @@ export default function WorkingPage() {
     );
   }
   return (
-    <>
-      {isLoggedIn ? (
-        <div className="app">
-          <div className="skelet">
-            <div className="componentsHead">
-              <div className="banner0">
-                <Clock />
-                <div id="Alarm">
-                  <AlarmClock />
-                </div>
-                <div id="UserId">
-                  <UserId
-                    quillContent={quillContent}
-                    ToDoList={todoList}
-                    callenAction={callenAction}
-                    setQuillContent={setQuillContent}
-                    setToDoList={setTodoList}
-                    setCalenAction={setCalenAction}
-                  />
-                </div>
+    <div className="app">
+      <div className="skelet">
+        {isLoggedIn ? (
+          isMobile ? (
+                <div className="componentsHead">
+                  <div className="banner0">
+                    <Clock />
+                    <div id="Alarm">
+                      <AlarmClock />
+                    </div>
+                    <h3 id="UserName">{userName}</h3>
+                    <div id="UserId">
+                      <UserId
+                        quillContent={quillContent}
+                        ToDoList={todoList}
+                        callenAction={callenAction}
+                        setQuillContent={setQuillContent}
+                        setToDoList={setTodoList}
+                        setCalenAction={setCalenAction}
+                      />
+                    </div>
+                  </div>
+                  <div className="containerNewsRadio">
+              <div className="newsbanner">
+                <NewsTabs />
               </div>
-              <div className="containerNewsRadio">
-                <div className="newsbanner">
-                  <NewsTabs />
-                </div>
-                <div className="banner5Radio">
-                  <Radio />
-                </div>
+              <div className="banner5Radio">
+                <Radio />
               </div>
             </div>
             <div className="componentsBody">
-              <div className="leftSide">
-                <div className="banner1Td">
-                  <ToDoList onListChange={(items) => setTodoList(items)} todoList={todoList}/>
-                </div>
-                <div className="banner2Calender">
-                  <MyCalendar
-                    onContentChange={(events: string) => setCalenAction(events)} callenAction={callenAction}
-                  />
-                </div>
-              </div>
-              <div className="banner3Notes">
-                <TextEdit
-                  onContentChange={(content: any) => setQuillContent(JSON.stringify(content))} quillContent={quillContent}
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>To-Do List</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <ToDoList onListChange={(items) => setTodoList(items)} todoList={todoList} />
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Calendar</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MyCalendar
+                  onContentChange={(events: string) => setCalenAction(events)}
+                  callenAction={callenAction}
                 />
-              </div>
-              <div className="rightSide">
-                <div className="bannerWeather">
-                  <Weather />
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Notes</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <TextEdit
+                  onContentChange={(content: any) => setQuillContent(JSON.stringify(content))}
+                  quillContent={quillContent}
+                />
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Weather</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Weather />
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Mini Game</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <TicTacToe />
+              </AccordionDetails>
+            </Accordion>
+          </div>
+        </div>
+          ) : (
+            <div className="app">
+              <div className="skelet">
+                <div className="componentsHead">
+                  <div className="banner0">
+                    <Clock />
+                    <h3>{userName}</h3>
+                    <div id="Alarm">
+                      <AlarmClock />
+                    </div>
+                    <div id="UserId">
+                      <UserId
+                        quillContent={quillContent}
+                        ToDoList={todoList}
+                        callenAction={callenAction}
+                        setQuillContent={setQuillContent}
+                        setToDoList={setTodoList}
+                        setCalenAction={setCalenAction}
+                      />
+                    </div>
+                  </div>
+                  <div className="containerNewsRadio">
+                    <div className="newsbanner">
+                      <NewsTabs />
+                    </div>
+                    <div className="banner5Radio">
+                      <Radio />
+                    </div>
+                  </div>
                 </div>
-                <div className="banner6MiniGame">
-                  <TicTacToe />
+                <div className="componentsBody">
+                  <div className="leftSide">
+                    <div className="banner1Td">
+                      <ToDoList
+                        onListChange={(items) => setTodoList(items)}
+                        todoList={todoList}
+                      />
+                    </div>
+                    <div className="banner2Calender">
+                      <MyCalendar
+                        onContentChange={(events: string) =>
+                          setCalenAction(events)
+                        }
+                        callenAction={callenAction}
+                      />
+                    </div>
+                  </div>
+                  <div className="banner3Notes">
+                    <TextEdit
+                      onContentChange={(content: any) =>
+                        setQuillContent(JSON.stringify(content))
+                      }
+                      quillContent={quillContent}
+                    />
+                  </div>
+                  <div className="rightSide">
+                    <div className="bannerWeather">
+                      <Weather />
+                    </div>
+                    <div className="banner6MiniGame">
+                      <TicTacToe />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+          )
+        ) : (
+          <div className="backgroundSite">
+            <div className="errorSing">
+              <Link to="/">
+                <Button variant="contained">
+                  Přihlašení neproběho úspěšně
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="backgroundSite">
-          <div className="errorSing">
-            <Link to="/">
-              <Button variant="contained">Přihlašení neproběho úspěšně</Button>
-            </Link>
-          </div>
-        </div>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
 }

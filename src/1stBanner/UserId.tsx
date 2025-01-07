@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import { useNavigate } from "react-router-dom";
 import { updateUserData, fetchUserData } from "../dbData/PushGetData";
+import Profile from "../Profile/Profile";
 
 
 // Definice typu pro uživatelská data
@@ -44,9 +45,6 @@ export default function UserId({ quillContent,
   const ToDo= ToDoList;
   const quill = quillContent;
 
-  console.log("callen", Calander);
-  console.log("todoList",ToDo);
-  console.log("data",quill);
   const userDataString = sessionStorage.getItem("userDatas");
 
   useEffect(() => {
@@ -55,7 +53,7 @@ export default function UserId({ quillContent,
         // Parsování stringu na objekt
         const parsedUserData = JSON.parse(userDataString) as UserData;
         setUserData(parsedUserData);
-        console.log("Parsed user data:", parsedUserData);
+
   
         // Načtení dat
         const fetchData = async () => {
@@ -106,6 +104,9 @@ export default function UserId({ quillContent,
   const handleClickProfil = () => {
     navigate(`/MyProfile`);
   };
+  const handleProfile = ()=>{
+    navigate(`/Profile`);
+  }
 
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Tab") {
@@ -168,7 +169,7 @@ export default function UserId({ quillContent,
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleProfile}>Profile</MenuItem>
                   <MenuItem onClick={handleClickProfil}>My CV</MenuItem>
                   <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                 </MenuList>

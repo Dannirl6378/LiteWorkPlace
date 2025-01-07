@@ -1,6 +1,7 @@
 .css-1t0788u-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition {
-    display:block;
-    position:relative;
-    overflow-x:hidden;
-    min-height:10vh;
-  }
+  display: block;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 10vh;
+  max-height: 40vh;
+}

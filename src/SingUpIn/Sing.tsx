@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import {ToastContainer } from "react-toastify";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -17,8 +18,8 @@ import PopUp from "../PopUp/PopUp";
 import CheckDatabaseEmail from "./CheckEmail/CheckDatabase";
 import { handleRegistration } from "./Register";
 import { handleSignIn } from "./SingIn";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { getUser } from "../dbData/AxiosGetUserbyEmail";
 
 
 export default function Sing() {
@@ -36,9 +37,12 @@ export default function Sing() {
   const handleSignInClick = async () => {
     const isValid = await handleSignIn(email, pwd, navigate);
     //const currentUser = user; // Zde získáme aktuální hodnotu user
+    const getName = await getUser(email);
+    console.log("userName",getName);
+    setUser(getName.name);
     if (isValid) {
       const userData = {
-        name: `${user}`, // Použijeme aktuální hodnotu user
+        name: `${getName.name}`, // Použijeme aktuální hodnotu user
         email: `${email}`,
         loggedIn: isValid,
       }
@@ -61,10 +65,11 @@ export default function Sing() {
     setValidationResultEmail(false);
   };
 
-  console.log("email", validationResultEmail);
-  console.log("Password", validationResultPassword);
+  //console.log("email", validationResultEmail);
+  //console.log("Password", validationResultPassword);
 
   return (
+    <>
     <div className="background">
       <div className="form">
         <Box
@@ -87,7 +92,7 @@ export default function Sing() {
             <h1>Sing In</h1>
           )}
 
-          <Box
+          {/*<Box
             sx={{
               display: "flex",
               alignItems: "flex-end",
@@ -105,7 +110,7 @@ export default function Sing() {
               onChange={(e) => setUser(e.target.value)}
             />
             <CheckIcon color="success" sx={{ display: user ? "" : "none" }} />
-          </Box>
+          </Box>*/}
 
           <Box
             sx={{
@@ -241,7 +246,6 @@ export default function Sing() {
           {pwd !== "" &&
           validationResultEmail &&
           validationResultPassword &&
-          user &&
           action === "Sing In" ? (
             <Button //toto je !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! přihlašení
               sx={{ width: "100%", padding: "10px 10px 10px 10px" }}
@@ -280,12 +284,14 @@ export default function Sing() {
             >
               Sing In
             </Button>
-            <Link to={{ pathname: "/workingPage", search: `?sing=$true` }}>
+            {/*<Link to={{ pathname: "/workingPage", search: `?sing=$true` }}>
               <Button variant="contained">Main Page</Button>
-            </Link>
+            </Link>*/}
           </Stack>
         </Box>
       </div>
     </div>
+    <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
+    </>
   );
 }

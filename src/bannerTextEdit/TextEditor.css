@@ -4,8 +4,10 @@
 .text-editor-container {
   background-color: white;
   margin-left: 3%;
-  width: 45vw;
+  max-width: 45vw;
   height: 100%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 .text-editor {
   background-color: white;
@@ -13,4 +15,32 @@
 .positionTextEdit {
   position: center;
   width: 100%;
+}
+@media (max-width: 768px) {
+  .text-editor-container {
+    max-width: 90%; /* Na mobilních zařízeních se editor roztáhne na téměř celou šířku */
+    height: auto; /* Automatická výška podle obsahu */
+  }
+
+  .positionTextEdit {
+    max-width: 100%;
+    padding: 5px; /* Menší odsazení na mobilních zařízeních */
+  }
+
+  .text-editor {
+    font-size: 14px; /* Menší písmo na mobilních zařízeních */
+  }
+}
+
+@media (max-width: 480px) {
+  .text-editor-container {
+    max-width: 100%;
+    margin: 0; /* Žádné okraje na velmi malých zařízeních */
+    padding: 5px;
+  }
+
+  .text-editor {
+    padding: 5px; /* Menší odsazení pro úsporu místa */
+    font-size: 12px; /* Ještě menší písmo na malých zařízeních */
+  }
 }
