@@ -22,6 +22,7 @@ import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MyCalendar from "./bannerCalender/MyCalender/MCalender";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Profile from "./Profile/Profile";
 
 export default function WorkingPage() {
   const [quillContent, setQuillContent] = useState(""); // Změněno na DeltaStatic | string

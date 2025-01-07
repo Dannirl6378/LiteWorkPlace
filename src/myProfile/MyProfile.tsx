@@ -79,7 +79,7 @@ export default function MyProfile() {
             borderRadius: "8px",
             bgcolor: "grey.100",
             boxShadow: 1,
-            maxWidth: "50%",
+            width: "50%",
             height: "fit-content",
             margin: "auto",
           }}
