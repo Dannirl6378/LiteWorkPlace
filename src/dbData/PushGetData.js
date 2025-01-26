@@ -2,7 +2,7 @@ import axios from "axios";
 // Funkce pro načtení uživatelských dat
 export const fetchUserData = async (email) => {
   try {
-    const response = await axios.get(`http://localhost:3001/api/getUser/${email}`);
+    const response = await axios.get(`https://muj-backend-jxbr.onrender.com/api/getUser/${email}`);
     console.log("PushGetData", response.data);
     return response.data;
   } catch (error) {
@@ -19,7 +19,7 @@ export const updateUserData = async (
   todoList,
 ) => {
   try {
-    const response = await axios.patch("http://localhost:3001/api/update", {
+    const response = await axios.patch("https://muj-backend-jxbr.onrender.com/api/update", {
       email,
       akceCalander, 
       Quilltext, 

@@ -2,7 +2,7 @@
 
 export async function Update(newName,userEmail, newPassword,password) {
     try {
-        const response = await fetch('http://localhost:3001/api/updateData', {
+        const response = await fetch('https://muj-backend-jxbr.onrender.com/api/updateData', {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({email:userEmail, newName, newPassword, currentPassword: password }),
@@ -20,7 +20,7 @@ export async function Update(newName,userEmail, newPassword,password) {
 
 export async function Delete(deletePassword, userEmail) {
     try {
-        const response = await fetch('http://localhost:3001/api/deleteData', {
+        const response = await fetch('https://muj-backend-jxbr.onrender.com/api/deleteData', {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password: deletePassword, email: userEmail }),

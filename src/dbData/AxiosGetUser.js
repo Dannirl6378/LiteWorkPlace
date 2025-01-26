@@ -4,7 +4,7 @@ import axios from "axios";
 export async function getUser(userData) {
   try {
     const response = await axios.get(
-      "http://localhost:3001/api/all",
+      "https://muj-backend-jxbr.onrender.com/api/all",
       userData
     );
     //console.log("getUsers_AxiosGetUsers",response.data);

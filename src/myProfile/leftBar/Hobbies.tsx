@@ -10,9 +10,7 @@ function Hobbies() {
   };
 
   return (
-    <Box
-    sx={{ lineHeight: 1.6, fontSize: "1rem", padding: "16px" }}
-    >
+    <Box sx={{ lineHeight: 1.6, fontSize: "1rem", padding: "16px" }}>
       {/* Nadpis */}
       <Typography
         variant="h4"
@@ -35,9 +33,7 @@ function Hobbies() {
           textAlign: "justify",
         }}
       >
-        {t(
-          "interests"
-        )} {/* Překlad textu popisu */}
+        {t("interests")} {/* Překlad textu popisu */}
       </Typography>
 
       {/* Přepínání jazyků */}
