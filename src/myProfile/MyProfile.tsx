@@ -45,7 +45,7 @@ export default function MyProfile() {
         >
           Home
         </Button>
-        <h1>Daniel kohoutek</h1>
+        <h1>Daniel Kohoutek</h1>
         <div>Foto</div>
       </div>
       <div className="side">
@@ -62,8 +62,8 @@ export default function MyProfile() {
                 color: activeComponent === key ? "white" : "text.primary",
                 transition: "all 0.3s",
                 fontSize: "0.85rem", // Zmenšení textu tlačítka
-                 padding: "12px", // Zmenšení vnitřní výplně tlačítka
-                 marginBottom: "3px", // Přidání mezery mezi tlačítky
+                padding: "12px", // Zmenšení vnitřní výplně tlačítka
+                marginBottom: "3px", // Přidání mezery mezi tlačítky
                 "&:hover": {
                   bgcolor:
                     activeComponent === key ? "primary.dark" : "grey.200",
