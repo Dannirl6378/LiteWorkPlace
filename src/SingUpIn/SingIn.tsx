@@ -6,7 +6,7 @@ export async function handleSignIn(
   navigate: (path: string) => void, // Předáváme funkci pro navigaci
 ) {
   try {
-    const response = await axios.post("http://localhost:3001/api/login", {
+    const response = await axios.post("https://muj-backend-jxbr.onrender.com/api/login", {
       password: pwd,
       email: email,
     });
