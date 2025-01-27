@@ -211,9 +211,9 @@
     grid-row: 1; /* Umístění do prvního řádku */
   }
   .clock{
-    height: 2rem;
-    width:16vw;
-    z-index: 1;
+    height: 1rem;
+    width:13vw;
+    
   }
   .banner0 #UserName {
   grid-column: 2; /* Umístění do druhého sloupce */
