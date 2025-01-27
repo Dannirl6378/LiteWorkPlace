@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./banner1.css"; // Styl
-import { getNews } from "../dbData/AxiosGetNews";
+
 
 interface Article {
   title: string;
@@ -11,27 +11,28 @@ interface Article {
 const News2: React.FC = () => {
   const [news, setNews] = useState<Article[]>([]);
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const data = await getNews();
-        if (data && !data.error && Array.isArray(data.articles)) {
-          setNews(data.articles); // Očekáváme, že backend vrací `articles`
-        } else {
-          console.error("Error fetching news or invalid data structure");
-        }
-      } catch (error) {
-        console.error("Failed to fetch news", error);
+  const fetchData = async () => {
+    try {
+      const options = {
+        method: "GET",
+        url: "https://newsapi.org/v2/top-headlines?country=us&apiKey=8090b74a249b4dffa71b2748fca0c37f",
+      };
+      const response = await axios.request(options);
+      setNews(response.data.articles);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error:", error.response?.status, error.message);
+      } else {
+        console.error("Unexpected error:", error);
       }
-    };
+    }
+  };
 
-    fetchNews();
-
-    const intervalId = setInterval(fetchNews, 100 * 60 * 1000); // Aktualizace po 100 minutách
-    return () => clearInterval(intervalId);
-    
-  }, []); // Only fetch on mount
-
+  useEffect(() => {
+    fetchData();
+    const intervalId = setInterval(fetchData, 100 * 60 * 1000); // Aktualizace po 100 minutách
+    return () => clearInterval(intervalId); // Vyčistíme interval při odmontování komponenty
+  }, []);
 
   return (
     <div className="scrolling-cylinder">
