@@ -10,7 +10,6 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import { useNavigate } from "react-router-dom";
 import { updateUserData, fetchUserData } from "../dbData/PushGetData";
-import Profile from "../Profile/Profile";
 
 
 // Definice typu pro uživatelská data

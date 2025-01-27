@@ -98,3 +98,29 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Jemný stín */
   border-radius: 8px;
 }
+@media (max-width: 768px) {
+  .styleSite {
+    flex-direction: column;
+  }
+
+  .leftBar {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .contentBar {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+  }
+
+  .rigthBar {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+  }
+}

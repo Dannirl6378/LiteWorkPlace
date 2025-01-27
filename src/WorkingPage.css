@@ -189,11 +189,11 @@
   }
 
   .banner0 {
-    display: 'grid';
+    display: "grid";
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     align-items: center; /* Vertikální zarovnání na střed */
-  justify-content: space-between;
+    justify-content: space-between;
     max-height: 13vh; /* Maximální výška */
     width: 90%; /* Plná šířka */
     margin: 0 auto; /* Centrovat horizontálně */
@@ -201,8 +201,8 @@
     border: 1px solid #ccc; /* Dekorativní rámeček */
     background-color: rgba(255, 255, 255, 0.9); /* Mírně průhledné pozadí */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Jemný stín */
-    position: sticky; 
-    padding-bottom:1rem;/* Banner zůstane na svém místě při scrollování */
+    position: sticky;
+    padding-bottom: 1rem; /* Banner zůstane na svém místě při scrollování */
     top: 0; /* Ukotvení nahoře */
     z-index: 1000; /* Zajištění překrytí ostatního obsahu */
   }
@@ -210,53 +210,58 @@
     grid-column: 1; /* Umístění do prvního sloupce */
     grid-row: 1; /* Umístění do prvního řádku */
   }
-  .clock{
+  .clock {
+    position: relative;
     height: 1rem;
-    width:13vw;
-    
+    width: 10vw;
+    font-family: sans-serif;
   }
   .banner0 #UserName {
-  grid-column: 2; /* Umístění do druhého sloupce */
-  grid-row: 1; /* Umístění do prvního řádku */
-  margin: 0; /* Zrušení výchozích mezer */
-  font-size: 1.2rem; /* Velikost textu */
-  text-align: right; /* Zarovnání textu doprava */
-  color: #333;
-  margin-bottom: 2rem;
+    grid-column: 2; /* Umístění do druhého sloupce */
+    grid-row: 1; /* Umístění do prvního řádku */
+    margin: 0; /* Zrušení výchozích mezer */
+    font-size: 1.2rem; /* Velikost textu */
+    text-align: right; /* Zarovnání textu doprava */
+    color: #333;
+    margin-bottom: 2rem;
   }
-  
+
   .banner0 #Alarm {
-  grid-column: 1; /* Umístění do prvního sloupce */
-  grid-row: 2; /* Umístění do druhého řádku */
-  margin-top: 4rem; 
-  margin-right: 2rem;
-  right:25%;
+    grid-column: 1; /* Umístění do prvního sloupce */
+    grid-row: 2; /* Umístění do druhého řádku */
+    margin-top: 4rem;
+    margin-right: 2rem;
+    right: 25%;
   }
-  
+
   .banner0 #UserId {
     grid-column: 2; /* Umístění do druhého sloupce */
-  grid-row: 2; /* Umístění do druhého řádku */
-  margin-top: 0.5rem; /* Mezera mezi uživatelským jménem a ikonou ID */
-    width:auto;
+    grid-row: 2; /* Umístění do druhého řádku */
+    margin-top: 0.5rem; /* Mezera mezi uživatelským jménem a ikonou ID */
+    width: auto;
     right: 5px;
     margin-top: 2rem;
-}
+  }
 
   .componentsBody {
     display: block;
     height: auto;
   }
 
-  .leftSide, .rightSide {
+  .leftSide,
+  .rightSide {
     width: 100%;
     margin-bottom: 1rem;
   }
-  .banner5Radio{
-    margin:auto;
+  .banner5Radio {
+    margin: auto;
     margin-left: 2px;
   }
 
-  .banner1Td, .banner2Calender, .bannerWeather, .banner6MiniGame {
+  .banner1Td,
+  .banner2Calender,
+  .bannerWeather,
+  .banner6MiniGame {
     width: 100%;
     margin: 1rem 0;
     padding: 1rem;
@@ -269,7 +274,7 @@
     padding: 1rem;
     border-radius: 12px;
   }
-  .newsbanner{
+  .newsbanner {
     margin-bottom: 1rem;
     margin-top: 1rem;
   }
@@ -289,7 +294,8 @@
     justify-content: space-around;
   }
 
-  .leftSide, .rightSide {
+  .leftSide,
+  .rightSide {
     width: 48%;
   }
 
@@ -304,4 +310,3 @@
     height: 20vh;
   }
 }
-

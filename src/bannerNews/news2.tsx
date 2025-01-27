@@ -19,7 +19,11 @@ const News2: React.FC = () => {
       const response = await axios.request(options);
       setNews(response.data.articles);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error:", error.response?.status, error.message);
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
   };
 
@@ -32,7 +36,7 @@ const News2: React.FC = () => {
   return (
     <div className="scrolling-cylinder">
       <div className="scrolling-content">
-        {[...news,...news].map((article, index) => (
+        {[...news, ...news].map((article, index) => (
           <div key={index} className="news-item">
             <div className="bullet"></div>
             <a href={article.url} target="_blank" rel="noopener noreferrer">
