@@ -99,8 +99,12 @@
   border-radius: 8px;
 }
 @media (max-width: 768px) {
-  .styleSite {
+  .side {
+    display: flex;
     flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    margin-top: 20px;
   }
 
   .leftBar {

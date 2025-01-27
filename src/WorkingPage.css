@@ -209,6 +209,7 @@
   #Clock {
     grid-column: 1; /* Umístění do prvního sloupce */
     grid-row: 1; /* Umístění do prvního řádku */
+    z-index: 0;
   }
   .clock {
     position: relative;
