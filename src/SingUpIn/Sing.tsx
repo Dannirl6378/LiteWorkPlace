@@ -91,15 +91,15 @@ export default function Sing() {
           ) : (
             <h1>Sing In</h1>
           )}
-
-          {/*<Box
+{action ==="Sing Up"?(
+          <Box
             sx={{
               display: "flex",
               alignItems: "flex-end",
               flexDirection: "row",
             }}
           >
-            <Person2OutlinedIcon
+             <Person2OutlinedIcon
               sx={{ color: "action.active", mr: 1, my: 0.5 }}
             />
             <TextField
@@ -110,8 +110,8 @@ export default function Sing() {
               onChange={(e) => setUser(e.target.value)}
             />
             <CheckIcon color="success" sx={{ display: user ? "" : "none" }} />
-          </Box>*/}
-
+          </Box>
+            ):null}
           <Box
             sx={{
               display: "flex",
@@ -119,6 +119,7 @@ export default function Sing() {
               flexDirection: "row",
             }}
           >
+            
             <EmailOutlinedIcon
               sx={{ color: "action.active", mr: 1, my: 0.5 }}
             />
@@ -192,6 +193,7 @@ export default function Sing() {
               color="success"
               sx={{ display: validationResultPassword ? "" : "none" }} //tady v podmince bude kontrola podminek pro email
             />
+            
           </Box>
           {action === "Sing Up" ? (
             <>
