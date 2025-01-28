@@ -33,8 +33,7 @@ export default function MyProfile() {
   const handleClick = (component: keyof typeof components) => {
     setActiveComponent(component);
   };
-  console.log("Active Component:", activeComponent);
-  console.log("Keys in components:", Object.keys(components));
+
   return (
     <div className="styleSite">
       <div className="header">
@@ -57,13 +56,13 @@ export default function MyProfile() {
               sx={{
                 border: "1px solid",
                 borderRadius: "4px",
-                textAlign: "center",
+                textAlign: "left",
                 bgcolor: activeComponent === key ? "primary.main" : " #ADD8E6;",
                 color: activeComponent === key ? "white" : "text.primary",
                 transition: "all 0.3s",
-                fontSize: "0.85rem", // Zmenšení textu tlačítka
-                padding: "12px", // Zmenšení vnitřní výplně tlačítka
-                marginBottom: "3px", // Přidání mezery mezi tlačítky
+                fontSize: "0.85rem",
+                padding: "10px",
+                marginBottom: "3px",
                 "&:hover": {
                   bgcolor:
                     activeComponent === key ? "primary.dark" : "grey.200",
@@ -79,14 +78,14 @@ export default function MyProfile() {
             borderRadius: "8px",
             bgcolor: "grey.100",
             boxShadow: 1,
-            width: "50%",
-            height: "fit-content",
+            height: "60%",
+            width: { xs: "90%", sm: "70%", md: "50%" },
             margin: "auto",
           }}
         >
           {components[activeComponent]}
         </Box>
-        <div className="rigthBar">
+        <div className="rightBar">
           <List sx={{ marginLeft: "10%", width: "fit-content", padding: 0 }}>
             <ListItem
               sx={{

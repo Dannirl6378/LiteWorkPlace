@@ -54,8 +54,6 @@ const CBox = styled(Box)`
 
   @media (min-width: 600px) 
   height: 15vh;
-   font-size: 2vw;
-  {
     & .MuiPickersDay-root {
       max-width: 12.5%; /* Slightly larger cells */
     }
@@ -66,7 +64,7 @@ const CBox = styled(Box)`
     .MuiPickersCalendarHeader-root {
     letter-spacing: 2px !important;
     letter-spacing: 9px;
-    height:15vh;
+    height:20vh;
     font-size:1.5vw;
     }
     & .MuiDayCalendar-weekDayLabel {
@@ -75,6 +73,8 @@ const CBox = styled(Box)`
     line-height: 1vw;
     text-align: center;
   }
+    & .MuiDayCalendar-weekContainer {
+    height:4vh;}
 
   }
 

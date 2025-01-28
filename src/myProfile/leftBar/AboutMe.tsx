@@ -8,7 +8,19 @@ function AboutMe() {
     i18n.changeLanguage(lang);
   };
   return (
-    <Box sx={{ lineHeight: 1.6, fontSize: "1rem", padding: "16px" }}>
+    <Box sx={{ lineHeight: 1.6,
+      fontSize: "1rem",
+      padding: "16px",
+      height: "100%", // Výchozí pro desktop
+      overflowY: "auto", // Povolí scrollování, pokud je obsah větší než výška
+      "@media (max-width: 600px)": {
+        height: "calc(70vh - 50px)", // Pevná výška na telefonech (odečteno 50px např. pro header/footer)
+      },
+      backgroundColor: "#f4f4f4",
+      borderRadius: "8px",
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    }}
+  >
       <h2 style={{ color: "#007bff", fontSize: "1.5rem", fontWeight: "bold" }}>
         {t("aboutMe")}
       </h2>

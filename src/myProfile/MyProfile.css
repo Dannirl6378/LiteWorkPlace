@@ -1,13 +1,8 @@
 .styleSite {
   width: 100%;
-  height: 100vh; /* Nastaví výšku na 100% výšky okna */
+  height: 100vh;
   position: relative;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.4
-  ); /* Pokrytí pozadí poloprůhledným černým */
+  background-color: rgba(0, 0, 0, 0.4);
   color: hsla(0, 67%, 1%, 0.822);
   display: flex;
   flex-direction: column;
@@ -24,9 +19,10 @@
   left: 0;
   z-index: -1;
 }
+
 .styleSite h1 {
-  color: #fff; /* Bílý text */
-  text-shadow: 2px 2px 10px rgba(0, 0, 255, 0.6); /* Modrý textový stín pro zvýraznění */
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0, 0, 255, 0.6);
   margin-left: 30%;
 }
 
@@ -41,15 +37,14 @@
 }
 
 .styleSite .leftBar,
-.styleSite .rigthBar {
-  color: #add8e6; /* Světlá modrá barva */
+.styleSite .rightBar {
+  color: #add8e6;
 }
 
 .styleSite .contentBar {
-  color: #87cefa; /* Trochu tmavší modrá */
+  color: #87cefa;
 }
 
-/* Případně použití gradientního textu */
 .styleSite h1 {
   background: linear-gradient(
     90deg,
@@ -62,8 +57,7 @@
 }
 
 .header {
-  /* Můžeš přidat stylování pro hlavičku */
-  z-index: 1; /* zajistí, že bude nad pozadím */
+  z-index: 1;
 }
 
 .side {
@@ -77,14 +71,15 @@
   display: flex;
   flex-direction: column;
   padding: 15px;
-  width: 20%; /* Levý a pravý sloupec */
+  width: 20%;
   margin: auto;
   border: 2px solid;
   background-color: rgba(173, 216, 230, 0.2);
   border-radius: 8px;
 }
-.rigthBar {
-  width: 14%; /* Levý a pravý sloupec */
+
+.rightBar {
+  width: 14%;
   margin: auto;
   padding: 15px;
   border: 2px solid;
@@ -93,36 +88,38 @@
 }
 
 .contentBar {
-  width: 50%; /* Hlavní obsah */
+  width: 50%;
   background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Jemný stín */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 }
+
 @media (max-width: 768px) {
+
+  .styleSite::before {
+    height:140vh;
+  }
+
   .side {
-    display: flex;
     flex-direction: column;
-    flex: 1;
-    justify-content: space-between;
-    margin-top: 20px;
   }
 
   .leftBar {
+    width: 90%;
     flex-direction: row;
-    width: 100%;
     justify-content: center;
-    gap: 8px;
+    margin-top: 10%;
+    gap: 3px;
   }
 
   .contentBar {
     width: 100%;
-    height: 100vh;
-    overflow: auto;
+    height: auto;
   }
 
-  .rigthBar {
-    flex-direction: row;
+  .rightBar {
     width: 100%;
+    flex-direction: row;
     justify-content: center;
     gap: 8px;
     margin: 0;

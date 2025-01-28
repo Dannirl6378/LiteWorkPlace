@@ -28,6 +28,7 @@ export default function WorkingPage() {
   const [quillContent, setQuillContent] = useState(""); // Změněno na DeltaStatic | string
   const [todoList, setTodoList] = useState<string[]>([]);
   const [callenAction, setCalenAction] = useState<string>("");
+  const [expanded, setExpanded] = useState<string | false>(false);
 
   const isMobile = useMediaQuery("(max-width:1024px)");
 
@@ -41,6 +42,10 @@ export default function WorkingPage() {
       console.error("chybav rodeleni dat", error);
     }
   }
+
+  const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   const userName = userData?.name ?? false;
   console.log("userNameworkingpage", userName);
@@ -89,7 +94,7 @@ export default function WorkingPage() {
               </div>
             </div>
             <div className="componentsBody">
-            <Accordion>
+            <Accordion expanded={expanded === "todo"} onChange={handleChange("todo")}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>To-Do List</Typography>
               </AccordionSummary>
@@ -97,7 +102,7 @@ export default function WorkingPage() {
                 <ToDoList onListChange={(items) => setTodoList(items)} todoList={todoList} />
               </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion expanded={expanded === "calendar"} onChange={handleChange("calendar")}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>Calendar</Typography>
               </AccordionSummary>
@@ -108,7 +113,7 @@ export default function WorkingPage() {
                 />
               </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion expanded={expanded === "notes"} onChange={handleChange("notes")}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>Notes</Typography>
               </AccordionSummary>
@@ -119,7 +124,7 @@ export default function WorkingPage() {
                 />
               </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion expanded={expanded === "weather"} onChange={handleChange("weather")}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>Weather</Typography>
               </AccordionSummary>
@@ -127,7 +132,7 @@ export default function WorkingPage() {
                 <Weather />
               </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion expanded={expanded === "minigame"} onChange={handleChange("minigame")}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>Mini Game</Typography>
               </AccordionSummary>

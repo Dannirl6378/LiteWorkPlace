@@ -178,6 +178,9 @@
 }
 /* Styl pro mobilní zařízení */
 @media (max-width: 600px) {
+
+  .app::before {height:150vh}
+
   .skelet {
     display: block;
     padding: 1rem;
@@ -213,8 +216,8 @@
   }
   .clock {
     position: relative;
-    height: 1rem;
-    width: 10vw;
+    height: 2vh;
+    width: 8vw;
     font-family: sans-serif;
   }
   .banner0 #UserName {
