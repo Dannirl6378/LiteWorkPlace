@@ -79,8 +79,9 @@ function Profile() {
           boxShadow: 2,
           maxWidth: "500px",
           position: "absolute",
-          top: "25%",
-          left: "32%",
+          top:"10%",
+          width:"70%",
+          marginLeft:"11%",
         }}
       >
         <Typography variant="h5" sx={{ marginBottom: "16px" }}>
