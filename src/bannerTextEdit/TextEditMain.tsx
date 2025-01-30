@@ -12,7 +12,32 @@ interface TextEditProps {
 
 const TextEdit: React.FC<TextEditProps> = ({ onContentChange, quillContent }) => {
   const [content, setContent] = useState(quillContent);
+
   const quillRef = useRef<ReactQuill | null>(null);
+
+
+  const textIsInDb = useRef(true);
+  const unescapeHtml = (html: string) => {
+    let cleanedHtml = html;
+    cleanedHtml = cleanedHtml.replace(/\\"/g, '"').replace(/\\\\/g, "\\");
+    if (cleanedHtml.startsWith('"') && cleanedHtml.endsWith('"')) {
+      cleanedHtml = cleanedHtml.slice(1, -1);
+    }
+    return cleanedHtml;
+  };
+
+  useEffect(() => {
+    if (quillRef.current) {
+      const editor = quillRef.current.getEditor();
+      const cleanedQuill = unescapeHtml(quillContent);
+      console.log("cleanQuill", cleanedQuill);
+      editor.clipboard.dangerouslyPasteHTML(cleanedQuill);
+      // Můžeme nastavit stav pouze pro inicializaci
+      setContent(cleanedQuill);
+      textIsInDb.current=false;
+    }
+  }, [textIsInDb.current]);
+
 
   const handleAddContent = () => {
     if (quillRef.current) {
@@ -22,6 +47,8 @@ const TextEdit: React.FC<TextEditProps> = ({ onContentChange, quillContent }) =>
       onContentChange(htmlContent);
     }
   };
+
+  
 
   const isMobile = window.innerWidth < 768;
 

@@ -19,6 +19,7 @@
   flex-direction: column;
   align-content: space-between;
   height: 100vh;
+  max-width: 200vh;
 }
 
 .componentsHead {
@@ -197,7 +198,7 @@
     grid-template-rows: auto auto;
     align-items: center; /* Vertikální zarovnání na střed */
     justify-content: space-between;
-    max-height: 13vh; /* Maximální výška */
+    max-height: 15vh; /* Maximální výška */
     width: 90%; /* Plná šířka */
     margin: 0 auto; /* Centrovat horizontálně */
     padding: 0 1rem; /* Přidat vodorovné mezery uvnitř banneru */
@@ -212,18 +213,20 @@
   #Clock {
     grid-column: 1; /* Umístění do prvního sloupce */
     grid-row: 1; /* Umístění do prvního řádku */
-    z-index: 0;
+    z-index: -1;
   }
   .clock {
     position: relative;
-    height: 2vh;
+    margin-top: 1vh;
+    height: 3rem;
     width: 8vw;
     font-family: sans-serif;
+    font-size: large;
   }
   .banner0 #UserName {
     grid-column: 2; /* Umístění do druhého sloupce */
     grid-row: 1; /* Umístění do prvního řádku */
-    margin: 0; /* Zrušení výchozích mezer */
+    margin-left: 0; /* Zrušení výchozích mezer */
     font-size: 1.2rem; /* Velikost textu */
     text-align: right; /* Zarovnání textu doprava */
     color: #333;
@@ -232,9 +235,9 @@
 
   .banner0 #Alarm {
     grid-column: 1; /* Umístění do prvního sloupce */
-    grid-row: 2; /* Umístění do druhého řádku */
+    grid-row: 2; /* Umí3stění do druhého řádku */
     margin-top: 4rem;
-    margin-right: 2rem;
+    margin-left: 9rem;
     right: 25%;
   }
 
