@@ -68,7 +68,7 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
   };
 
   return (
-    <div>
+    <Box>
       <Badge badgeContent={items.length} color="secondary" overlap="circular" />
       <Button
         aria-controls="ToDoList"
@@ -83,10 +83,16 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
         open={Boolean(anchorEl)}
         keepMounted
         onClose={handleClose}
+        anchorReference="anchorPosition"
+  anchorPosition={{
+    top: window.innerHeight / 3.3,
+    left: window.innerWidth / 2.6,
+  }}
         sx={{
           style: {
-            maxHeight: 300,
-            width: "20ch",
+            width: "300px",
+            maxHeight: "400px", // Omezení maximální výšky
+            overflowY: "auto",
           },
         }}
       >
@@ -104,16 +110,17 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
             fullWidth
           />
         </MenuItem>
-        <List dense>
+        <List dense sx={{ maxHeight: "300px", overflowY: "auto" }}>
           {items.map((item, index) => (
             <ListItem
               key={index}
               secondaryAction={
-                <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="center" sx={{ marginRight: "-10px"}}>
                   <Checkbox
                     checked={item.checked}
                     onChange={() => handleToggleChecked(index)}
                     size="small"
+                    
                   />
                   <IconButton
                     edge="end"
@@ -125,12 +132,13 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
                 </Box>
               }
             >
-              <ListItemText primary={item.text} />
+              <ListItemText primary={item.text}
+              sx={{ maxWidth:"250px",wordBreak: "break-word", whiteSpace: "normal", flex: 1 }} />
             </ListItem>
           ))}
         </List>
       </Menu>
-    </div>
+    </Box>
   );
 };
 

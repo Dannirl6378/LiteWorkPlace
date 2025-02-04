@@ -30,7 +30,8 @@ export default function WorkingPage() {
   const [callenAction, setCalenAction] = useState<string>("");
   const [expanded, setExpanded] = useState<string | false>(false);
 
-  const isMobile = useMediaQuery("(max-width:1024px)");
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const isTablet = useMediaQuery("(max-width:900px) and (min-width:601px)");
 
   const getuserDataString = sessionStorage.getItem("userDatas");
   let userData;
@@ -43,9 +44,10 @@ export default function WorkingPage() {
     }
   }
 
-  const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+  const handleChange =
+    (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
   const userName = userData?.name ?? false;
   console.log("userNameworkingpage", userName);
@@ -67,14 +69,114 @@ export default function WorkingPage() {
       <div className="skelet">
         {isLoggedIn ? (
           isMobile ? (
+            <div className="componentsHead">
+              <div className="banner0">
+                <Clock />
+                <div id="Alarm">
+                  <AlarmClock />
+                </div>
+                <h3 id="UserName">{userName}</h3>
+                <div id="UserId">
+                  <UserId
+                    quillContent={quillContent}
+                    ToDoList={todoList}
+                    callenAction={callenAction}
+                    setQuillContent={setQuillContent}
+                    setToDoList={setTodoList}
+                    setCalenAction={setCalenAction}
+                  />
+                </div>
+              </div>
+              <div className="containerNewsRadio">
+                <div className="newsbanner">
+                  <NewsTabs />
+                </div>
+                <div className="banner5Radio">
+                  <Radio />
+                </div>
+              </div>
+              <div className="componentsBody">
+                <Accordion
+                  expanded={expanded === "todo"}
+                  onChange={handleChange("todo")}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>To-Do List</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <ToDoList
+                      onListChange={(items) => setTodoList(items)}
+                      todoList={todoList}
+                    />
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
+                  expanded={expanded === "calendar"}
+                  onChange={handleChange("calendar")}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>Calendar</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <MyCalendar
+                      onContentChange={(events: string) =>
+                        setCalenAction(events)
+                      }
+                      callenAction={callenAction}
+                    />
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
+                  expanded={expanded === "notes"}
+                  onChange={handleChange("notes")}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>Notes</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <TextEdit
+                      onContentChange={(content: any) =>
+                        setQuillContent(JSON.stringify(content))
+                      }
+                      quillContent={quillContent}
+                    />
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
+                  expanded={expanded === "weather"}
+                  onChange={handleChange("weather")}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>Weather</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Weather />
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
+                  expanded={expanded === "minigame"}
+                  onChange={handleChange("minigame")}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>Mini Game</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <TicTacToe />
+                  </AccordionDetails>
+                </Accordion>
+              </div>
+            </div>
+          ) : isTablet ? (
+            <div className="app">
+              <div className="skelet">
                 <div className="componentsHead">
                   <div className="banner0">
                     <Clock />
                     <div id="Alarm">
                       <AlarmClock />
                     </div>
-                    <h3 id="UserName">{userName}</h3>
                     <div id="UserId">
+                      <h3>{userName}</h3>
                       <UserId
                         quillContent={quillContent}
                         ToDoList={todoList}
@@ -86,62 +188,46 @@ export default function WorkingPage() {
                     </div>
                   </div>
                   <div className="containerNewsRadio">
-              <div className="newsbanner">
-                <NewsTabs />
-              </div>
-              <div className="banner5Radio">
-                <Radio />
+                    <div className="newsbanner">
+                      <NewsTabs />
+                    </div>
+                    <div className="banner5Radio">
+                      <Radio />
+                    </div>
+                  </div>
+                </div>
+                <div className="componentsBody">
+                  <div className="leftSide">
+                    <div className="banner1Td">
+                      <ToDoList
+                        onListChange={(items) => setTodoList(items)}
+                        todoList={todoList}
+                      />
+                    </div>
+                    <div
+                      className="calendarButton"
+                      onClick={() => setExpanded("calendar")}
+                    >
+                      Otevřít Kalendář
+                    </div>
+                    <div
+                      className="minigameButton"
+                      onClick={() => setExpanded("minigame")}
+                    >
+                      Otevřít Mini hru
+                    </div>
+                  </div>
+                  <div className="banner3Notes">
+                    <TextEdit
+                      onContentChange={(content: any) =>
+                        setQuillContent(JSON.stringify(content))
+                      }
+                      quillContent={quillContent}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="componentsBody">
-            <Accordion expanded={expanded === "todo"} onChange={handleChange("todo")}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>To-Do List</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <ToDoList onListChange={(items) => setTodoList(items)} todoList={todoList} />
-              </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === "calendar"} onChange={handleChange("calendar")}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Calendar</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <MyCalendar
-                  onContentChange={(events: string) => setCalenAction(events)}
-                  callenAction={callenAction}
-                />
-              </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === "notes"} onChange={handleChange("notes")}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Notes</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <TextEdit
-                  onContentChange={(content: any) => setQuillContent(JSON.stringify(content))}
-                  quillContent={quillContent}
-                />
-              </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === "weather"} onChange={handleChange("weather")}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Weather</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Weather />
-              </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === "minigame"} onChange={handleChange("minigame")}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Mini Game</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <TicTacToe />
-              </AccordionDetails>
-            </Accordion>
-          </div>
-        </div>
           ) : (
             <div className="app">
               <div className="skelet">

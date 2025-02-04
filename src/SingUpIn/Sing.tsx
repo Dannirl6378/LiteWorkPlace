@@ -11,7 +11,7 @@ import TextField from "@mui/material/TextField";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import "./Sing.css";
-import { Tooltip } from "@mui/material";
+import { Alert, AlertTitle, Tooltip } from "@mui/material";
 import ValidationPassword from "./CheckPassword/ValidationPassword";
 import ValidationEmail from "./CheckEmail/ValidationEmail";
 import PopUp from "../PopUp/PopUp";
@@ -77,7 +77,7 @@ export default function Sing() {
             maxWidth: "fit-content",
             maxHeight: "fit-content",
             justifyContent: "center",
-            margin: "5% auto",
+            margin: { xs: "35% auto", md: "10% auto" },
             boxShadow: 3,
             borderRadius: 4,
             background: " #CDD1CD",
@@ -293,6 +293,13 @@ export default function Sing() {
         </Box>
       </div>
     </div>
+    <Box sx={{ mt: 0, mx: "auto", maxWidth: 600 }}>
+  <Alert severity="info">
+    <AlertTitle>Důležité informace</AlertTitle>
+    Tento web je pouze demonstrační. Žádné osobní údaje nejsou ukládány. 
+    Registrace je pouze simulace a není nutné zadávat skutečný e-mail a jine informace.
+  </Alert>
+</Box>
     <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
     </>
   );
