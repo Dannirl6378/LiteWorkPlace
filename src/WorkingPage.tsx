@@ -22,7 +22,6 @@ import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MyCalendar from "./bannerCalender/MyCalender/MCalender";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Profile from "./Profile/Profile";
 
 export default function WorkingPage() {
   const [quillContent, setQuillContent] = useState(""); // Změněno na DeltaStatic | string
@@ -51,7 +50,8 @@ export default function WorkingPage() {
 
   const userName = userData?.name ?? false;
   console.log("userNameworkingpage", userName);
-  const isLoggedIn = userData?.loggedIn ?? false;
+  const isLoggedIn = userData?.loggedIn;
+  console.log("isLoged", isLoggedIn);
 
   if (!isLoggedIn) {
     return (
@@ -75,16 +75,18 @@ export default function WorkingPage() {
                 <div id="Alarm">
                   <AlarmClock />
                 </div>
-                <h3 id="UserName">{userName}</h3>
-                <div id="UserId">
-                  <UserId
-                    quillContent={quillContent}
-                    ToDoList={todoList}
-                    callenAction={callenAction}
-                    setQuillContent={setQuillContent}
-                    setToDoList={setTodoList}
-                    setCalenAction={setCalenAction}
-                  />
+                <div className="user-info">
+                  
+                  <div id="UserId">
+                    <UserId
+                      quillContent={quillContent}
+                      ToDoList={todoList}
+                      callenAction={callenAction}
+                      setQuillContent={setQuillContent}
+                      setToDoList={setTodoList}
+                      setCalenAction={setCalenAction}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="containerNewsRadio">
@@ -176,7 +178,7 @@ export default function WorkingPage() {
                       <AlarmClock />
                     </div>
                     <div id="UserId">
-                      <h3>{userName}</h3>
+                      
                       <UserId
                         quillContent={quillContent}
                         ToDoList={todoList}
@@ -234,10 +236,11 @@ export default function WorkingPage() {
                 <div className="componentsHead">
                   <div className="banner0">
                     <Clock />
-                    <h3>{userName}</h3>
+                    
                     <div id="Alarm">
                       <AlarmClock />
                     </div>
+                    <h3>{userName}</h3>
                     <div id="UserId">
                       <UserId
                         quillContent={quillContent}

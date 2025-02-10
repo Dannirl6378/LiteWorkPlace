@@ -32,6 +32,7 @@
 .banner0 {
   position: relative;
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: space-between;
   text-align: center;
@@ -179,8 +180,9 @@
 }
 
 .errorSing {
-  margin-left: 50%;
-  margin-top: 25%;
+  position: relative;
+  margin-left: 40%;
+  margin-top: 15% ;
 }
 
 #UserId {
@@ -194,15 +196,25 @@
   justify-content: space-between;
   flex-direction: row;
 }
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Mezera mezi UserName a UserId */
+}
+
+#UserName {
+  margin: 0;
+}
+
 
 /* Styl pro mobilní zařízení */
 @media (max-width: 600px) {
   .app::before {
     height: 150vh;
   }
-#h3{
-  position: inherit;
-}
+  #h3 {
+    position: inherit;
+  }
   .skelet {
     display: block;
     padding: 1rem;
@@ -255,7 +267,7 @@
   .banner0 #Alarm {
     grid-column: 1;
     grid-row: 1;
-   margin-top: 1.3rem;
+    margin-top: 1.3rem;
     margin-left: 12rem;
     right: 25%;
   }
@@ -263,10 +275,9 @@
   .banner0 #UserId {
     grid-column: 2;
     grid-row: 2;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
     width: auto;
     right: 5px;
-    
   }
 
   .componentsBody {
@@ -308,15 +319,16 @@
   }
 }
 
-
 /* Styl pro tablety */
 @media (max-width: 900px) and (min-width: 601px) {
   .skelet {
     display: block;
     padding: 1rem;
   }
-#h3{align-items: center;
-margin-left: 50%;}
+  #h3 {
+    align-items: center;
+    margin-left: 50%;
+  }
   .componentsBody {
     display: grid;
     grid-template-columns: 25% 75%; /* Levý sloupec (25%) pro To-Do List, pravý sloupec (75%) pro News a Notes */

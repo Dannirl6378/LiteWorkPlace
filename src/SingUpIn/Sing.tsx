@@ -39,17 +39,20 @@ export default function Sing() {
     //const currentUser = user; // Zde získáme aktuální hodnotu user
     const getName = await getUser(email);
     console.log("userName",getName);
+    console.log("isValid",isValid.success);
     setUser(getName.name);
-    if (isValid) {
+    if (isValid.success) {
       const userData = {
         name: `${getName.name}`, // Použijeme aktuální hodnotu user
         email: `${email}`,
-        loggedIn: isValid,
+        loggedIn: isValid.success,
       }
       sessionStorage.setItem("userDatas", JSON.stringify(userData));
       console.log("Přihlášení proběhlo úspěšně");
   } else {
-      navigate(`/workingPage`);
+    const userData = {loggedIn: isValid.success};
+    sessionStorage.setItem("userDatas", JSON.stringify(userData));
+    navigate("/workingPage");
       console.error("Nesprávné přihlašovací údaje");
   }
   };
@@ -77,7 +80,7 @@ export default function Sing() {
             maxWidth: "fit-content",
             maxHeight: "fit-content",
             justifyContent: "center",
-            margin: { xs: "35% auto", md: "10% auto" },
+            margin: "15% auto",
             boxShadow: 3,
             borderRadius: 4,
             background: " #CDD1CD",

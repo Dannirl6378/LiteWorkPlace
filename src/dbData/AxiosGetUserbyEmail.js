@@ -10,7 +10,7 @@ export async function getUser(email) {
     return response.data; // Return the user data
   } catch (error) {
     console.error("Error fetching user data:", error);
-    throw error;
+    return false;
   }
 }
 
