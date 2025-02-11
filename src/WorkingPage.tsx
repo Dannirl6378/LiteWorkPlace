@@ -12,6 +12,7 @@ import {
   AccordionDetails,
   Typography,
   useMediaQuery,
+  Box,
 } from "@mui/material";
 import UserId from "./1stBanner/UserId";
 import NewsTabs from "./bannerNews/newsTabs";
@@ -21,7 +22,7 @@ import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MyCalendar from "./bannerCalender/MyCalender/MCalender";
-import ChuckNorrisJoke from './bannerJokes/ChuckNorrisJokes';
+import ChuckNorrisJoke from "./bannerJokes/ChuckNorrisJokes";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function WorkingPage() {
@@ -77,7 +78,6 @@ export default function WorkingPage() {
                   <AlarmClock />
                 </div>
                 <div className="user-info">
-                  
                   <div id="UserId">
                     <UserId
                       quillContent={quillContent}
@@ -176,10 +176,9 @@ export default function WorkingPage() {
                   <div className="banner0">
                     <Clock />
                     <div id="Alarm">
-                      <ChuckNorrisJoke />
+                      <AlarmClock />
                     </div>
                     <div id="UserId">
-                      
                       <UserId
                         quillContent={quillContent}
                         ToDoList={todoList}
@@ -192,7 +191,7 @@ export default function WorkingPage() {
                   </div>
                   <div className="containerNewsRadio">
                     <div className="newsbanner">
-                      <NewsTabs />
+                      <ChuckNorrisJoke />
                     </div>
                     <div className="banner5Radio">
                       <Radio />
@@ -219,6 +218,25 @@ export default function WorkingPage() {
                     >
                       Otevřít Mini hru
                     </div>
+                    {expanded && (
+                      <Box
+                        sx={{
+                          margin: "20px auto",
+                          padding: "20px",
+                          maxHeight:"350px",
+                          maxWidth: "200px",
+                          backgroundColor: "white",
+                          boxShadow: 3,
+                          borderRadius: 4,
+                          textAlign: "center",
+                        }}
+                      >
+                        {expanded === "calendar" && <MyCalendar onContentChange={function (content: string): void {
+                            throw new Error("Function not implemented.");
+                          } } callenAction={""} />}
+                        {expanded === "minigame" && <TicTacToe />}
+                      </Box>
+                    )}
                   </div>
                   <div className="banner3Notes">
                     <TextEdit
@@ -237,7 +255,7 @@ export default function WorkingPage() {
                 <div className="componentsHead">
                   <div className="banner0">
                     <Clock />
-                    
+
                     <div id="Alarm">
                       <AlarmClock />
                     </div>
@@ -255,7 +273,7 @@ export default function WorkingPage() {
                   </div>
                   <div className="containerNewsRadio">
                     <div className="newsbanner">
-                      <ChuckNorrisJoke/>
+                      <ChuckNorrisJoke />
                     </div>
                     <div className="banner5Radio">
                       <Radio />

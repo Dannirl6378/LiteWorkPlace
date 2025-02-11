@@ -419,4 +419,7 @@
   .minigameButton:hover {
     background-color: rgba(255, 255, 255, 0.8);
   }
+  .app{
+    height:100%;
+  }
 }
