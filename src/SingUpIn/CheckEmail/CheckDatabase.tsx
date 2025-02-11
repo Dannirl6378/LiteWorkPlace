@@ -15,9 +15,7 @@ export default function CheckDataseEmail({
   useEffect(() => {
     async function checkEmailExistence() {
       try {
-
-        if (!value.email) {
-          console.error("Email není zadán.");
+        if (!value.email || value.email.trim() === "") {
           return;
         }
         const data = await getUser(value.email); // Získání dat z databáze
