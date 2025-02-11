@@ -21,6 +21,7 @@ import TicTacToe from "./bannerMinigame/TicTacToe";
 import Weather from "./bannerWeather/Weather";
 import ToDoList from "./bannerTODoLIST/ToDoListMain";
 import MyCalendar from "./bannerCalender/MyCalender/MCalender";
+import ChuckNorrisJoke from './bannerJokes/ChuckNorrisJokes';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function WorkingPage() {
@@ -91,7 +92,7 @@ export default function WorkingPage() {
               </div>
               <div className="containerNewsRadio">
                 <div className="newsbanner">
-                  <NewsTabs />
+                  <ChuckNorrisJoke />
                 </div>
                 <div className="banner5Radio">
                   <Radio />
@@ -175,7 +176,7 @@ export default function WorkingPage() {
                   <div className="banner0">
                     <Clock />
                     <div id="Alarm">
-                      <AlarmClock />
+                      <ChuckNorrisJoke />
                     </div>
                     <div id="UserId">
                       
@@ -254,7 +255,7 @@ export default function WorkingPage() {
                   </div>
                   <div className="containerNewsRadio">
                     <div className="newsbanner">
-                      <NewsTabs />
+                      <ChuckNorrisJoke/>
                     </div>
                     <div className="banner5Radio">
                       <Radio />
