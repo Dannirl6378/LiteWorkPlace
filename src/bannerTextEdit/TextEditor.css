@@ -11,6 +11,8 @@
 }
 .text-editor {
   background-color: white;
+  overflow: auto; /* Povolit skrolování v editoru */
+  max-height: 90%; /* Můžeš upravit podle potřeby */
 }
 .positionTextEdit {
   position: center;

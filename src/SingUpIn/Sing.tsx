@@ -87,6 +87,9 @@ export default function Sing() {
             backgroundColor: "rgb(255 255 255 / 0.6)",
             padding: "0em 2em 2em 2em",
             backdropFilter: " blur(1px)",
+            "@media (max-width: 768px)": {
+      margin: "40% auto",
+    },
           }}
         >
           {action === "Sing Up" ? (

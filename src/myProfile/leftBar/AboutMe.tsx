@@ -11,7 +11,7 @@ function AboutMe() {
     <Box sx={{ lineHeight: 1.6,
       fontSize: "1rem",
       padding: "16px",
-      height: "100%", // Výchozí pro desktop
+      height: "90%", // Výchozí pro desktop
       overflowY: "auto", // Povolí scrollování, pokud je obsah větší než výška
       "@media (max-width: 600px)": {
         height: "calc(70vh - 50px)", // Pevná výška na telefonech (odečteno 50px např. pro header/footer)

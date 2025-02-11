@@ -38,7 +38,8 @@ const CBox = styled(Box)`
     box-sizing: border-box; /* Prevents padding from affecting size */
     display: flex;
     justify-content: center;
-    align-items: center;
+    text-align: center;
+    padding-top:3px;
   }
 
   & .MuiDayCalendar-weekDayLabel {

@@ -24,33 +24,32 @@ const MyCalendar: React.FC<McalenderProps> = ({
   const [events, setEvents] = React.useState<{ [key: string]: string[] }>({});
   const [eventText, setEventText] = React.useState("");
   const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
-
-
+  
   React.useEffect(() => {
-    if (typeof callenAction === "string" ) {
-      setEvents({});
-      return;
-    }
     try {
-      const parsedData = JSON.parse(callenAction);
+      const parsedData =
+        typeof callenAction === "string" ? JSON.parse(callenAction) : callenAction;
+  
       if (typeof parsedData === "object" && !Array.isArray(parsedData)) {
         const formattedData = Object.entries(parsedData).reduce(
           (acc, [key, value]) => {
             acc[key] = Array.isArray(value) ? value : [value];
             return acc;
           },
-          {} as { [key: string]: string[] },
+          {} as { [key: string]: string[] }
         );
         setEvents(formattedData);
       } else {
+        console.log("mcalender 2nd setEvents");
         setEvents({});
       }
     } catch (error) {
       console.error("Failed to parse callenAction data:", error);
+      console.log("mcalender 3rd setEvents");
       setEvents({});
     }
   }, [callenAction]);
-
+  
   const handleDateClick = (date: dayjs.Dayjs) => {
     setSelectedDate(date);
     setOpenPopUp(true);
@@ -92,7 +91,7 @@ const MyCalendar: React.FC<McalenderProps> = ({
             marginTop: "5%",
             "& .MuiDayCalendar-weekDayLabel": {
               fontSize: "1.3rem",
-              width:"100%", // Nastaví pevnou velikost
+              width: "100%", // Nastaví pevnou velikost
               "@media (max-width: 600px)": {
                 fontSize: "1rem", // Pro menší obrazovky
               },

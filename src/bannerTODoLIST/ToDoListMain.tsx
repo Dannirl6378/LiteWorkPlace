@@ -110,12 +110,12 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
             fullWidth
           />
         </MenuItem>
-        <List dense sx={{ maxHeight: "300px", overflowY: "auto" }}>
+        <List dense sx={{ maxHeight: "300px",maxWidth:"250px", overflowY: "auto" }}>
           {items.map((item, index) => (
             <ListItem
               key={index}
               secondaryAction={
-                <Box display="flex" alignItems="center" sx={{ marginRight: "-10px"}}>
+                <Box display="flex" alignItems="center" sx={{ marginRight: "-13px"}}>
                   <Checkbox
                     checked={item.checked}
                     onChange={() => handleToggleChecked(index)}
