@@ -11,8 +11,6 @@ export async function handleSignIn(
       email: email,
     });
 
-    console.log("SignIn response:", response.data);
-
     if (response.status === 200 && response.data.message === "Přihlášení úspěšné.") {
       navigate("/workingPage");
       return { success: true };

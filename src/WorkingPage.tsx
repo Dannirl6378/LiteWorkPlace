@@ -39,7 +39,6 @@ export default function WorkingPage() {
   if (getuserDataString) {
     try {
       userData = JSON.parse(getuserDataString);
-      console.log(userData);
     } catch (error) {
       console.error("chybav rodeleni dat", error);
     }
@@ -51,9 +50,7 @@ export default function WorkingPage() {
     };
 
   const userName = userData?.name ?? false;
-  console.log("userNameworkingpage", userName);
   const isLoggedIn = userData?.loggedIn;
-  console.log("isLoged", isLoggedIn);
 
   if (!isLoggedIn) {
     return (

@@ -40,12 +40,10 @@ const MyCalendar: React.FC<McalenderProps> = ({
         );
         setEvents(formattedData);
       } else {
-        console.log("mcalender 2nd setEvents");
         setEvents({});
       }
     } catch (error) {
       console.error("Failed to parse callenAction data:", error);
-      console.log("mcalender 3rd setEvents");
       setEvents({});
     }
   }, [callenAction]);

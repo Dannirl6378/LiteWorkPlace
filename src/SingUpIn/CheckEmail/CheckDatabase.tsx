@@ -25,7 +25,6 @@ export default function CheckDataseEmail({
         const checkSameEmail =
           data && data.email === value.email ? true : false;
         setCheckIsEmail(checkSameEmail);
-        console.log("E-mail nalezen:", checkSameEmail);
       } catch (error) {
         console.error("Chyba při načítání dat z databáze:", error);
         setCheckIsEmail(false); // Pokud dojde k chybě, nastavíme na false

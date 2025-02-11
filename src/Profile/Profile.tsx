@@ -24,7 +24,6 @@ function Profile() {
   if (getuserDataString) {
     try {
       userData = JSON.parse(getuserDataString);
-      console.log(userData);
     } catch (error) {
       console.error("Error parsing user data", error);
     }
@@ -32,7 +31,6 @@ function Profile() {
 
   const userEmail = userData?.email ?? null;
   const userName = userData?.name?? null;
-  console.log("email working page", userEmail);
 
   const handleUpdate = (field: string) => {
     if (field === "username" && userEmail) {

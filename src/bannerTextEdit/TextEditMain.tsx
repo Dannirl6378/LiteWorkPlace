@@ -30,7 +30,6 @@ const TextEdit: React.FC<TextEditProps> = ({ onContentChange, quillContent }) =>
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
       const cleanedQuill = unescapeHtml(quillContent);
-      console.log("cleanQuill", cleanedQuill);
       editor.clipboard.dangerouslyPasteHTML(cleanedQuill);
       // Můžeme nastavit stav pouze pro inicializaci
       setContent(cleanedQuill);

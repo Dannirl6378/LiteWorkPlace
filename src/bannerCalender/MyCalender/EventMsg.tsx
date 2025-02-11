@@ -50,7 +50,6 @@ const EventMsg: React.FC<EventMsgProps> = ({
       setSelectedEvent(null); 
     }
   };
-  console.log("events",dayEvents)
 
   return (
     <Dialog open={open} onClose={onClose}>

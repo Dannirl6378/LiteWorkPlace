@@ -49,12 +49,10 @@ const Radio = () => {
   };
 
   useEffect(() => {
-    console.log("Component mounted, fetching data for the first time...");
     fetchData();
 
     const intervalId = setInterval(
       () => {
-        console.log("Fetching data on interval...");
         fetchData();
       },
       60 * 60 * 1000,

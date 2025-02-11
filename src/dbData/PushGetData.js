@@ -3,7 +3,6 @@ import axios from "axios";
 export const fetchUserData = async (email) => {
   try {
     const response = await axios.get(`https://muj-backend-jxbr.onrender.com/api/getUser/${email}`);
-    console.log("PushGetData", response.data);
     return response.data;
   } catch (error) {
     console.error("Chyba při získávání uživatelských dat:", error);
@@ -25,7 +24,6 @@ export const updateUserData = async (
       Quilltext, 
       todoList, 
     });
-    console.log("Aktualizace úspěšná:", response.data);
   } catch (error) {
     console.error("Chyba při aktualizaci uživatelských dat:", error);
   }

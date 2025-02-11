@@ -7,7 +7,6 @@ export async function LoginUser(userData) {
       "https://muj-backend-jxbr.onrender.com/api/login", // Opravená URL
       userData // Odeslání uživatelských dat jako tělo požadavku
     );
-    console.log("AxiosLoginUser",response.data);
     return response.data;
   } catch (error) {
     console.error("Error during login:", error);

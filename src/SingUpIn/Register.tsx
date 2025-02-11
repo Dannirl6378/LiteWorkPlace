@@ -21,7 +21,6 @@ export async function handleRegistration(
 
     // Zobrazíme notifikaci o úspěchu
     toast.success("Registrace úspěšná, můžete se přihlásit!");
-    console.log(response.data.message); // Zobrazení zprávy z serveru (např. o úspěchu)
   } catch (error) {
     // Při chybě zobrazíme notifikaci s chybovým hlášením
     if (axios.isAxiosError(error)) {

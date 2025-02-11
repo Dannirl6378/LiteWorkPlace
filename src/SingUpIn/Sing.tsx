@@ -36,19 +36,15 @@ export default function Sing() {
 
   const handleSignInClick = async () => {
     const isValid = await handleSignIn(email, pwd, navigate);
-    //const currentUser = user; // Zde získáme aktuální hodnotu user
     const getName = await getUser(email);
-    console.log("userName",getName);
-    console.log("isValid",isValid.success);
     setUser(getName.name);
     if (isValid.success) {
       const userData = {
-        name: `${getName.name}`, // Použijeme aktuální hodnotu user
+        name: `${getName.name}`, 
         email: `${email}`,
         loggedIn: isValid.success,
       }
       sessionStorage.setItem("userDatas", JSON.stringify(userData));
-      console.log("Přihlášení proběhlo úspěšně");
   } else {
     const userData = {loggedIn: isValid.success};
     sessionStorage.setItem("userDatas", JSON.stringify(userData));
@@ -67,9 +63,6 @@ export default function Sing() {
     setEmail(newEmail);
     setValidationResultEmail(false);
   };
-
-  //console.log("email", validationResultEmail);
-  //console.log("Password", validationResultPassword);
 
   return (
     <>
@@ -93,7 +86,7 @@ export default function Sing() {
           }}
         >
           {action === "Sing Up" ? (
-            <h1>Sing Up</h1> /*tady bude info pro heslo */
+            <h1>Sing Up</h1> 
           ) : (
             <h1>Sing In</h1>
           )}

@@ -8,7 +8,7 @@ export async function registerUser(name: string, email: string, password: string
       password,
     });
 
-    console.log(response.data.message);
+   
   } catch (error) {
     console.error('Chyba při registraci uživatele:', error);
   }

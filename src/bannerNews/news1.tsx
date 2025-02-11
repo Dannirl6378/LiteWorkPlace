@@ -24,7 +24,6 @@ const fetchData = async () => {
         };
         const response = await axios.request(options);
         setNews(response.data);
-        console.log(response.data);
     } catch (error) {
         console.error('Chyba při načítání dat:', error);
     }
@@ -48,7 +47,6 @@ useEffect(() => {
     }
 }, [news, displayedArticles]); // Tento useEffect zajišťuje aktualizaci displayedArticles po načtení nových dat nebo změně displayedArticles
 
-    console.log("testnews", news );
 
     return (
         <div>

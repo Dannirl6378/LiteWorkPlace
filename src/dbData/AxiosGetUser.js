@@ -7,7 +7,6 @@ export async function getUser(userData) {
       "https://muj-backend-jxbr.onrender.com/api/all",
       userData
     );
-    //console.log("getUsers_AxiosGetUsers",response.data);
     return response.data;
   } catch (error) {
     console.error(error);

@@ -31,9 +31,8 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
 
   useEffect(() => {
     // Načtení a synchronizace dat z todoList
-    console.log("todoList z databáze:", todoList);
     const parsedItems = todoList.map((item) => JSON.parse(item)); // Konverze
-    setItems(parsedItems); // Nastavení
+    setItems(parsedItems); 
   }, [todoList]);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
