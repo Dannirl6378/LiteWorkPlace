@@ -304,6 +304,7 @@ export default function Sing() {
     <AlertTitle>Důležité informace</AlertTitle>
     Tento web je pouze demonstrační. Žádné osobní údaje nejsou ukládány. 
     Registrace je pouze simulace a není nutné zadávat skutečný e-mail a jine informace.
+    Ukládaní Todo List, Kalendář, Text Edit. je až po odhlašení. 
   </Alert>
 </Box>
     <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
