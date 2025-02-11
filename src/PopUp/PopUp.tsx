@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import "./PopUp.css"
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Box } from '@mui/material';
 
 interface PopUpProps {
   checkIsEmail: boolean;
@@ -18,8 +17,8 @@ export default function PopUp({ checkIsEmail }: PopUpProps) {
   },[checkIsEmail] ) 
 
   return (
-    <div>
-      <Dialog open={open} onClose={handleClose}>
+    <Box>
+      <Dialog open={open} onClose={handleClose} sx={{marginBottom:"125%"}}>
         <DialogTitle>You have already an account</DialogTitle>
         <DialogContent>
           {/* Můžete sem přidat další obsah modálního okna */}
@@ -30,7 +29,7 @@ export default function PopUp({ checkIsEmail }: PopUpProps) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 }
 

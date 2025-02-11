@@ -67,7 +67,7 @@ export default function WorkingPage() {
     <div className="app">
       <div className="skelet">
         {isLoggedIn ? (
-          isMobile ? (
+          isMobile ? (//pokud je mobil tak tento kus kodu
             <div className="componentsHead">
               <div className="banner0">
                 <Clock />
@@ -166,7 +166,7 @@ export default function WorkingPage() {
                 </Accordion>
               </div>
             </div>
-          ) : isTablet ? (
+          ) : isTablet ? (//pokud je tablet tak tento kus kodu
             <div className="app">
               <div className="skelet">
                 <div className="componentsHead">
@@ -246,7 +246,7 @@ export default function WorkingPage() {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : (// verze pro pc
             <div className="app">
               <div className="skelet">
                 <div className="componentsHead">
