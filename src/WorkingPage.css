@@ -209,6 +209,7 @@
 
 /* Styl pro mobilní zařízení */
 @media (max-width: 600px) {
+  .app{background-color: rgba(0, 0, 0, 0);}
   .app::before {
     height: 150vh;
   }
