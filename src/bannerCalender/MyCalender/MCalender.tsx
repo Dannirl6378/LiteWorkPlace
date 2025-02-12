@@ -7,6 +7,7 @@ import { Box, Tooltip } from "@mui/material";
 import EventMsg from "./EventMsg";
 import DeleteEvent from "./DeleteEvent";
 import CBox from "./StyledCalenderBoxCss";
+import { useEffect } from "react";
 
 interface McalenderProps {
   onContentChange: (content: string) => void;
@@ -25,28 +26,61 @@ const MyCalendar: React.FC<McalenderProps> = ({
   const [eventText, setEventText] = React.useState("");
   const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
   
-  React.useEffect(() => {
+  useEffect(() => {
     try {
-      const parsedData =
-        typeof callenAction === "string" ? JSON.parse(callenAction) : callenAction;
+      if (callenAction && Array.isArray(callenAction) && callenAction.length > 0) {
+        const parsedData = callenAction.map((item) => {
+          try {
+            return JSON.parse(item);
+          } catch (error) {
+            console.error("Chyba při parsování JSON:", error);
+            return null;
+          }
+        }).filter((item) => item !== null);
   
-      if (typeof parsedData === "object" && !Array.isArray(parsedData)) {
-        const formattedData = Object.entries(parsedData).reduce(
-          (acc, [key, value]) => {
-            acc[key] = Array.isArray(value) ? value : [value];
-            return acc;
-          },
-          {} as { [key: string]: string[] }
-        );
-        setEvents(formattedData);
-      } else {
-        setEvents({});
+        if (parsedData.length > 0) {
+          const formattedData = Object.entries(parsedData[0]).reduce(
+            (acc, [key, value]) => {
+              acc[key] = Array.isArray(value) ? value : [value];
+              return acc;
+            },
+            {} as { [key: string]: string[] }
+          );
+          setEvents(formattedData);
+        } else {
+          console.error("Žádný platný JSON v callenAction.");
+          setEvents({});
+        }
       }
     } catch (error) {
-      console.error("Failed to parse callenAction data:", error);
+      console.error("Chyba při zpracování callenAction:", error);
       setEvents({});
     }
   }, [callenAction]);
+  
+  const handleSaveEvent = () => {
+    if (selectedDate && eventText.trim() !== "") {
+      const dateString = selectedDate.format("YYYY-MM-DD");
+  
+      // Aktualizace stavu s událostmi
+      setEvents((prevEvents) => {
+        const updatedEvents = {
+          ...prevEvents,
+          [dateString]: [...(prevEvents[dateString] || []), eventText],
+        };
+  
+        // Předání zpět rodičovské komponentě pro uložení
+        onContentChange(JSON.stringify(updatedEvents));
+        
+        return updatedEvents;
+      });
+  
+      setEventText(""); // Vymazání textu události
+      handleDiaClose(); // Zavření popupu
+    } else {
+      console.warn("Nelze uložit prázdnou událost.");
+    }
+  };
   
   const handleDateClick = (date: dayjs.Dayjs) => {
     setSelectedDate(date);
@@ -57,28 +91,6 @@ const MyCalendar: React.FC<McalenderProps> = ({
   const handleDiaClose = () => {
     setOpenPopUp(false);
   };
-  const handleSaveEvent = () => {
-    if (selectedDate) {
-      const dateString = selectedDate.format("YYYY-MM-DD");
-
-      // Update the events state using the updater function
-      setEvents((prevEvents) => {
-        const updatedEvents = {
-          ...prevEvents,
-          [dateString]: [...(prevEvents[dateString] || []), eventText], // Add the new event
-        };
-
-        // Update the content in the parent component
-        onContentChange(JSON.stringify(updatedEvents));
-
-        return updatedEvents; // Return the updated state
-      });
-
-      setEventText(""); // Clear the event text
-      handleDiaClose(); // Close the popup/modal
-    }
-  };
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <CBox>
