@@ -47,8 +47,8 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
     if (newItem.trim() !== "") {
       const updatedItems = [...items, { text: newItem, checked: false }];
       setItems(updatedItems);
-      setNewItem("");
       onListChange(updatedItems.map((item) => JSON.stringify(item))); // Aktualizace databáze
+      setTimeout(() => setNewItem(""), 0);;
     }
   };
 
@@ -82,7 +82,7 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
         open={Boolean(anchorEl)}
         keepMounted
         onClose={handleClose}
-        anchorReference="anchorPosition"
+        anchorEl={anchorEl}
   anchorPosition={{
     top: window.innerHeight / 3.3,
     left: window.innerWidth / 2.6,
@@ -101,12 +101,14 @@ const ToDoList: React.FC<ToDoListProps> = ({ onListChange, todoList }) => {
             value={newItem}
             onChange={(e) => setNewItem(e.target.value)}
             onKeyDown={(e) => {
+              e.stopPropagation();
               if (e.key === "Enter") {
                 handleAddItem();
                 e.preventDefault();
               }
             }}
             fullWidth
+            autoFocus
           />
         </MenuItem>
         <List dense sx={{ maxHeight: "300px",maxWidth:"250px", overflowY: "auto" }}>

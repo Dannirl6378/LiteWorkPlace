@@ -80,7 +80,7 @@ export default function Sing() {
               padding: "0em 2em 2em 2em",
               backdropFilter: " blur(1px)",
               "@media (max-width: 768px)": {
-                margin: "40% auto",
+                margin: "48% auto",
               },
             }}
           >
@@ -311,7 +311,7 @@ export default function Sing() {
           Tento web je pouze demonstrační. Žádné osobní údaje nejsou ukládány.
           Registrace je pouze simulace a není nutné zadávat skutečný e-mail a
           jine informace. Ukládaní Todo List, Kalendář, Text Edit. je až po
-          odhlašení.
+          odhlašení. Server při nečinosti má prodlevu 50s.
         </Alert>
       </Box>
       <ToastContainer

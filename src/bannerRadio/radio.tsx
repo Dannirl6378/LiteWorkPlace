@@ -28,7 +28,7 @@ const Radio = () => {
       // Filtrování konkrétních stanic podle názvu
       const allStations = response.data;
       const filteredStations = allStations.filter((station: any) =>
-        ["Color Music Radio", "Rock Radio", "Kiss Radio"].includes(
+        ["COLOR Music Radio", "Rock Radio", "Kiss Radio"].includes(
           station.name,
         ),
       );
