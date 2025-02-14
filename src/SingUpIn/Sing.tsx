@@ -84,7 +84,7 @@ export default function Sing() {
               },
             }}
           >
-            {action === "Sing Up" ? <h1>Sing Up</h1> : <h1>Sing In</h1>}
+            {action === "Sing Up" ? <h1>Sign Up</h1> : <h1>Sign In</h1>}
             {action === "Sing Up" ? (
               <Box
                 sx={{
@@ -296,7 +296,7 @@ export default function Sing() {
                   setPwd("");
                 }}
               >
-                Sing In
+                Sign In
               </Button>
               {/*<Link to={{ pathname: "/workingPage", search: `?sing=$true` }}>
               <Button variant="contained">Main Page</Button>

@@ -25,6 +25,9 @@ const MyCalendar: React.FC<McalenderProps> = ({
   const [events, setEvents] = React.useState<{ [key: string]: string[] }>({});
   const [eventText, setEventText] = React.useState("");
   const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
+
+  console.log("events",events);
+  console.log("callenAction",callenAction);
   
   useEffect(() => {
     try {
@@ -59,7 +62,7 @@ const MyCalendar: React.FC<McalenderProps> = ({
   }, [callenAction]);
   
   const handleSaveEvent = () => {
-    if (selectedDate && eventText.trim() !== "") {
+    if (selectedDate) {
       const dateString = selectedDate.format("YYYY-MM-DD");
   
       // Aktualizace stavu s událostmi
@@ -68,7 +71,7 @@ const MyCalendar: React.FC<McalenderProps> = ({
           ...prevEvents,
           [dateString]: [...(prevEvents[dateString] || []), eventText],
         };
-  
+        console.log(updatedEvents);
         // Předání zpět rodičovské komponentě pro uložení
         onContentChange(JSON.stringify(updatedEvents));
         
@@ -133,6 +136,7 @@ const MyCalendar: React.FC<McalenderProps> = ({
                               eventText={event}
                               events={events}
                               setEvents={setEvents}
+                              onContentChange={onContentChange}
                             />
                           </Box>
                         ))}
