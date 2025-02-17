@@ -1,5 +1,6 @@
 .styleSite {
   width: 100%;
+  max-width: 150vw;
   height: 100vh;
   position: relative;
   background-color: rgba(0, 0, 0, 0.4);
@@ -92,6 +93,17 @@
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+}
+.fotoProfile img{
+  width: 100%; /* Obrázek se přizpůsobí rodiči */
+  max-width: 100px; /* Maximální velikost */
+  height: auto; /* Zachování poměru stran */
+  border-radius: 50%; /* Pokud chceš kulatý obrázek */
+  object-fit: cover; /* Lepší oříznutí */
+  margin-left: 15%;
+  margin-top: -10%;
+  padding: -50%;
+  z-index: -1;
 }
 
 @media (max-width: 768px) {

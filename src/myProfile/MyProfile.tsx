@@ -12,6 +12,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import ProfileFoto from "./leftBar/ProfileFoto.jpg"
+
 
 const components = {
   AboutMe: <AboutMe />,
@@ -34,6 +36,15 @@ export default function MyProfile() {
     setActiveComponent(component);
   };
 
+  const onDownloadCV=()=>{
+    const link = document.createElement("a");
+    link.href = "/documents/Životopis-CV.docx"; // Cesta k souboru (musí být ve složce `public`)
+    link.download = "Životopis-CV.docx"; // Název souboru pro stažení
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <div className="styleSite">
       <div className="header">
@@ -44,8 +55,10 @@ export default function MyProfile() {
         >
           Home
         </Button>
+        
         <h1>Daniel Kohoutek</h1>
-        <div>Foto</div>
+        
+        <div className="fotoProfile"><img src={ProfileFoto} alt= "MyProfileFoto"/></div>
       </div>
       <div className="side">
         <div className="leftBar">
@@ -162,6 +175,17 @@ export default function MyProfile() {
               >
                 GitHub
               </a>
+             
+            </ListItem>
+            <ListItem
+              sx={{
+                color: "white",
+                borderRadius: "8px",
+                padding: "8px 16px",
+                
+              }}
+            >
+            <Button variant="contained" onClick={onDownloadCV}>CV</Button>
             </ListItem>
           </List>
         </div>
