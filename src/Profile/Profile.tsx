@@ -30,7 +30,7 @@ function Profile() {
   }
 
   const userEmail = userData?.email ?? null;
-  const userName = userData?.name?? null;
+  const userName = userData?.name ?? null;
 
   const handleUpdate = (field: string) => {
     if (field === "username" && userEmail) {
@@ -57,29 +57,26 @@ function Profile() {
 
   return (
     <div className="app">
-       <Button
-          onClick={backOnProject}
-          variant="contained"
-          startIcon={<ArrowBackIcon />}
-        >
-          Home
-        </Button>
+      <Button
+        onClick={backOnProject}
+        variant="contained"
+        startIcon={<ArrowBackIcon />}
+      >
+        Home
+      </Button>
+      <div style={{
+    display: "grid",
+    placeItems: "center",
+    height: "100vh",
+  }}>
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          lineHeight: 1.6,
-          fontSize: "1rem",
-          padding: "16px",
+          width: "90%",
+          maxWidth: "500px",
           bgcolor: "background.paper",
+          padding: "16px",
           borderRadius: "8px",
           boxShadow: 2,
-          maxWidth: "500px",
-          position: "absolute",
-          top:"10%",
-          width:"70%",
-          marginLeft:"11%",
         }}
       >
         <Typography variant="h5" sx={{ marginBottom: "16px" }}>
@@ -109,7 +106,7 @@ function Profile() {
             fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            sx={{ marginBottom: "10px",marginTop:"20px" }}
+            sx={{ marginBottom: "10px", marginTop: "20px" }}
           />
           <Button
             variant="contained"
@@ -150,6 +147,7 @@ function Profile() {
           </DialogActions>
         </Dialog>
       </Box>
+      </div>
     </div>
   );
 }
