@@ -26,8 +26,6 @@ const MyCalendar: React.FC<McalenderProps> = ({
   const [eventText, setEventText] = React.useState("");
   const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
 
-  console.log("events",events);
-  console.log("callenAction",callenAction);
   
   useEffect(() => {
     try {
