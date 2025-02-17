@@ -27,7 +27,7 @@ const ChuckNorrisJoke = () => {
       marginTop:"-2%",
       gap:"5%",
     }}>
-      <h4 style={{ marginTop: "2%",marginBottom:"1%" }}>Chuck Norris Joke</h4>
+      <h4 style={{ position:"relative", marginTop: "2%",marginBottom:"1%" }}>Chuck Norris Joke</h4>
       <p>{joke}</p>
     </Box>
   );
