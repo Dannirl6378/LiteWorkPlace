@@ -99,7 +99,14 @@ export default function MyProfile() {
           {components[activeComponent]}
         </Box>
         <div className="rightBar">
-          <List sx={{ marginLeft: "10%", width: "fit-content", padding: 0 }}>
+          <List sx={{ marginLeft: "10%", width: "90%", padding: 0,
+          "@media (max-width: 600px)": {
+                 display:"flex",
+                flexDirection:"row",
+                justifyContent:"space-evenly",
+                marginLeft:"5%",
+              // Pro menší obrazovky
+              }, }}>
             <ListItem
               sx={{
                 backgroundColor: "#87CEFA",
@@ -107,6 +114,10 @@ export default function MyProfile() {
                 borderRadius: "8px",
                 padding: "8px 16px",
                 marginBottom: "8px",
+                "@media (max-width: 600px)": {
+                maxWidth:"8rem",
+                maxHeight:"5vh",
+              },
                 "&:hover": {
                   backgroundColor: "#00BFFF",
                   color: "white",
@@ -129,34 +140,14 @@ export default function MyProfile() {
             </ListItem>
             <ListItem
               sx={{
-                backgroundColor: "#3b5998",
-                color: "white",
-                borderRadius: "8px",
-                padding: "8px 16px",
-                marginBottom: "8px",
-                "&:hover": {
-                  backgroundColor: "#2d4373",
-                },
-              }}
-            >
-              <FacebookIcon sx={{ marginRight: "8px" }} />
-              <a
-                href="#"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  fontWeight: "bold",
-                }}
-              >
-                Facebook
-              </a>
-            </ListItem>
-            <ListItem
-              sx={{
                 backgroundColor: "#24292e",
                 color: "white",
                 borderRadius: "8px",
                 padding: "8px 16px",
+                "@media (max-width: 600px)": {
+                maxWidth:"8rem",
+                maxHeight:"5vh",
+              },
                 "&:hover": {
                   backgroundColor: "#333",
                 },
@@ -181,11 +172,16 @@ export default function MyProfile() {
               sx={{
                 color: "white",
                 borderRadius: "8px",
-                padding: "8px 16px",
+                padding: "8px 0px",
+                marginBottom: "8px",
+                "@media (max-width: 600px)": {
+                maxWidth:"8rem",
+                height:"5vh",
+              },
                 
               }}
             >
-            <Button variant="contained" onClick={onDownloadCV}>CV</Button>
+            <Button variant="contained" sx={{width:"7rem",height:"5vh",fontSize:"small",}} onClick={onDownloadCV}>Download CV</Button>
             </ListItem>
           </List>
         </div>

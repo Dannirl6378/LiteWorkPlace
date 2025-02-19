@@ -16,6 +16,9 @@ function work() {
                 height: "400px", // Pevná výška okna
                 overflowY: "auto", // Povolení svislého skrolování
                 scrollbarGutter: "stable", // Stabilní prostor pro posuvník
+                "@media (max-width: 600px)": {
+        height: "calc(48vh - 50px)", // Pevná výška na telefonech (odečteno 50px např. pro header/footer)
+      },
             }}
         >
             <Typography
