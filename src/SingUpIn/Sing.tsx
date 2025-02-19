@@ -63,7 +63,7 @@ export default function Sing() {
     setValidationResultEmail(false);
   };
   const isMobile = useMediaQuery("(max-width: 768px)");
-  console.log("Mobile",isMobile);
+  
 
   return (
     <>
