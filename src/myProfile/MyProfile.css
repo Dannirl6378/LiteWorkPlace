@@ -130,7 +130,9 @@
   }
 
   .rightBar {
-    width: 90%;
+    margin-top: 5%;
+    min-width: 80%;
+    gap: 10px;
   }
   .fotoProfile img{
     margin-left: 10%;

@@ -91,7 +91,7 @@ export default function MyProfile() {
             borderRadius: "8px",
             bgcolor: "grey.100",
             boxShadow: 1,
-            height: "60%",
+            height: "80%",
             width: { xs: "90%", sm: "70%", md: "50%" },
             margin: "auto",
           }}
@@ -99,12 +99,17 @@ export default function MyProfile() {
           {components[activeComponent]}
         </Box>
         <div className="rightBar">
-          <List sx={{ marginLeft: "10%", width: "90%", padding: 0,
-          "@media (max-width: 600px)": {
+          <List sx={{  display: "flex",
+  justifyContent: "center",
+  gap: "10px", // Mezera mezi list items
+  flexWrap: "wrap", // Pokud se nevejdou, přeskočí na další řádek
+  padding: 0,
+          "@media (max-width: 768px)": {
                  display:"flex",
                 flexDirection:"row",
                 justifyContent:"space-evenly",
-                marginLeft:"5%",
+                alignItems:"center",
+               marginLeft:"1%"
               // Pro menší obrazovky
               }, }}>
             <ListItem
@@ -112,9 +117,10 @@ export default function MyProfile() {
                 backgroundColor: "#87CEFA",
                 color: "black",
                 borderRadius: "8px",
-                padding: "8px 16px",
-                marginBottom: "8px",
-                "@media (max-width: 600px)": {
+                padding: "8px 2px",
+                marginBottom: "4px",
+                maxWidth:"20vw",
+                "@media (max-width: 768px)": {
                 maxWidth:"8rem",
                 maxHeight:"5vh",
               },
@@ -143,8 +149,10 @@ export default function MyProfile() {
                 backgroundColor: "#24292e",
                 color: "white",
                 borderRadius: "8px",
-                padding: "8px 16px",
-                "@media (max-width: 600px)": {
+                padding: "8px 5px",
+                maxWidth:"20vw",
+                marginBttom:"2px",
+                "@media (max-width: 768px)": {
                 maxWidth:"8rem",
                 maxHeight:"5vh",
               },
@@ -174,14 +182,14 @@ export default function MyProfile() {
                 borderRadius: "8px",
                 padding: "8px 0px",
                 marginBottom: "8px",
-                "@media (max-width: 600px)": {
+                "@media (max-width: 768px)": {
                 maxWidth:"8rem",
-                height:"5vh",
+                height:"3vh",
               },
                 
               }}
             >
-            <Button variant="contained" sx={{width:"7rem",height:"5vh",fontSize:"small",}} onClick={onDownloadCV}>Download CV</Button>
+            <Button variant="contained" sx={{MaxWidth:"20vw",fontSize:"small",maxHeight:"4vh"}} onClick={onDownloadCV}>Download CV</Button>
             </ListItem>
           </List>
         </div>
