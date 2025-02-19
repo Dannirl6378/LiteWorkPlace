@@ -196,8 +196,8 @@ export default function Sing() {
                 title="8 znaku velká,malá písmena a číslice"
                 arrow
                 disableHoverListener={isMobile} // Na mobilech vypne hover
-                disableTouchListener={!isMobile} // Povolit touch (kliknutí)
-                disableFocusListener={!isMobile} // Povolit focus (po kliknutí)
+                disableTouchListener={false} // Povolit touch (kliknutí)
+                disableFocusListener={false} // Povolit focus (po kliknutí)
               >
                 <TextField
                   id="inputPassword"
