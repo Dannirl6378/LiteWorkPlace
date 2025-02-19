@@ -11,7 +11,7 @@ import TextField from "@mui/material/TextField";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import "./Sing.css";
-import { Alert, AlertTitle, Tooltip } from "@mui/material";
+import { Alert, AlertTitle, Tooltip, useMediaQuery } from "@mui/material";
 import ValidationPassword from "./CheckPassword/ValidationPassword";
 import ValidationEmail from "./CheckEmail/ValidationEmail";
 import PopUp from "../PopUp/PopUp";
@@ -62,6 +62,8 @@ export default function Sing() {
     setEmail(newEmail);
     setValidationResultEmail(false);
   };
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  console.log("Mobile",isMobile);
 
   return (
     <>
@@ -80,7 +82,13 @@ export default function Sing() {
               padding: "0em 2em 2em 2em",
               backdropFilter: " blur(1px)",
               "@media (max-width: 768px)": {
-                margin: "50% auto",
+                margin: "55% auto",
+              },
+              "@media (max-width: 853px)": {
+                margin: "45% auto",
+              },
+              "@media (max-width: 375px)": {
+                margin: "60% auto",
               },
             }}
           >
@@ -184,7 +192,13 @@ export default function Sing() {
               <LockOutlinedIcon
                 sx={{ color: "action.active", mr: 1, my: 0.5 }}
               />
-              <Tooltip title="8 znaku velká,malá písmena a číslice" arrow>
+              <Tooltip
+                title="8 znaku velká,malá písmena a číslice"
+                arrow
+                disableHoverListener={isMobile} // Na mobilech vypne hover
+                disableTouchListener={!isMobile} // Povolit touch (kliknutí)
+                disableFocusListener={!isMobile} // Povolit focus (po kliknutí)
+              >
                 <TextField
                   id="inputPassword"
                   type="password"
