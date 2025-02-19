@@ -80,7 +80,7 @@ export default function Sing() {
               padding: "0em 2em 2em 2em",
               backdropFilter: " blur(1px)",
               "@media (max-width: 768px)": {
-                margin: "48% auto",
+                margin: "50% auto",
               },
             }}
           >
