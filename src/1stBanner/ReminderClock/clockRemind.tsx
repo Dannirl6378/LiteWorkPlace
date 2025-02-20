@@ -48,7 +48,7 @@ const AlarmClock: React.FC = () => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <TimePicker
         sx={{
-          minWidth: "20vw",
+          maxWidth: "10vw",
         }}
         label="hh:mm"
         ampm={false}
