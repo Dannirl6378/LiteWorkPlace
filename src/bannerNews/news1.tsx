@@ -10,12 +10,7 @@ interface Article {
 const News1 = () => {
     const [news, setNews] = useState<Article[]>([]);
     const [displayedArticles, setDisplayedArticles] = useState(0);
-//pub_42274efc9a31e45f9bc6231a79f84c5d77fd1 newsdata.io
 
-//https://newsdata.io/api/1/news?apikey=pub_42274efc9a31e45f9bc6231a79f84c5d77fd1&language=en
-//title 
-//link
-//description
 const fetchData = async () => {
     try {
         const options = {
@@ -34,18 +29,18 @@ useEffect(() => {
         await fetchData();
     };
 
-    loadDataAndSetTimeout(); // Spustíme načtení dat hned po zavolání useEffect
+    loadDataAndSetTimeout(); 
 
     const intervalId = setInterval(loadDataAndSetTimeout, 100 * 60 * 1000); // 100 minut v milisekundách
 
     return () => clearInterval(intervalId); // Zrušíme interval při odmontování komponenty
-}, []); // Zde je prázdné pole znamená, že useEffect se spustí pouze při inicializaci komponenty
+}, []); 
 
 useEffect(() => {
     if (news) {
         setDisplayedArticles(Math.min(3, news.length));
     }
-}, [news, displayedArticles]); // Tento useEffect zajišťuje aktualizaci displayedArticles po načtení nových dat nebo změně displayedArticles
+}, [news, displayedArticles]); 
 
 
     return (

@@ -80,7 +80,7 @@ const EventMsg: React.FC<EventMsgProps> = ({
               />
             ))
           ) : (
-            <p>No events for this date.</p> // Fallback message if no events
+            <p>No events for this date.</p> 
           )}
         </Box>
       </DialogContent>

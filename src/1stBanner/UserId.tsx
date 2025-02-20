@@ -118,7 +118,7 @@ export default function UserId({ quillContent,
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      localStorage.removeItem("userDatas"); // Ujistěte se, že název localStorage položky je správný
+      localStorage.removeItem("userDatas"); 
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {

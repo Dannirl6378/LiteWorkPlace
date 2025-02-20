@@ -44,7 +44,7 @@ function Profile() {
 
   const handleDelete = () => {
     if (deletePassword && userEmail) {
-      Delete(deletePassword, userEmail); // Delete user data
+      Delete(deletePassword, userEmail); 
       setDialogOpen(false);
     } else {
       alert("Please enter your password to delete data.");

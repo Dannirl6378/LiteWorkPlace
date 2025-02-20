@@ -102,9 +102,9 @@ const MyCalendar: React.FC<McalenderProps> = ({
             marginTop: "5%",
             "& .MuiDayCalendar-weekDayLabel": {
               fontSize: "1.3rem",
-              width: "100%", // Nastaví pevnou velikost
+              width: "100%", 
               "@media (max-width: 600px)": {
-                fontSize: "1rem", // Pro menší obrazovky
+                fontSize: "1rem", 
               },
             },
           }}

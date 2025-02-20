@@ -313,9 +313,6 @@ export default function Sing() {
               >
                 Sign In
               </Button>
-              {/*<Link to={{ pathname: "/workingPage", search: `?sing=$true` }}>
-              <Button variant="contained">Main Page</Button>
-            </Link>*/}
             </Stack>
           </Box>
         </div>
