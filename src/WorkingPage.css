@@ -1,6 +1,6 @@
 .app {
   width: 100%;
-  max-width:200vw;
+  max-width: 200vw;
   min-height: 100vh;
   position: relative;
   background-color: rgba(0, 0, 0, 0.4);
@@ -20,7 +20,7 @@
   flex-direction: column;
   align-content: space-between;
   height: 100vh;
-  max-width: 1444px;
+  max-width: 1670px;
   margin: auto;
 }
 
@@ -45,7 +45,9 @@
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.6);
 }
-
+.banner0 h3{
+  margin-right:11%;
+}
 .newsbanner {
   position: relative;
   display: flex;

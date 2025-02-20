@@ -1,4 +1,4 @@
-import { Box, Button, List, ListItem, ListItemButton } from "@mui/material";
+import { Box, Button, List, ListItem, ListItemButton, useMediaQuery } from "@mui/material";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import "./MyProfile.css";
@@ -12,8 +12,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import ProfileFoto from "./leftBar/ProfileFoto.jpg"
-
+import ProfileFoto from "./leftBar/ProfileFoto.jpg";
 
 const components = {
   AboutMe: <AboutMe />,
@@ -36,14 +35,14 @@ export default function MyProfile() {
     setActiveComponent(component);
   };
 
-  const onDownloadCV=()=>{
+  const onDownloadCV = () => {
     const link = document.createElement("a");
     link.href = "/documents/Životopis-CV.docx"; // Cesta k souboru (musí být ve složce `public`)
     link.download = "Životopis-CV.docx"; // Název souboru pro stažení
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }
+  };
 
   return (
     <div className="styleSite">
@@ -55,10 +54,12 @@ export default function MyProfile() {
         >
           Home
         </Button>
-        
+
         <h1>Daniel Kohoutek</h1>
-        
-        <div className="fotoProfile"><img src={ProfileFoto} alt= "MyProfileFoto"/></div>
+
+        <div className="fotoProfile">
+          <img src={ProfileFoto} alt="MyProfileFoto" />
+        </div>
       </div>
       <div className="side">
         <div className="leftBar">
@@ -99,19 +100,23 @@ export default function MyProfile() {
           {components[activeComponent]}
         </Box>
         <div className="rightBar">
-          <List sx={{  display: "flex",
-  justifyContent: "center",
-  gap: "10px", // Mezera mezi list items
-  flexWrap: "wrap", // Pokud se nevejdou, přeskočí na další řádek
-  padding: 0,
-          "@media (max-width: 768px)": {
-                 display:"flex",
-                flexDirection:"row",
-                justifyContent:"space-evenly",
-                alignItems:"center",
-               marginLeft:"1%"
-              // Pro menší obrazovky
-              }, }}>
+          <List
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "10px", // Mezera mezi list items
+              flexWrap: "wrap", // Pokud se nevejdou, přeskočí na další řádek
+              padding: 0,
+              "@media (max-width: 768px)": {
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                marginLeft: "1%",
+                // Pro menší obrazovky
+              },
+            }}
+          >
             <ListItem
               sx={{
                 backgroundColor: "#87CEFA",
@@ -119,11 +124,11 @@ export default function MyProfile() {
                 borderRadius: "8px",
                 padding: "8px 2px",
                 marginBottom: "4px",
-                maxWidth:"20vw",
+                maxWidth: "20vw",
                 "@media (max-width: 768px)": {
-                maxWidth:"8rem",
-                maxHeight:"5vh",
-              },
+                  maxWidth: "8rem",
+                  maxHeight: "5vh",
+                },
                 "&:hover": {
                   backgroundColor: "#00BFFF",
                   color: "white",
@@ -150,12 +155,12 @@ export default function MyProfile() {
                 color: "white",
                 borderRadius: "8px",
                 padding: "8px 5px",
-                maxWidth:"20vw",
-                marginBttom:"2px",
+                maxWidth: "20vw",
+                marginBttom: "2px",
                 "@media (max-width: 768px)": {
-                maxWidth:"8rem",
-                maxHeight:"5vh",
-              },
+                  maxWidth: "8rem",
+                  maxHeight: "5vh",
+                },
                 "&:hover": {
                   backgroundColor: "#333",
                 },
@@ -174,7 +179,6 @@ export default function MyProfile() {
               >
                 GitHub
               </a>
-             
             </ListItem>
             <ListItem
               sx={{
@@ -183,13 +187,33 @@ export default function MyProfile() {
                 padding: "8px 0px",
                 marginBottom: "8px",
                 "@media (max-width: 768px)": {
-                maxWidth:"8rem",
-                height:"3vh",
-              },
-                
+                  maxWidth: "8rem",
+                  height: "3vh",
+                },
               }}
             >
-            <Button variant="contained" sx={{MaxWidth:"20vw",fontSize:"small",maxHeight:"4vh"}} onClick={onDownloadCV}>Download CV</Button>
+              <Button
+                variant={useMediaQuery("(max-width:768px)")? ("text"): ("contained" )}
+                sx={{
+                  MaxWidth: "20vw",
+                  size: "large",
+                  maxHeight: "5vh",
+                  "@media (max-width: 768px)": {
+                    width: "50vw",
+                    maxWidth: "40vw",
+                    color: "black",
+                    fontWeight: "bold", // Tučné písmo na mobilech
+      fontSize: "1rem",
+      textDecoration: "underline",
+                  },
+                  "&:hover": {
+                    textDecoration: "underline", // Podtržení textu při hoveru
+                  },
+                }}
+                onClick={onDownloadCV}
+              >
+                Download CV
+              </Button>
             </ListItem>
           </List>
         </div>
