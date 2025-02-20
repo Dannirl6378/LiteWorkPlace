@@ -49,6 +49,7 @@ const AlarmClock: React.FC = () => {
       <TimePicker
         sx={{
           maxWidth: "10vw",
+          minWidth: "5vw",
         }}
         label="hh:mm"
         ampm={false}
