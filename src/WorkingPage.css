@@ -45,8 +45,8 @@
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.6);
 }
-.banner0 h3{
-  margin-right:11%;
+.banner0 h3 {
+  margin-right: 11%;
 }
 .newsbanner {
   position: relative;
@@ -279,7 +279,9 @@
     grid-row: 1;
     margin-top: 1.2rem;
     margin-left: 12rem;
-    right: 25%;
+    min-width: 50vw;
+    right: 45%;
+    z-index: -1;
   }
 
   .banner0 #UserId {
@@ -287,7 +289,7 @@
     grid-row: 2;
     margin-bottom: 2rem;
     width: auto;
-    right: 5px;
+    right: 55px;
   }
 
   .componentsBody {
