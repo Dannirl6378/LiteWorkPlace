@@ -275,7 +275,7 @@
   .banner0 #Alarm {
     grid-column: 1;
     grid-row: 1;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     margin-left: 12rem;
     min-width: 50vw;
     right: 45%;
