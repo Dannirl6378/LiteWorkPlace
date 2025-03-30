@@ -37,8 +37,8 @@ export default function MyProfile() {
 
   const onDownloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/documents/Životopis-CV.docx"; // Cesta k souboru (musí být ve složce `public`)
-    link.download = "Životopis-CV.docx"; // Název souboru pro stažení
+    link.href = "/documents/Životopis-CV.pdf"; // Cesta k souboru (musí být ve složce `public`)
+    link.download = "Životopis-CV.pdf"; // Název souboru pro stažení
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
