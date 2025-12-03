@@ -64,7 +64,15 @@ export default function Sing() {
   };
   const isMobile = useMediaQuery("(max-width: 768px)");
   
-  
+  const handleMpg=()=>{
+    const userData = {
+      name:"Host",
+      email:"host@email.com",
+      loggedIn: true,
+    }
+    sessionStorage.setItem("userDatas", JSON.stringify(userData));
+    navigate("/workingPage");
+  }
 
   return (
     <>
@@ -313,6 +321,7 @@ export default function Sing() {
               >
                 Sign In
               </Button>
+              <Button variant="contained" onClick={()=>handleMpg()}>Hlavní strana </Button>
             </Stack>
           </Box>
         </div>

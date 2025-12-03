@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Weather.css";
+import { env } from 'process';
 
 interface WeatherData {
   name: string;
@@ -22,7 +23,8 @@ export default function Weather() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const API_KEY = "db0840f95d9213c5790cddb57ac9d6cf";
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
 
   // Získání dat o počasí pomocí API
   const fetchWeather = async (url: string) => {
@@ -109,9 +111,6 @@ export default function Weather() {
             </div>
             <div>
               <p className="windSpeed">Wind: {data.wind.speed} m/s</p>
-              <p className="feelsLike">
-                Feels like: {Math.round(data.main.feels_like)}°C
-              </p>
             </div>
           </div>
         </div>
