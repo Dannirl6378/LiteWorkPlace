@@ -6,7 +6,7 @@ function Projects() {
         {
             name: 'Lite Work Place',
             url: 'https://github.com/Dannirl6378/LiteWorkPlace',
-            description: 'Tento odkaz je pro tuto stránku tento projekt kterým se prezentuji',
+            description: 'Moje hlavní portfolio projektů',
         },
         {
             name: 'Exercise Arrays',
@@ -23,6 +23,11 @@ function Projects() {
             url: 'https://github.com/Dannirl6378/weather',
             description: 'Malý projekt na API',
         },
+        {
+            name: 'JobBoard',
+            url: 'https://jobboard-psi.vercel.app/',
+            description: 'Jednoduchá stránka pro hledání práce',
+        }
     ];
 
     return (
