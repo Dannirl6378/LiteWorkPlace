@@ -19,34 +19,47 @@ const Radio = () => {
   const [error, setError] = useState<string | null>(null); // For handling any errors
 
   const fetchData = async () => {
-    console.log("Fetching stations from Radio Browser API...");
-    try {
-      const response = await axios.get(
-        "http://de1.api.radio-browser.info/json/countries/cz",
-      );
+  console.log("Fetching stations from Radio Browser API...");
+  try {
+    const response = await axios.get(
+      "https://de1.api.radio-browser.info/json/stations/bycountrycodeexact/cz",
+      {
+        headers: {
+          // Autor API vyžaduje identifikaci aplikace (název/verze)
+          "User-Agent": "MyRadioApp/1.0"
+        }
+      }
+    );
 
-      // Filtrování konkrétních stanic podle názvu
-      const allStations = response.data;
-      const filteredStations = allStations.filter((station: any) =>
-        ["COLOR Music Radio", "Rock Radio", "Kiss Radio"].includes(
-          station.name,
-        ),
-      );
+    // Všechny stanice z ČR
+    const allStations = response.data;
 
-      // Mapa potřebných dat
-      const mappedStations = filteredStations.map((station: any) => ({
-        id: station.stationuuid,
-        name: station.name,
-        streams_url: [{ https_url: station.url_resolved }],
-      }));
+    // Filtrování konkrétních stanic podle názvu
+    // TIP: "Kiss Radio" se v databázi často jmenuje jen "Kiss", 
+    // proto doporučuji přidat obě varianty pro jistotu.
+    const targetNames = ["COLOR Music Radio", "Rock Radio", "Kiss Radio", "Kiss"];
+    
+    const filteredStations = allStations.filter((station: any) =>
+      targetNames.includes(station.name)
+    );
 
-      setStations(mappedStations);
-      setError(null); // Resetuje chyby
-    } catch (error: any) {
-      console.error("Error fetching stations:", error);
-      setError("Error loading stations. Please try again later.");
-    }
-  };
+    // Mapa do tvého formátu
+    const mappedStations = filteredStations.map((station: any) => ({
+      id: station.stationuuid,
+      name: station.name,
+      // Používáme url_resolved, protože Radio Browser tam ukládá přímé streamy
+      streams_url: [{ https_url: station.url_resolved }],
+    }));
+
+    setStations(mappedStations);
+    setError(null); // Resetuje chyby
+    console.log("Successfully loaded:", mappedStations);
+
+  } catch (error: any) {
+    console.error("Error fetching stations:", error);
+    setError("Error loading stations. Please try again later.");
+  }
+};
 
   useEffect(() => {
     fetchData();
