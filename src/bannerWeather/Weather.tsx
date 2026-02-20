@@ -23,7 +23,7 @@ export default function Weather() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+  //const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 
   // Získání dat o počasí pomocí API

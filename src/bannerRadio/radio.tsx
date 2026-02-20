@@ -22,7 +22,7 @@ const Radio = () => {
     console.log("Fetching stations from Radio Browser API...");
     try {
       const response = await axios.get(
-        "https://fi1.api.radio-browser.info/json/stations/bycountry/Czech",
+        "https://api.radio-browser.info/json/countries/cz",
       );
 
       // Filtrování konkrétních stanic podle názvu
