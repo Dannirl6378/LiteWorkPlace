@@ -71,7 +71,7 @@ export default function Sing() {
       loggedIn: true,
     }
     sessionStorage.setItem("userDatas", JSON.stringify(userData));
-    navigate("/workingPage");
+    navigate("/workingPage/MyProfile");
   }
 
   return (
