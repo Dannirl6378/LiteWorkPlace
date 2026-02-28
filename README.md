@@ -23,7 +23,7 @@ Chuck Norris Jokes: Generátor vtipů o Chucku Norrisovi. Jsou sice pověstné s
 👤 Přístup a uživatelský profil
 Demo režim: Pro vyzkoušení není potřeba zadávat reálné údaje (e-mail ani heslo nemusí být pravdivé).
 obr.
-<img width="1901" height="900" alt="Image" src="https://github.com/user-attachments/assets/08c41603-1013-4da4-ab9b-75828dc6541e" />
+<img width="1919" height="908" alt="Image" src="https://github.com/user-attachments/assets/43b63ed4-c158-47fb-824e-63de5992f01f" />
 
 Vstup pro hosty: Tlačítko, které vás okamžitě přesměruje do aplikace bez registrace.
 
