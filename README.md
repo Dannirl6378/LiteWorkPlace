@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+🚀 LiteWorkPlace
+LiteWorkPlace je můj osobní digitální workspace navržený jako interaktivní dashboard. Chtěl jsem vytvořit místo, které na jedné obrazovce kombinuje praktické nástroje pro každodenní produktivitu, relaxaci a moji vlastní prezentaci.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🛠️ Co projekt nabízí?
+📅 Organizace a produktivita
+Plně funkční kalendář & Reminder: Správa událostí a připomínek, aby důležité termíny nezapadly.
 
-## Available Scripts
+ToDo List: Jednoduchý seznam úkolů pro efektivní plánování dne.
 
-In the project directory, you can run:
+Textový editor: Prostor pro rychlé poznámky a myšlenky přímo v prohlížeči.
 
-### `npm start`
+Počasí a Hodiny: Aktuální přehled o čase a venkovních podmínkách na jednom místě.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+🎮 Volný čas a doplňky
+Rádio: Integrovaný přehrávač pro hudební podkres při práci.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+TicTacToe: Klasická minihra pro krátké odreagování.
 
-### `npm test`
+Chuck Norris Jokes: Generátor vtipů o Chucku Norrisovi. Jsou sice pověstné svou „trapností“, ale k tomuto typu projektů podle mě prostě patří.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+👤 Přístup a uživatelský profil
+Demo režim: Pro vyzkoušení není potřeba zadávat reálné údaje (e-mail ani heslo nemusí být pravdivé).
 
-### `npm run build`
+Vstup pro hosty: Tlačítko, které vás okamžitě přesměruje do aplikace bez registrace.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Správa účtu: V sekci profilu je možné kdykoliv změnit přihlašovací údaje.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+📄 O autorovi (Interaktivní CV)
+Součástí dashboardu je i moje digitální portfolio, které je dvojjazyčné (CZ/EN). Najdete zde:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Přehled mých zkušeností a dovedností.
 
-### `npm run eject`
+Odkazy na LinkedIn, GitHub a další mé projekty.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Možnost stažení mého CV.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+💻 Technické pozadí
+Projekt je postaven na moderním stacku, který zajišťuje rychlost a přehlednost:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Frontend: React – základ celé aplikace.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+UI Framework: Material UI (MUI) – čistý a responzivní design jednotlivých panelů.
 
-## Learn More
+Databáze: MongoDB – bezpečné ukládání uživatelských dat a nastavení.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Lokalizace: Vlastní řešení pro plynulé přepínání mezi češtinou a angličtinou.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+🚀 Instalace a spuštění
+Klonování repozitáře:
+git clone https://github.com/Dannirl6378/LiteWorkPlace
+
+Instalace závislostí:
+Spusťte npm install v kořenové složce i ve složce se serverem.
+
+Konfigurace:
+Vytvořte soubor .env a vložte do něj svůj MONGODB_URI pro propojení s databází.
+
+Spuštění:
+
+Backend: node server.js
+
+Frontend: npm start
